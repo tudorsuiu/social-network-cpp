@@ -3,4 +3,4 @@ project(proiect_sda)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(proiect_sda main.cpp Domain/Array/Array.h Domain/BSC/BST.h Domain/BSC/BSTNode.h Domain/User/User.cpp Domain/User/User.h Repository/UserRepository/UserRepositoryCSV.cpp Repository/UserRepository/UserRepositoryCSV.h Service/UserService/UserService.cpp Service/UserService/UserService.h UserInterface/Console.cpp UserInterface/Console.h)
+add_executable(proiect_sda main.cpp Domain/Array/Array.h Domain/BSC/BST.h Domain/BSC/BSTNode.h Domain/User/User.cpp Domain/User/User.h Repository/UserRepository/UserRepositoryCSV.cpp Repository/UserRepository/UserRepositoryCSV.h Service/UserService/UserService.cpp Service/UserService/UserService.h UserInterface/Console.cpp UserInterface/Console.h Tests/TestDomain/TestUser/TestUser.cpp Tests/TestDomain/TestUser/TestUser.h Tests/TestAll/TestAll.cpp Tests/TestAll/TestAll.h Tests/TestRepository/TestUserRepository/TestUserRepository.cpp Tests/TestRepository/TestUserRepository/TestUserRepository.h Tests/TestService/TestUserService/TestUserService.cpp Tests/TestService/TestUserService/TestUserService.h)

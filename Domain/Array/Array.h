@@ -41,7 +41,7 @@ public:
         this->_size = array._size;
         T* newEntities = new T[this->_capacity];
         for(int i = 0; i < this->_size; i++) {
-            newEntities[i] = this->_entities[i];
+            newEntities[i] = array[i];
         }
         this->_entities = newEntities;
     }
@@ -85,8 +85,7 @@ public:
         if(this->_size == this->_capacity) {
             _resize();
         }
-        this->_entities[this->_size] = entity;
-        this->_size++;
+        this->_entities[this->_size++] = entity;
     }
 
     /**
@@ -100,7 +99,7 @@ public:
         T entity;
         entity = this->_entities[--this->_size];
 
-        T* newEntities = new T[this->_capacity];
+        T* newEntities = new T[this->_size];
         for(int i = 0; i < this->_size; i++) {
             newEntities[i] = this->_entities[i];
         }
@@ -192,7 +191,7 @@ public:
         this->_capacity = array._capacity;
         this->_size = array._size;
         delete[] this->_entities;
-        this->_entities = new T[_capacity];
+        this->_entities = new T[this->_capacity];
         for(int i = 0; i < this->_size; i++) {
             this->_entities[i] = array._entities[i];
         }

@@ -79,6 +79,30 @@ build CMakeFiles/proiect_sda.dir/UserInterface/Console.cpp.obj: CXX_COMPILER__pr
   OBJECT_DIR = CMakeFiles\proiect_sda.dir
   OBJECT_FILE_DIR = CMakeFiles\proiect_sda.dir\UserInterface
 
+build CMakeFiles/proiect_sda.dir/Tests/TestDomain/TestUser/TestUser.cpp.obj: CXX_COMPILER__proiect_sda_Debug C$:/Users/Tudor/Desktop/Laboratoare/proiect-sda/Tests/TestDomain/TestUser/TestUser.cpp || cmake_object_order_depends_target_proiect_sda
+  DEP_FILE = CMakeFiles\proiect_sda.dir\Tests\TestDomain\TestUser\TestUser.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles\proiect_sda.dir
+  OBJECT_FILE_DIR = CMakeFiles\proiect_sda.dir\Tests\TestDomain\TestUser
+
+build CMakeFiles/proiect_sda.dir/Tests/TestAll/TestAll.cpp.obj: CXX_COMPILER__proiect_sda_Debug C$:/Users/Tudor/Desktop/Laboratoare/proiect-sda/Tests/TestAll/TestAll.cpp || cmake_object_order_depends_target_proiect_sda
+  DEP_FILE = CMakeFiles\proiect_sda.dir\Tests\TestAll\TestAll.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles\proiect_sda.dir
+  OBJECT_FILE_DIR = CMakeFiles\proiect_sda.dir\Tests\TestAll
+
+build CMakeFiles/proiect_sda.dir/Tests/TestRepository/TestUserRepository/TestUserRepository.cpp.obj: CXX_COMPILER__proiect_sda_Debug C$:/Users/Tudor/Desktop/Laboratoare/proiect-sda/Tests/TestRepository/TestUserRepository/TestUserRepository.cpp || cmake_object_order_depends_target_proiect_sda
+  DEP_FILE = CMakeFiles\proiect_sda.dir\Tests\TestRepository\TestUserRepository\TestUserRepository.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles\proiect_sda.dir
+  OBJECT_FILE_DIR = CMakeFiles\proiect_sda.dir\Tests\TestRepository\TestUserRepository
+
+build CMakeFiles/proiect_sda.dir/Tests/TestService/TestUserService/TestUserService.cpp.obj: CXX_COMPILER__proiect_sda_Debug C$:/Users/Tudor/Desktop/Laboratoare/proiect-sda/Tests/TestService/TestUserService/TestUserService.cpp || cmake_object_order_depends_target_proiect_sda
+  DEP_FILE = CMakeFiles\proiect_sda.dir\Tests\TestService\TestUserService\TestUserService.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles\proiect_sda.dir
+  OBJECT_FILE_DIR = CMakeFiles\proiect_sda.dir\Tests\TestService\TestUserService
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target proiect_sda
@@ -87,7 +111,7 @@ build CMakeFiles/proiect_sda.dir/UserInterface/Console.cpp.obj: CXX_COMPILER__pr
 #############################################
 # Link the executable proiect_sda.exe
 
-build proiect_sda.exe: CXX_EXECUTABLE_LINKER__proiect_sda_Debug CMakeFiles/proiect_sda.dir/main.cpp.obj CMakeFiles/proiect_sda.dir/Domain/User/User.cpp.obj CMakeFiles/proiect_sda.dir/Repository/UserRepository/UserRepositoryCSV.cpp.obj CMakeFiles/proiect_sda.dir/Service/UserService/UserService.cpp.obj CMakeFiles/proiect_sda.dir/UserInterface/Console.cpp.obj
+build proiect_sda.exe: CXX_EXECUTABLE_LINKER__proiect_sda_Debug CMakeFiles/proiect_sda.dir/main.cpp.obj CMakeFiles/proiect_sda.dir/Domain/User/User.cpp.obj CMakeFiles/proiect_sda.dir/Repository/UserRepository/UserRepositoryCSV.cpp.obj CMakeFiles/proiect_sda.dir/Service/UserService/UserService.cpp.obj CMakeFiles/proiect_sda.dir/UserInterface/Console.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestDomain/TestUser/TestUser.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestAll/TestAll.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestRepository/TestUserRepository/TestUserRepository.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestService/TestUserService/TestUserService.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\proiect_sda.dir

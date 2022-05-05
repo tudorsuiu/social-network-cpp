@@ -26,7 +26,14 @@ void Console::uiAddUser() {
 }
 
 void Console::uiCheckUser() {
-
+    if(userService.read().empty()) {
+        std::cout << "No users created." << '\n';
+    }
+    else {
+        for (int i = 0; i < userService.read().size(); i++) {
+            std::cout << userService.read()[i] << '\n';
+        }
+    }
 }
 
 void Console::uiUpdateUser() {
