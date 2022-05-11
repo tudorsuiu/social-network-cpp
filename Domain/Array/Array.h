@@ -172,6 +172,7 @@ public:
         delete[] this->_entities;
         this->_size = 0;
         this->_capacity = _DEFAULT_CAPACITY;
+        this->_entities = new T[this->_capacity];
     }
 
     /**

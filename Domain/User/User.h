@@ -16,6 +16,7 @@ private:
     std::string lastName;
     unsigned int age;
     std::string email;
+    std::string password;
     std::string phoneNumber;
 public:
     /**
@@ -30,9 +31,10 @@ public:
      * @param lastName: user last name
      * @param age: user age
      * @param email: user email
+     * @param password: user password
      * @param phoneNumber: user phone number
      */
-    User(unsigned int id, std::string firstName, std::string lastName, unsigned int age, std::string email, std::string phoneNumber);
+    User(unsigned int id, std::string firstName, std::string lastName, unsigned int age, std::string email, std::string password, std::string phoneNumber);
 
     /**
      * Constructor from file
@@ -113,6 +115,18 @@ public:
     void setEmail(std::string email);
 
     /**
+     * Password getter
+     * @return: user password
+     */
+    std::string getPassword();
+
+    /**
+     * Password setter
+     * @param password: new user password
+     */
+    void setPassword(std::string password);
+
+    /**
      * Phone number getter
      * @return: user phone number
      */
@@ -123,6 +137,13 @@ public:
      * @param phoneNumber: new user phone number
      */
     void setPhoneNumber(std::string phoneNumber);
+
+    /**
+     * Checks password for log in
+     * @param password: inserted password
+     * @return: true if passwords are equal, false otherwise
+     */
+    bool verifyPassword(std::string password);
 
     /**
      * To string delimiter

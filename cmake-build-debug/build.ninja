@@ -103,6 +103,30 @@ build CMakeFiles/proiect_sda.dir/Tests/TestService/TestUserService/TestUserServi
   OBJECT_DIR = CMakeFiles\proiect_sda.dir
   OBJECT_FILE_DIR = CMakeFiles\proiect_sda.dir\Tests\TestService\TestUserService
 
+build CMakeFiles/proiect_sda.dir/Tests/TestDomain/TestArray/TestArray.cpp.obj: CXX_COMPILER__proiect_sda_Debug C$:/Users/Tudor/Desktop/Laboratoare/proiect-sda/Tests/TestDomain/TestArray/TestArray.cpp || cmake_object_order_depends_target_proiect_sda
+  DEP_FILE = CMakeFiles\proiect_sda.dir\Tests\TestDomain\TestArray\TestArray.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles\proiect_sda.dir
+  OBJECT_FILE_DIR = CMakeFiles\proiect_sda.dir\Tests\TestDomain\TestArray
+
+build CMakeFiles/proiect_sda.dir/Domain/Event/Event.cpp.obj: CXX_COMPILER__proiect_sda_Debug C$:/Users/Tudor/Desktop/Laboratoare/proiect-sda/Domain/Event/Event.cpp || cmake_object_order_depends_target_proiect_sda
+  DEP_FILE = CMakeFiles\proiect_sda.dir\Domain\Event\Event.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles\proiect_sda.dir
+  OBJECT_FILE_DIR = CMakeFiles\proiect_sda.dir\Domain\Event
+
+build CMakeFiles/proiect_sda.dir/Domain/Message/Message.cpp.obj: CXX_COMPILER__proiect_sda_Debug C$:/Users/Tudor/Desktop/Laboratoare/proiect-sda/Domain/Message/Message.cpp || cmake_object_order_depends_target_proiect_sda
+  DEP_FILE = CMakeFiles\proiect_sda.dir\Domain\Message\Message.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles\proiect_sda.dir
+  OBJECT_FILE_DIR = CMakeFiles\proiect_sda.dir\Domain\Message
+
+build CMakeFiles/proiect_sda.dir/Domain/Friendship/Friendship.cpp.obj: CXX_COMPILER__proiect_sda_Debug C$:/Users/Tudor/Desktop/Laboratoare/proiect-sda/Domain/Friendship/Friendship.cpp || cmake_object_order_depends_target_proiect_sda
+  DEP_FILE = CMakeFiles\proiect_sda.dir\Domain\Friendship\Friendship.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles\proiect_sda.dir
+  OBJECT_FILE_DIR = CMakeFiles\proiect_sda.dir\Domain\Friendship
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target proiect_sda
@@ -111,7 +135,7 @@ build CMakeFiles/proiect_sda.dir/Tests/TestService/TestUserService/TestUserServi
 #############################################
 # Link the executable proiect_sda.exe
 
-build proiect_sda.exe: CXX_EXECUTABLE_LINKER__proiect_sda_Debug CMakeFiles/proiect_sda.dir/main.cpp.obj CMakeFiles/proiect_sda.dir/Domain/User/User.cpp.obj CMakeFiles/proiect_sda.dir/Repository/UserRepository/UserRepositoryCSV.cpp.obj CMakeFiles/proiect_sda.dir/Service/UserService/UserService.cpp.obj CMakeFiles/proiect_sda.dir/UserInterface/Console.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestDomain/TestUser/TestUser.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestAll/TestAll.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestRepository/TestUserRepository/TestUserRepository.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestService/TestUserService/TestUserService.cpp.obj
+build proiect_sda.exe: CXX_EXECUTABLE_LINKER__proiect_sda_Debug CMakeFiles/proiect_sda.dir/main.cpp.obj CMakeFiles/proiect_sda.dir/Domain/User/User.cpp.obj CMakeFiles/proiect_sda.dir/Repository/UserRepository/UserRepositoryCSV.cpp.obj CMakeFiles/proiect_sda.dir/Service/UserService/UserService.cpp.obj CMakeFiles/proiect_sda.dir/UserInterface/Console.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestDomain/TestUser/TestUser.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestAll/TestAll.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestRepository/TestUserRepository/TestUserRepository.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestService/TestUserService/TestUserService.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestDomain/TestArray/TestArray.cpp.obj CMakeFiles/proiect_sda.dir/Domain/Event/Event.cpp.obj CMakeFiles/proiect_sda.dir/Domain/Message/Message.cpp.obj CMakeFiles/proiect_sda.dir/Domain/Friendship/Friendship.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\proiect_sda.dir

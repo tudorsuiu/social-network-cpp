@@ -63,7 +63,11 @@
 				12,
 				14,
 				16,
-				18
+				18,
+				20,
+				22,
+				24,
+				26
 			]
 		}
 	],
@@ -108,7 +112,11 @@
 				12,
 				14,
 				16,
-				18
+				18,
+				20,
+				22,
+				24,
+				26
 			]
 		},
 		{
@@ -125,7 +133,11 @@
 				13,
 				15,
 				17,
-				19
+				19,
+				21,
+				23,
+				25,
+				27
 			]
 		}
 	],
@@ -144,12 +156,12 @@
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Domain/BSC/BST.h",
+			"path" : "Domain/BST/BST.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Domain/BSC/BSTNode.h",
+			"path" : "Domain/BST/BSTNode.h",
 			"sourceGroupIndex" : 1
 		},
 		{
@@ -238,6 +250,50 @@
 		{
 			"backtrace" : 1,
 			"path" : "Tests/TestService/TestUserService/TestUserService.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Tests/TestDomain/TestArray/TestArray.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Tests/TestDomain/TestArray/TestArray.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Domain/Event/Event.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Domain/Event/Event.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Domain/Message/Message.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Domain/Message/Message.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "Domain/Friendship/Friendship.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Domain/Friendship/Friendship.h",
 			"sourceGroupIndex" : 1
 		}
 	],

@@ -6,6 +6,7 @@
 #include "../TestDomain/TestUser/TestUser.h"
 #include "../TestRepository/TestUserRepository/TestUserRepository.h"
 #include "../TestService/TestUserService/TestUserService.h"
+#include "../TestDomain/TestArray/TestArray.h"
 
 void TestAll::run() {
     TestUser testUser;
@@ -16,4 +17,7 @@ void TestAll::run() {
 
     TestUserService testUserService;
     testUserService.all();
+
+    TestArray testArray;
+    testArray.all();
 }

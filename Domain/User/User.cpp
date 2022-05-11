@@ -11,12 +11,13 @@ User::User() {
 }
 
 User::User(unsigned int id, std::string firstName, std::string lastName, unsigned int age,
-           std::string email, std::string phoneNumber) {
+           std::string email, std::string password, std::string phoneNumber) {
     this->id = id;
     this->firstName = firstName;
     this->lastName = lastName;
     this->age = age;
     this->email = email;
+    this->password = password;
     this->phoneNumber = phoneNumber;
 }
 
@@ -30,6 +31,7 @@ User::User(const User &user) {
     this->lastName = user.lastName;
     this->age = user.age;
     this->email = user.email;
+    this->password = user.password;
     this->phoneNumber = user.phoneNumber;
 }
 
@@ -75,6 +77,14 @@ void User::setEmail(std::string email) {
     this->email = email;
 }
 
+std::string User::getPassword() {
+    return this->password;
+}
+
+void User::setPassword(std::string password) {
+    this->password = password;
+}
+
 std::string User::getPhoneNumber() {
     return this->phoneNumber;
 }
@@ -83,9 +93,13 @@ void User::setPhoneNumber(std::string phoneNumber) {
     this->phoneNumber = phoneNumber;
 }
 
+bool User::verifyPassword(std::string password) {
+    return this->password == password;
+}
+
 std::string User::toStringDelimiter(char separator) {
     return std::to_string(this->id) + separator + this->firstName + separator + this->lastName + separator +
-            std::to_string(this->age) + separator + this->email + separator + this->phoneNumber;
+            std::to_string(this->age) + separator + this->email + separator + this->password + separator + this->phoneNumber;
 }
 
 void User::loadFromString(std::string line, char separator) {
@@ -95,7 +109,7 @@ void User::loadFromString(std::string line, char separator) {
     while(getline(ss, userInfo, separator)) {
         users.push_back(userInfo);
     }
-    if(users.size() == 6) {
+    if(users.size() == 7) {
         std::stringstream i(users[0]);
         i >> this->id;
         this->firstName = users[1];
@@ -103,7 +117,8 @@ void User::loadFromString(std::string line, char separator) {
         std::stringstream a(users[3]);
         a >> this->age;
         this->email = users[4];
-        this->phoneNumber = users[5];
+        this->password = users[5];
+        this->phoneNumber = users[6];
     }
 }
 
@@ -113,17 +128,13 @@ User &User::operator=(const User &user) {
     this->lastName = user.lastName;
     this->age = user.age;
     this->email = user.email;
+    this->password = user.password;
     this->phoneNumber = user.phoneNumber;
     return *this;
 }
 
 bool User::operator<(const User &user) const {
-    if(this->age < user.age) {
-        return true;
-    }
-    if(this->age > user.age) {
-        return false;
-    }
+    return this->age < user.age;
 }
 
 bool User::operator>(const User &user) const {
@@ -144,6 +155,7 @@ bool User::operator==(const User &user) const {
     this->lastName == user.lastName &&
     this->age == user.age &&
     this->email == user.email &&
+    this->password == user.password &&
     this->phoneNumber == phoneNumber;
 }
 
@@ -157,34 +169,39 @@ std::istream &operator>>(std::istream &is, User &user) {
     user.id = id;
 
     std::string firstName;
-    std::cout << "Enter your first name:"; is >> firstName;
+    std::cout << "Enter user first name:"; is >> firstName;
     user.firstName = firstName;
 
     std::string lastName;
-    std::cout << "Enter your last name:"; is >> lastName;
+    std::cout << "Enter user last name:"; is >> lastName;
     user.lastName = lastName;
 
     unsigned int age;
-    std::cout << "Enter your age:"; is >> age;
+    std::cout << "Enter user age:"; is >> age;
     user.age = age;
 
     std::string email;
-    std::cout << "Enter your email:"; is >> email;
+    std::cout << "Enter user email:"; is >> email;
     user.email = email;
 
+    std::string password;
+    std::cout << "Enter user password:"; is >> password;
+    user.password = password;
+
     std::string phoneNumber;
-    std::cout << "Enter your phone number:"; is >> phoneNumber;
+    std::cout << "Enter user phone number:"; is >> phoneNumber;
     user.phoneNumber = phoneNumber;
 
     return is;
 }
 
 std::ostream &operator<<(std::ostream &os, User &user) {
-    os << "Id: " << user.id << '\n' <<
+    os << "User id: " << user.id << '\n' <<
     "First name: " << user.firstName << '\n' <<
     "Last name: " << user.lastName << '\n' <<
     "Age: " << user.age << '\n' <<
     "Email: " << user.email << '\n' <<
+    "Password: " << user.password << '\n' <<
     "Phone number: " << user.phoneNumber << '\n';
 
     return os;

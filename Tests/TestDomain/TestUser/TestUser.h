@@ -7,7 +7,7 @@
 
 
 class TestUser {
-public:
+private:
     void constructor();
     void copyConstructor();
     void lineConstructor();
@@ -24,6 +24,8 @@ public:
     void setEmail();
     void getPhoneNumber();
     void setPhoneNumber();
+    void verifyPassword();
+public:
     void all();
 };
 

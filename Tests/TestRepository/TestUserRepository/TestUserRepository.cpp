@@ -13,9 +13,9 @@ void TestUserRepository::clearFile(std::string fileName) {
 void TestUserRepository::addUser() {
     clearFile("testUserRepository.csv");
     UserRepositoryCSV repository("testUserRepository.csv");
-    User u1(1, "First name", "Last name", 18, "firstname.lastname@domain.com", "40712345678");
-    User u2(2, "First name", "Last name", 18, "firstname.lastname@domain.com", "40712345678");
-    User u3(3, "First name", "Last name", 18, "firstname.lastname@domain.com", "40712345678");
+    User u1(1, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
+    User u2(2, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
+    User u3(3, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
     repository.addUser(u1);
     repository.addUser(u2);
     repository.addUser(u3);
@@ -27,9 +27,9 @@ void TestUserRepository::addUser() {
 void TestUserRepository::readUser() {
     clearFile("testUserRepository.csv");
     UserRepositoryCSV repository("testUserRepository.csv");
-    User u1(1, "First name", "Last name", 18, "firstname.lastname@domain.com", "40712345678");
-    User u2(2, "First name", "Last name", 18, "firstname.lastname@domain.com", "40712345678");
-    User u3(3, "First name", "Last name", 18, "firstname.lastname@domain.com", "40712345678");
+    User u1(1, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
+    User u2(2, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
+    User u3(3, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
     repository.addUser(u1);
     repository.addUser(u2);
     repository.addUser(u3);
@@ -41,10 +41,10 @@ void TestUserRepository::readUser() {
 void TestUserRepository::updateUser() {
     clearFile("testUserRepository.csv");
     UserRepositoryCSV repository("testUserRepository.csv");
-    User u1(1, "First name", "Last name", 18, "firstname.lastname@domain.com", "40712345678");
-    User u2(2, "First name", "Last name", 18, "firstname.lastname@domain.com", "40712345678");
-    User u3(3, "First name", "Last name", 18, "firstname.lastname@domain.com", "40712345678");
-    User u4(4, "First name", "Last name", 20, "firstname.lastname@domain.com", "40712345678");
+    User u1(1, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
+    User u2(2, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
+    User u3(3, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
+    User u4(4, "First name", "Last name", 20, "firstname.lastname@domain.com", "parola123", "40712345678");
     repository.addUser(u1);
     repository.addUser(u2);
     repository.addUser(u3);
@@ -57,9 +57,9 @@ void TestUserRepository::updateUser() {
 void TestUserRepository::deleteUser() {
     clearFile("testUserRepository.csv");
     UserRepositoryCSV repository("testUserRepository.csv");
-    User u1(1, "First name", "Last name", 18, "firstname.lastname@domain.com", "40712345678");
-    User u2(2, "First name", "Last name", 18, "firstname.lastname@domain.com", "40712345678");
-    User u3(3, "First name", "Last name", 18, "firstname.lastname@domain.com", "40712345678");
+    User u1(1, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
+    User u2(2, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
+    User u3(3, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
     repository.addUser(u1);
     repository.addUser(u2);
     repository.addUser(u3);
@@ -76,9 +76,9 @@ void TestUserRepository::deleteUser() {
 void TestUserRepository::getPosById() {
     clearFile("testUserRepository.csv");
     UserRepositoryCSV repository("testUserRepository.csv");
-    User u1(1, "First name", "Last name", 18, "firstname.lastname@domain.com", "40712345678");
-    User u2(2, "First name", "Last name", 18, "firstname.lastname@domain.com", "40712345678");
-    User u3(3, "First name", "Last name", 18, "firstname.lastname@domain.com", "40712345678");
+    User u1(1, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
+    User u2(2, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
+    User u3(3, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
     repository.addUser(u1);
     repository.addUser(u2);
     repository.addUser(u3);
