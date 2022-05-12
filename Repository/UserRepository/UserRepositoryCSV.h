@@ -7,11 +7,11 @@
 
 
 #include "../../Domain/User/User.h"
-#include "../../Domain/Array/Array.h"
+#include "../../Domain/Array/List.h"
 
 class UserRepositoryCSV {
 private:
-    Array<User> users;
+    List<User> users;
     std::string fileName;
 public:
     /**
@@ -35,7 +35,7 @@ public:
      * Read users from file
      * @return: all users from file
      */
-    Array<User> readUser();
+    List<User> readUser();
 
     /**
      * Read user from file

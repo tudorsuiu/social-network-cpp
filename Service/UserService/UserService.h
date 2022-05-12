@@ -28,7 +28,7 @@ public:
      * Reads all users stored in repository
      * @return: all users stored in repository
      */
-    Array<User> read();
+    List<User> read();
 
     /**
      * Read user with given id

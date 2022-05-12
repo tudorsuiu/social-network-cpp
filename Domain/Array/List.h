@@ -2,12 +2,12 @@
 // Created by Tudor on 4/23/2022.
 //
 
-#ifndef PROIECT_SDA_ARRAY_H
-#define PROIECT_SDA_ARRAY_H
+#ifndef PROIECT_SDA_LIST_H
+#define PROIECT_SDA_LIST_H
 
 #include <iostream>
 
-template<class T> class Array {
+template<class T> class List {
 private:
     int _DEFAULT_CAPACITY = 10;
     T* _entities;
@@ -26,7 +26,7 @@ public:
     /**
      * Constructor
      */
-    Array() {
+    List() {
         this->_size = 0;
         this->_capacity = _DEFAULT_CAPACITY;
         _entities = new T[this->_capacity];
@@ -36,7 +36,7 @@ public:
      * Copy-constructor
      * @param array: new array
      */
-    Array(const Array<T> &array) {
+    List(const List<T> &array) {
         this->_capacity = array._capacity;
         this->_size = array._size;
         T* newEntities = new T[this->_capacity];
@@ -49,7 +49,7 @@ public:
     /**
      * Destructor
      */
-    ~Array() {
+    ~List() {
         delete[] _entities;
     }
 
@@ -94,7 +94,7 @@ public:
      */
     T pop_back() {
         if(empty()) {
-            throw std::out_of_range("Array is empty.");
+            throw std::out_of_range("List is empty.");
         }
         T entity;
         entity = this->_entities[--this->_size];
@@ -144,7 +144,7 @@ public:
      */
     void erase(int index) {
         if(empty()) {
-            throw std::out_of_range("Array is empty.");
+            throw std::out_of_range("List is empty.");
         }
 
         if (index < 0 || index >= this->_size) {
@@ -188,7 +188,7 @@ public:
         return _entities[index];
     }
 
-    Array<T> &operator=(const Array<T> &array) {
+    List<T> &operator=(const List<T> &array) {
         this->_capacity = array._capacity;
         this->_size = array._size;
         delete[] this->_entities;
@@ -201,4 +201,4 @@ public:
 };
 
 
-#endif //PROIECT_SDA_ARRAY_H
+#endif //PROIECT_SDA_LIST_H

@@ -10,7 +10,7 @@ void UserService::create(User user) {
     userRepository.addUser(user);
 }
 
-Array<User> UserService::read() {
+List<User> UserService::read() {
     return userRepository.readUser();
 }
 

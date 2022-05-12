@@ -15,7 +15,7 @@ void UserRepositoryCSV::addUser(User user) {
     this->saveToFile();
 }
 
-Array<User> UserRepositoryCSV::readUser() {
+List<User> UserRepositoryCSV::readUser() {
     return users;
 }
 

@@ -4,17 +4,17 @@
 
 #include <cassert>
 #include "TestArray.h"
-#include "../../../Domain/Array/Array.h"
+#include "../../../Domain/Array/List.h"
 
 void TestArray::constructor() {
-    Array<int> array;
+    List<int> array;
     assert(array.size() == 0);
     assert(array.capacity() == 10);
 }
 
 void TestArray::copyConstructor() {
-    Array<int> copyArray;
-    Array<int> array;
+    List<int> copyArray;
+    List<int> array;
     array.push_back(1);
     array.push_back(2);
     array.push_back(3);
@@ -32,7 +32,7 @@ void TestArray::copyConstructor() {
 }
 
 void TestArray::size() {
-    Array<int> array;
+    List<int> array;
     array.push_back(1);
     array.push_back(2);
     array.push_back(3);
@@ -48,7 +48,7 @@ void TestArray::size() {
 }
 
 void TestArray::capacity() {
-    Array<int> array;
+    List<int> array;
     array.push_back(1);
     array.push_back(2);
     array.push_back(3);
@@ -74,7 +74,7 @@ void TestArray::capacity() {
 }
 
 void TestArray::empty() {
-    Array<int> array;
+    List<int> array;
     assert(array.empty() == true);
 
     array.push_back(1);
@@ -82,7 +82,7 @@ void TestArray::empty() {
 }
 
 void TestArray::push_back() {
-    Array<int> array;
+    List<int> array;
     array.push_back(1);
     array.push_back(2);
     array.push_back(3);
@@ -109,7 +109,7 @@ void TestArray::push_back() {
 }
 
 void TestArray::pop_back() {
-    Array<int> array;
+    List<int> array;
     array.push_back(1);
     array.push_back(2);
     array.push_back(3);
@@ -128,7 +128,7 @@ void TestArray::pop_back() {
 }
 
 void TestArray::insert() {
-    Array<int> array;
+    List<int> array;
     array.push_back(1);
     array.push_back(2);
     array.push_back(3);
@@ -158,7 +158,7 @@ void TestArray::insert() {
 }
 
 void TestArray::erase() {
-    Array<int> array;
+    List<int> array;
     array.push_back(1);
     array.push_back(2);
     array.push_back(3);
@@ -186,7 +186,7 @@ void TestArray::erase() {
 }
 
 void TestArray::clear() {
-    Array<int> array;
+    List<int> array;
     array.push_back(1);
     array.push_back(2);
     array.push_back(3);

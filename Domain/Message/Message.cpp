@@ -3,7 +3,7 @@
 //
 
 #include "Message.h"
-#include "../Array/Array.h"
+#include "../Array/List.h"
 
 Message::Message() {
     this->id = 0;
@@ -67,7 +67,7 @@ std::string Message::toStringDelimiter(char separator) {
 }
 
 void Message::loadFromString(std::string line, char separator) {
-    Array<std::string> messages;
+    List<std::string> messages;
     std::stringstream ss(line);
     std::string messageInfo;
     while(getline(ss, messageInfo, separator)) {

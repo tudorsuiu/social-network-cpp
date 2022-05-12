@@ -3,7 +3,7 @@
 //
 
 #include "Event.h"
-#include "../Array/Array.h"
+#include "../Array/List.h"
 
 Event::Event() {
     this->id = 0;
@@ -77,7 +77,7 @@ std::string Event::toStringDelimiter(char separator) {
 }
 
 void Event::loadFromString(std::string line, char separator) {
-    Array<std::string> events;
+    List<std::string> events;
     std::stringstream ss(line);
     std::string eventInfo;
     while(getline(ss, eventInfo, separator)) {

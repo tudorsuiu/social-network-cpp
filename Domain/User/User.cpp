@@ -3,7 +3,7 @@
 //
 
 #include "User.h"
-#include "../Array/Array.h"
+#include "../Array/List.h"
 
 User::User() {
     this->id = 0;
@@ -103,7 +103,7 @@ std::string User::toStringDelimiter(char separator) {
 }
 
 void User::loadFromString(std::string line, char separator) {
-    Array<std::string> users;
+    List<std::string> users;
     std::stringstream ss(line);
     std::string userInfo;
     while(getline(ss, userInfo, separator)) {

@@ -3,7 +3,7 @@
 //
 
 #include "Friendship.h"
-#include "../Array/Array.h"
+#include "../Array/List.h"
 
 Friendship::Friendship() {
     this->id = 0;
@@ -67,7 +67,7 @@ std::string Friendship::toStringDelimiter(char separator) {
 }
 
 void Friendship::loadFromstring(std::string line, char separator) {
-    Array<std::string> friendships;
+    List<std::string> friendships;
     std::stringstream ss(line);
     std::string friendshipInfo;
     while(getline(ss, friendshipInfo, separator)) {
@@ -138,7 +138,8 @@ std::istream &operator>>(std::istream &is, Friendship &friendship) {
 
 std::ostream &operator<<(std::ostream &os, Friendship &friendship) {
     os << "Friendship id: " << friendship.id << '\n' <<
-    "This is a relation of friendship between: " << friendship.firstUser << " and " << friendship.secondUser << '\n' <<
+    "This is a relation of friendship between: " << friendship.firstUser.getFirstName() << " " << friendship.firstUser.getLastName() <<
+    " and " << friendship.secondUser.getFirstName() << " " << friendship.secondUser.getLastName() << '\n' <<
     "Friendship status: " << friendship.status << '\n';
     return os;
 }

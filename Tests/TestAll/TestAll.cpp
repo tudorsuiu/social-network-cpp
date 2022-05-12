@@ -7,6 +7,9 @@
 #include "../TestRepository/TestUserRepository/TestUserRepository.h"
 #include "../TestService/TestUserService/TestUserService.h"
 #include "../TestDomain/TestArray/TestArray.h"
+#include "../TestDomain/TestFriendship/TestFriendship.h"
+#include "../TestDomain/TestMessage/TestMessage.h"
+#include "../TestDomain/TestEvent/TestEvent.h"
 
 void TestAll::run() {
     TestUser testUser;
@@ -20,4 +23,13 @@ void TestAll::run() {
 
     TestArray testArray;
     testArray.all();
+
+    TestFriendship testFriendship;
+    testFriendship.all();
+
+    TestMessage testMessage;
+    testMessage.all();
+
+    TestEvent testEvent;
+    testEvent.all();
 }
