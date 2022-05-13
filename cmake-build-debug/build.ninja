@@ -61,12 +61,6 @@ build CMakeFiles/proiect_sda.dir/Domain/User/User.cpp.obj: CXX_COMPILER__proiect
   OBJECT_DIR = CMakeFiles\proiect_sda.dir
   OBJECT_FILE_DIR = CMakeFiles\proiect_sda.dir\Domain\User
 
-build CMakeFiles/proiect_sda.dir/Repository/UserRepository/UserRepositoryCSV.cpp.obj: CXX_COMPILER__proiect_sda_Debug C$:/Users/Tudor/Desktop/Laboratoare/proiect-sda/Repository/UserRepository/UserRepositoryCSV.cpp || cmake_object_order_depends_target_proiect_sda
-  DEP_FILE = CMakeFiles\proiect_sda.dir\Repository\UserRepository\UserRepositoryCSV.cpp.obj.d
-  FLAGS = -g -std=gnu++14
-  OBJECT_DIR = CMakeFiles\proiect_sda.dir
-  OBJECT_FILE_DIR = CMakeFiles\proiect_sda.dir\Repository\UserRepository
-
 build CMakeFiles/proiect_sda.dir/Service/UserService/UserService.cpp.obj: CXX_COMPILER__proiect_sda_Debug C$:/Users/Tudor/Desktop/Laboratoare/proiect-sda/Service/UserService/UserService.cpp || cmake_object_order_depends_target_proiect_sda
   DEP_FILE = CMakeFiles\proiect_sda.dir\Service\UserService\UserService.cpp.obj.d
   FLAGS = -g -std=gnu++14
@@ -145,6 +139,42 @@ build CMakeFiles/proiect_sda.dir/Tests/TestDomain/TestEvent/TestEvent.cpp.obj: C
   OBJECT_DIR = CMakeFiles\proiect_sda.dir
   OBJECT_FILE_DIR = CMakeFiles\proiect_sda.dir\Tests\TestDomain\TestEvent
 
+build CMakeFiles/proiect_sda.dir/Service/EventService/EventService.cpp.obj: CXX_COMPILER__proiect_sda_Debug C$:/Users/Tudor/Desktop/Laboratoare/proiect-sda/Service/EventService/EventService.cpp || cmake_object_order_depends_target_proiect_sda
+  DEP_FILE = CMakeFiles\proiect_sda.dir\Service\EventService\EventService.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles\proiect_sda.dir
+  OBJECT_FILE_DIR = CMakeFiles\proiect_sda.dir\Service\EventService
+
+build CMakeFiles/proiect_sda.dir/Service/FriendshipService/FriendshipService.cpp.obj: CXX_COMPILER__proiect_sda_Debug C$:/Users/Tudor/Desktop/Laboratoare/proiect-sda/Service/FriendshipService/FriendshipService.cpp || cmake_object_order_depends_target_proiect_sda
+  DEP_FILE = CMakeFiles\proiect_sda.dir\Service\FriendshipService\FriendshipService.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles\proiect_sda.dir
+  OBJECT_FILE_DIR = CMakeFiles\proiect_sda.dir\Service\FriendshipService
+
+build CMakeFiles/proiect_sda.dir/Service/MessageService/MessageService.cpp.obj: CXX_COMPILER__proiect_sda_Debug C$:/Users/Tudor/Desktop/Laboratoare/proiect-sda/Service/MessageService/MessageService.cpp || cmake_object_order_depends_target_proiect_sda
+  DEP_FILE = CMakeFiles\proiect_sda.dir\Service\MessageService\MessageService.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles\proiect_sda.dir
+  OBJECT_FILE_DIR = CMakeFiles\proiect_sda.dir\Service\MessageService
+
+build CMakeFiles/proiect_sda.dir/Tests/TestRepository/TestMessageRepository/TestMessageRepository.cpp.obj: CXX_COMPILER__proiect_sda_Debug C$:/Users/Tudor/Desktop/Laboratoare/proiect-sda/Tests/TestRepository/TestMessageRepository/TestMessageRepository.cpp || cmake_object_order_depends_target_proiect_sda
+  DEP_FILE = CMakeFiles\proiect_sda.dir\Tests\TestRepository\TestMessageRepository\TestMessageRepository.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles\proiect_sda.dir
+  OBJECT_FILE_DIR = CMakeFiles\proiect_sda.dir\Tests\TestRepository\TestMessageRepository
+
+build CMakeFiles/proiect_sda.dir/Tests/TestRepository/TestEventRepository/TestEventRepository.cpp.obj: CXX_COMPILER__proiect_sda_Debug C$:/Users/Tudor/Desktop/Laboratoare/proiect-sda/Tests/TestRepository/TestEventRepository/TestEventRepository.cpp || cmake_object_order_depends_target_proiect_sda
+  DEP_FILE = CMakeFiles\proiect_sda.dir\Tests\TestRepository\TestEventRepository\TestEventRepository.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles\proiect_sda.dir
+  OBJECT_FILE_DIR = CMakeFiles\proiect_sda.dir\Tests\TestRepository\TestEventRepository
+
+build CMakeFiles/proiect_sda.dir/Tests/TestRepository/TestFriendshipRepository/TestFriendshipRepository.cpp.obj: CXX_COMPILER__proiect_sda_Debug C$:/Users/Tudor/Desktop/Laboratoare/proiect-sda/Tests/TestRepository/TestFriendshipRepository/TestFriendshipRepository.cpp || cmake_object_order_depends_target_proiect_sda
+  DEP_FILE = CMakeFiles\proiect_sda.dir\Tests\TestRepository\TestFriendshipRepository\TestFriendshipRepository.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles\proiect_sda.dir
+  OBJECT_FILE_DIR = CMakeFiles\proiect_sda.dir\Tests\TestRepository\TestFriendshipRepository
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target proiect_sda
@@ -153,7 +183,7 @@ build CMakeFiles/proiect_sda.dir/Tests/TestDomain/TestEvent/TestEvent.cpp.obj: C
 #############################################
 # Link the executable proiect_sda.exe
 
-build proiect_sda.exe: CXX_EXECUTABLE_LINKER__proiect_sda_Debug CMakeFiles/proiect_sda.dir/main.cpp.obj CMakeFiles/proiect_sda.dir/Domain/User/User.cpp.obj CMakeFiles/proiect_sda.dir/Repository/UserRepository/UserRepositoryCSV.cpp.obj CMakeFiles/proiect_sda.dir/Service/UserService/UserService.cpp.obj CMakeFiles/proiect_sda.dir/UserInterface/Console.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestDomain/TestUser/TestUser.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestAll/TestAll.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestRepository/TestUserRepository/TestUserRepository.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestService/TestUserService/TestUserService.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestDomain/TestArray/TestArray.cpp.obj CMakeFiles/proiect_sda.dir/Domain/Event/Event.cpp.obj CMakeFiles/proiect_sda.dir/Domain/Message/Message.cpp.obj CMakeFiles/proiect_sda.dir/Domain/Friendship/Friendship.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestDomain/TestFriendship/TestFriendship.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestDomain/TestMessage/TestMessage.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestDomain/TestEvent/TestEvent.cpp.obj
+build proiect_sda.exe: CXX_EXECUTABLE_LINKER__proiect_sda_Debug CMakeFiles/proiect_sda.dir/main.cpp.obj CMakeFiles/proiect_sda.dir/Domain/User/User.cpp.obj CMakeFiles/proiect_sda.dir/Service/UserService/UserService.cpp.obj CMakeFiles/proiect_sda.dir/UserInterface/Console.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestDomain/TestUser/TestUser.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestAll/TestAll.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestRepository/TestUserRepository/TestUserRepository.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestService/TestUserService/TestUserService.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestDomain/TestArray/TestArray.cpp.obj CMakeFiles/proiect_sda.dir/Domain/Event/Event.cpp.obj CMakeFiles/proiect_sda.dir/Domain/Message/Message.cpp.obj CMakeFiles/proiect_sda.dir/Domain/Friendship/Friendship.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestDomain/TestFriendship/TestFriendship.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestDomain/TestMessage/TestMessage.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestDomain/TestEvent/TestEvent.cpp.obj CMakeFiles/proiect_sda.dir/Service/EventService/EventService.cpp.obj CMakeFiles/proiect_sda.dir/Service/FriendshipService/FriendshipService.cpp.obj CMakeFiles/proiect_sda.dir/Service/MessageService/MessageService.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestRepository/TestMessageRepository/TestMessageRepository.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestRepository/TestEventRepository/TestEventRepository.cpp.obj CMakeFiles/proiect_sda.dir/Tests/TestRepository/TestFriendshipRepository/TestFriendshipRepository.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\proiect_sda.dir

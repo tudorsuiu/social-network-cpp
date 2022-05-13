@@ -3,25 +3,27 @@
 //
 
 #include "UserService.h"
+#include "../../Repository/RepositoryCSV.h"
+#include "../../Domain/User/User.h"
 
-UserService::UserService(UserRepositoryCSV &userRepository) : userRepository(userRepository) {}
+UserService::UserService(RepositoryCSV<User> &userRepository) : userRepository(userRepository) {}
 
 void UserService::create(User user) {
-    userRepository.addUser(user);
+    userRepository.addEntity(user);
 }
 
 List<User> UserService::read() {
-    return userRepository.readUser();
+    return userRepository.readEntity();
 }
 
 User UserService::read(unsigned int id) {
-    return userRepository.readUser(id);
+    return userRepository.readEntity(id);
 }
 
 void UserService::update(unsigned int id, User newUser) {
-    userRepository.updateUser(id, newUser);
+    userRepository.updateEntity(id, newUser);
 }
 
 void UserService::del(unsigned int id) {
-    userRepository.deleteUser(id);
+    userRepository.deleteEntity(id);
 }

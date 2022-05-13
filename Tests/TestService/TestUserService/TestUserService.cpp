@@ -3,9 +3,7 @@
 //
 
 #include "TestUserService.h"
-#include "../../../Repository/UserRepository/UserRepositoryCSV.h"
 #include "../../../Service/UserService/UserService.h"
-#include <fstream>
 #include <cassert>
 
 void TestUserService::clearFile(std::string fileName) {
@@ -14,7 +12,7 @@ void TestUserService::clearFile(std::string fileName) {
 
 void TestUserService::createUser() {
     clearFile("testService.csv");
-    UserRepositoryCSV repository("testService.csv");
+    RepositoryCSV<User> repository("testService.csv");
     UserService service(repository);
     User u1(1, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
     User u2(2, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
@@ -29,7 +27,7 @@ void TestUserService::createUser() {
 
 void TestUserService::readUser() {
     clearFile("testService.csv");
-    UserRepositoryCSV repository("testService.csv");
+    RepositoryCSV<User> repository("testService.csv");
     UserService service(repository);
     User u1(1, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
     User u2(2, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
@@ -45,7 +43,7 @@ void TestUserService::readUser() {
 
 void TestUserService::updateUser() {
     clearFile("testService.csv");
-    UserRepositoryCSV repository("testService.csv");
+    RepositoryCSV<User> repository("testService.csv");
     UserService service(repository);
     User u1(1, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
     User u2(2, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
@@ -65,7 +63,7 @@ void TestUserService::updateUser() {
 
 void TestUserService::deleteUser() {
     clearFile("testService.csv");
-    UserRepositoryCSV repository("testService.csv");
+    RepositoryCSV<User> repository("testService.csv");
     UserService service(repository);
     User u1(1, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
     User u2(2, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
@@ -82,9 +80,14 @@ void TestUserService::deleteUser() {
     assert(service.read(3) == u3);
 }
 
+void TestUserService::getPosById() {
+
+}
+
 void TestUserService::all() {
     createUser();
     readUser();
     updateUser();
     deleteUser();
+    getPosById();
 }

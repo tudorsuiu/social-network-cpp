@@ -5,18 +5,18 @@
 #ifndef PROIECT_SDA_USERSERVICE_H
 #define PROIECT_SDA_USERSERVICE_H
 
-
-#include "../../Repository/UserRepository/UserRepositoryCSV.h"
+#include "../../Domain/User/User.h"
+#include "../../Repository/RepositoryCSV.h"
 
 class UserService {
 private:
-    UserRepositoryCSV userRepository;
+    RepositoryCSV<User> userRepository;
 public:
     /**
      * Constructor
      * @param userRepository: repository
      */
-    UserService(UserRepositoryCSV &userRepository);
+    UserService(RepositoryCSV<User> &userRepository);
 
     /**
      * Add user to repository

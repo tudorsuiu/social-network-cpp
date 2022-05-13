@@ -1,12 +1,13 @@
 #include "Domain/Array/List.h"
 #include "UserInterface/Console.h"
 #include "Tests/TestAll/TestAll.h"
+#include "Repository/RepositoryCSV.h"
 
 int main() {
     TestAll test;
     test.run();
 
-    UserRepositoryCSV userRepository("users.csv");
+    RepositoryCSV<User> userRepository("users.csv");
     UserService userService(userRepository);
     Console console(userService);
 

@@ -10,6 +10,9 @@
 #include "../TestDomain/TestFriendship/TestFriendship.h"
 #include "../TestDomain/TestMessage/TestMessage.h"
 #include "../TestDomain/TestEvent/TestEvent.h"
+#include "../TestRepository/TestMessageRepository/TestMessageRepository.h"
+#include "../TestRepository/TestEventRepository/TestEventRepository.h"
+#include "../TestRepository/TestFriendshipRepository/TestFriendshipRepository.h"
 
 void TestAll::run() {
     TestUser testUser;
@@ -27,9 +30,19 @@ void TestAll::run() {
     TestFriendship testFriendship;
     testFriendship.all();
 
+    TestFriendshipRepository testFriendshipRepository;
+    testFriendshipRepository.all();
+
     TestMessage testMessage;
     testMessage.all();
 
+    TestMessageRepository testMessageRepository;
+    testMessageRepository.all();
+
     TestEvent testEvent;
     testEvent.all();
+
+    TestEventRepository testEventRepository;
+    testEventRepository.all();
+
 }

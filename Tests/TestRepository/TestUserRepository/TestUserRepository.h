@@ -10,12 +10,12 @@
 class TestUserRepository {
 private:
     void clearFile(std::string fileName);
-public:
     void addUser();
     void readUser();
     void updateUser();
     void deleteUser();
     void getPosById();
+public:
     void all();
 };
 
