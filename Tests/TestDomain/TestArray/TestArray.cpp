@@ -4,7 +4,7 @@
 
 #include <cassert>
 #include "TestArray.h"
-#include "../../../Domain/Array/List.h"
+#include "../../../Domain/ADT/List/List.h"
 
 void TestArray::constructor() {
     List<int> array;

@@ -6,18 +6,22 @@
 #define USERREPOSITORYCSV_H_MESSAGESERVICE_H
 
 
-#include "../../Domain/Message/Message.h"
+#include "../../Domain/Entities/Message/Message.h"
 #include "../../Repository/RepositoryCSV.h"
+#include "../../Domain/Validators/MessageValidator/MessageValidator.h"
+#include "../UserService/UserService.h"
 
 class MessageService {
 private:
+    MessageValidator messageValidator;
     RepositoryCSV<Message> messageRepository;
+    UserService userService;
 public:
     /**
      * Constructor
      * @param messageRepository: repository
      */
-    MessageService(RepositoryCSV<Message> &messageRepository);
+    MessageService(RepositoryCSV<Message> &messageRepository, UserService &userService);
 
     /**
      * Add message to repository
@@ -50,6 +54,20 @@ public:
      * @param id: message id
      */
     void del(unsigned int id);
+
+    /**
+     * Checks if entity ID already exist
+     * @param id: id
+     * @return: true if exists, false otherwise
+     */
+    bool doesExistId(unsigned int id);
+
+    /**
+     * Checks if the receiver exists
+     * @param receiver: receiver
+     * @return: true if exists, false otherwise
+     */
+    bool doesExistReceiver(User receiver);
 };
 
 

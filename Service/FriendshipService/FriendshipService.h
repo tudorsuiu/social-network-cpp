@@ -6,18 +6,22 @@
 #define USERREPOSITORYCSV_H_FRIENDSHIPSERVICE_H
 
 
-#include "../../Domain/Friendship/Friendship.h"
+#include "../../Domain/Entities/Friendship/Friendship.h"
 #include "../../Repository/RepositoryCSV.h"
+#include "../../Domain/Validators/FriendshipValidator/FriendshipValidator.h"
+#include "../UserService/UserService.h"
 
 class FriendshipService {
 private:
+    FriendshipValidator friendshipValidator;
     RepositoryCSV<Friendship> friendshipRepository;
+    UserService userService;
 public:
     /**
      * Constructor
      * @param friendshipRepository: repository
      */
-    FriendshipService(RepositoryCSV<Friendship> &friendshipRepository);
+    FriendshipService(RepositoryCSV<Friendship> &friendshipRepository, UserService &userService);
 
     /**
      * Add friendship to repository
@@ -50,6 +54,20 @@ public:
      * @param id: friendship id
      */
     void del(unsigned int id);
+
+    /**
+     * Checks if entity with given ID already exist
+     * @param id: id
+     * @return: true if exists, false otherwise
+     */
+    bool doesExistId(unsigned int id);
+
+    /**
+     * Checks if the receiver exists
+     * @param secondUser: receiver
+     * @return: true if exists, false otherwise
+     */
+    bool doesExistSecondUser(User secondUser);
 };
 
 

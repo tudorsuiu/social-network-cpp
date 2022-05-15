@@ -7,7 +7,7 @@
 
 #include <fstream>
 #include <string>
-#include "../Domain/Array/List.h"
+#include "../Domain/ADT/List/List.h"
 
 template<class T> class RepositoryCSV {
 private:

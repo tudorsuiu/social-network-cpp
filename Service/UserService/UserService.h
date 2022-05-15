@@ -5,11 +5,13 @@
 #ifndef PROIECT_SDA_USERSERVICE_H
 #define PROIECT_SDA_USERSERVICE_H
 
-#include "../../Domain/User/User.h"
+#include "../../Domain/Entities/User/User.h"
 #include "../../Repository/RepositoryCSV.h"
+#include "../../Domain/Validators/UserValidator/UserValidator.h"
 
 class UserService {
 private:
+    UserValidator userValidator;
     RepositoryCSV<User> userRepository;
 public:
     /**
@@ -49,6 +51,28 @@ public:
      * @param id: user id
      */
     void del(unsigned int id);
+
+    /**
+     * Checks if entity ID already exist
+     * @param id: id
+     * @return: true if exists, false otherwise
+     */
+    bool doesExistId(unsigned int id);
+
+    /**
+     * Checks if entity email already exist
+     * @param email: email
+     * @return: true if exists, false otherwise
+     */
+    bool doesExistEmail(std::string email);
+
+    /**
+     * Checks if email and password are valid
+     * @param email: email
+     * @param password: password
+     * @return: existing user if exists, default user otherwise
+     */
+    User getUserByEmailAndPassword(std::string email, std::string password);
 };
 
 

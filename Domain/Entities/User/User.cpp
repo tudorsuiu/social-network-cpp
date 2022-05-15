@@ -3,7 +3,7 @@
 //
 
 #include "User.h"
-#include "../Array/List.h"
+#include "../../ADT/List/List.h"
 
 User::User() {
     this->id = 0;

@@ -6,18 +6,22 @@
 #define USERREPOSITORYCSV_H_EVENTSERVICE_H
 
 
-#include "../../Domain/Event/Event.h"
+#include "../../Domain/Entities/Event/Event.h"
 #include "../../Repository/RepositoryCSV.h"
+#include "../../Domain/Validators/EventValidator/EventValidator.h"
+#include "../UserService/UserService.h"
 
 class EventService {
 private:
+    EventValidator eventValidator;
     RepositoryCSV<Event> eventRepository;
+    UserService userService;
 public:
     /**
      * Constructor
      * @param eventRepository: repository
      */
-    EventService(RepositoryCSV<Event> &eventRepository);
+    EventService(RepositoryCSV<Event> &eventRepository, UserService &userService);
 
     /**
      * Add event to repository
@@ -50,6 +54,13 @@ public:
       * @param id: event id
       */
      void del(unsigned int id);
+
+     /**
+      * Checks if entity with given ID exist
+      * @param id: id
+      * @return: true if exists, false otherwise
+      */
+     bool doesExistId(unsigned int id);
 };
 
 

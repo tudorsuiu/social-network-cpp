@@ -4,7 +4,7 @@
 
 #include <cassert>
 #include "TestUserRepository.h"
-#include "../../../Domain/User/User.h"
+#include "../../../Domain/Entities/User/User.h"
 #include "../../../Repository/RepositoryCSV.h"
 
 void TestUserRepository::clearFile(std::string fileName) {
@@ -14,9 +14,9 @@ void TestUserRepository::clearFile(std::string fileName) {
 void TestUserRepository::addUser() {
     clearFile("testUserRepository.csv");
     RepositoryCSV<User> repository("testUserRepository.csv");
-    User u1(1, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
-    User u2(2, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
-    User u3(3, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
+    User u1(1, "First name", "Last name", 18, "firstname.lastname1@domain.com", "parola123", "40712345678");
+    User u2(2, "First name", "Last name", 18, "firstname.lastname2@domain.com", "parola123", "40712345678");
+    User u3(3, "First name", "Last name", 18, "firstname.lastname3@domain.com", "parola123", "40712345678");
     repository.addEntity(u1);
     repository.addEntity(u2);
     repository.addEntity(u3);
@@ -28,9 +28,9 @@ void TestUserRepository::addUser() {
 void TestUserRepository::readUser() {
     clearFile("testUserRepository.csv");
     RepositoryCSV<User> repository("testUserRepository.csv");
-    User u1(1, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
-    User u2(2, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
-    User u3(3, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
+    User u1(1, "First name", "Last name", 18, "firstname.lastname1@domain.com", "parola123", "40712345678");
+    User u2(2, "First name", "Last name", 18, "firstname.lastname2@domain.com", "parola123", "40712345678");
+    User u3(3, "First name", "Last name", 18, "firstname.lastname3@domain.com", "parola123", "40712345678");
     repository.addEntity(u1);
     repository.addEntity(u2);
     repository.addEntity(u3);
@@ -42,10 +42,10 @@ void TestUserRepository::readUser() {
 void TestUserRepository::updateUser() {
     clearFile("testUserRepository.csv");
     RepositoryCSV<User> repository("testUserRepository.csv");
-    User u1(1, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
-    User u2(2, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
-    User u3(3, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
-    User u4(4, "First name", "Last name", 20, "firstname.lastname@domain.com", "parola123", "40712345678");
+    User u1(1, "First name", "Last name", 18, "firstname.lastname1@domain.com", "parola123", "40712345678");
+    User u2(2, "First name", "Last name", 18, "firstname.lastname2@domain.com", "parola123", "40712345678");
+    User u3(3, "First name", "Last name", 18, "firstname.lastname3@domain.com", "parola123", "40712345678");
+    User u4(4, "First name", "Last name", 20, "firstname.lastname4@domain.com", "parola123", "40712345678");
     repository.addEntity(u1);
     repository.addEntity(u2);
     repository.addEntity(u3);
@@ -58,9 +58,9 @@ void TestUserRepository::updateUser() {
 void TestUserRepository::deleteUser() {
     clearFile("testUserRepository.csv");
     RepositoryCSV<User> repository("testUserRepository.csv");
-    User u1(1, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
-    User u2(2, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
-    User u3(3, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
+    User u1(1, "First name", "Last name", 18, "firstname.lastname1@domain.com", "parola123", "40712345678");
+    User u2(2, "First name", "Last name", 18, "firstname.lastname2@domain.com", "parola123", "40712345678");
+    User u3(3, "First name", "Last name", 18, "firstname.lastname3@domain.com", "parola123", "40712345678");
     repository.addEntity(u1);
     repository.addEntity(u2);
     repository.addEntity(u3);
@@ -77,9 +77,9 @@ void TestUserRepository::deleteUser() {
 void TestUserRepository::getPosById() {
     clearFile("testUserRepository.csv");
     RepositoryCSV<User> repository("testUserRepository.csv");
-    User u1(1, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
-    User u2(2, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
-    User u3(3, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
+    User u1(1, "First name", "Last name", 18, "firstname.lastname1@domain.com", "parola123", "40712345678");
+    User u2(2, "First name", "Last name", 18, "firstname.lastname2@domain.com", "parola123", "40712345678");
+    User u3(3, "First name", "Last name", 18, "firstname.lastname3@domain.com", "parola123", "40712345678");
     repository.addEntity(u1);
     repository.addEntity(u2);
     repository.addEntity(u3);

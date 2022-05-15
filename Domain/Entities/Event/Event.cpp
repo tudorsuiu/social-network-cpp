@@ -3,7 +3,7 @@
 //
 
 #include "Event.h"
-#include "../Array/List.h"
+#include "../../ADT/List/List.h"
 
 Event::Event() {
     this->id = 0;

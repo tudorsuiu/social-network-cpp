@@ -5,7 +5,7 @@
 #include <fstream>
 #include <cassert>
 #include "TestEventRepository.h"
-#include "../../../Domain/Event/Event.h"
+#include "../../../Domain/Entities/Event/Event.h"
 #include "../../../Repository/RepositoryCSV.h"
 
 void TestEventRepository::clearFile(std::string fileName) {

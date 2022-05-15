@@ -16,7 +16,6 @@ public:
     void readUser();
     void updateUser();
     void deleteUser();
-    void getPosById();
     void all();
 };
 

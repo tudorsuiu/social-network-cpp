@@ -3,7 +3,7 @@
 //
 
 #include "Message.h"
-#include "../Array/List.h"
+#include "../../ADT/List/List.h"
 
 Message::Message() {
     this->id = 0;
@@ -123,11 +123,69 @@ bool Message::operator!=(const Message &message) const {
 }
 
 std::istream &operator>>(std::istream &is, Message &message) {
+    unsigned int id;
+    std::cout << "Enter message id:"; is >> id;
+    message.id = id;
 
+    unsigned int firstUserId;
+    std::cout << "Enter first user id:"; is >> firstUserId;
+    message.sender.setId(firstUserId);
 
+    std::string firstUserFirstName;
+    std::cout << "Enter first user first name:"; is >> firstUserFirstName;
+    message.sender.setFirstName(firstUserFirstName);
 
+    std::string firstUserLastName;
+    std::cout << "Enter first user last name:"; is >> firstUserLastName;
+    message.sender.setLastName(firstUserLastName);
 
+    unsigned int firstUserAge;
+    std::cout << "Enter first user age:"; is >> firstUserAge;
+    message.sender.setAge(firstUserAge);
 
+    std::string firstUserEmail;
+    std::cout << "Enter first user email:"; is >> firstUserEmail;
+    message.sender.setEmail(firstUserEmail);
+
+    std::string firstUserPassword;
+    std::cout << "Enter first user password:"; is >> firstUserPassword;
+    message.sender.setPassword(firstUserPassword);
+
+    std::string firstUserPhoneNumber;
+    std::cout << "Enter first user phone number:"; is >> firstUserPhoneNumber;
+    message.sender.setPhoneNumber(firstUserPhoneNumber);
+
+    unsigned int secondUserId;
+    std::cout << "Enter second user id:"; is >> secondUserId;
+    message.receiver.setId(secondUserId);
+
+    std::string secondUserFirstName;
+    std::cout << "Enter second user first name:"; is >> secondUserFirstName;
+    message.receiver.setFirstName(secondUserFirstName);
+
+    std::string secondUserLastName;
+    std::cout << "Enter second user last name:"; is >> secondUserLastName;
+    message.receiver.setLastName(secondUserLastName);
+
+    unsigned int secondUserAge;
+    std::cout << "Enter second user age:"; is >> secondUserAge;
+    message.receiver.setAge(secondUserAge);
+
+    std::string secondUserEmail;
+    std::cout << "Enter second user email:"; is >> secondUserEmail;
+    message.receiver.setEmail(secondUserEmail);
+
+    std::string secondUserPassword;
+    std::cout << "Enter second user password:"; is >> secondUserPassword;
+    message.receiver.setPassword(secondUserPassword);
+
+    std::string secondUserPhoneNumber;
+    std::cout << "Enter second user phone number:"; is >> secondUserPhoneNumber;
+    message.receiver.setPhoneNumber(secondUserPhoneNumber);
+
+    std::string data;
+    std::cout << "Enter message:"; is >> data;
+    message.data = data;
 
     return is;
 }

@@ -5,8 +5,8 @@
 #include <fstream>
 #include <cassert>
 #include "TestMessageRepository.h"
-#include "../../../Domain/User/User.h"
-#include "../../../Domain/Message/Message.h"
+#include "../../../Domain/Entities/User/User.h"
+#include "../../../Domain/Entities/Message/Message.h"
 #include "../../../Repository/RepositoryCSV.h"
 
 void TestMessageRepository::clearFile(std::string fileName) {

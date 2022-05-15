@@ -14,9 +14,9 @@ void TestUserService::createUser() {
     clearFile("testService.csv");
     RepositoryCSV<User> repository("testService.csv");
     UserService service(repository);
-    User u1(1, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
-    User u2(2, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
-    User u3(3, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
+    User u1(1, "First name", "Last name", 18, "firstname.lastname1@domain.com", "parola123", "40712345678");
+    User u2(2, "First name", "Last name", 18, "firstname.lastname2@domain.com", "parola123", "40712345678");
+    User u3(3, "First name", "Last name", 18, "firstname.lastname3@domain.com", "parola123", "40712345678");
     service.create(u1);
     service.create(u2);
     service.create(u3);
@@ -29,9 +29,9 @@ void TestUserService::readUser() {
     clearFile("testService.csv");
     RepositoryCSV<User> repository("testService.csv");
     UserService service(repository);
-    User u1(1, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
-    User u2(2, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
-    User u3(3, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
+    User u1(1, "First name", "Last name", 18, "firstname.lastname1@domain.com", "parola123", "40712345678");
+    User u2(2, "First name", "Last name", 18, "firstname.lastname2@domain.com", "parola123", "40712345678");
+    User u3(3, "First name", "Last name", 18, "firstname.lastname3@domain.com", "parola123", "40712345678");
     service.create(u1);
     service.create(u2);
     service.create(u3);
@@ -45,10 +45,10 @@ void TestUserService::updateUser() {
     clearFile("testService.csv");
     RepositoryCSV<User> repository("testService.csv");
     UserService service(repository);
-    User u1(1, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
-    User u2(2, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
-    User u3(3, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123","40712345678");
-    User u4(4, "First name", "Last name", 20, "firstname.lastname@domain.com", "parola123", "40712345678");
+    User u1(1, "First name", "Last name", 18, "firstname.lastname1@domain.com", "parola123", "40712345678");
+    User u2(2, "First name", "Last name", 18, "firstname.lastname2@domain.com", "parola123", "40712345678");
+    User u3(3, "First name", "Last name", 18, "firstname.lastname3@domain.com", "parola123","40712345678");
+    User u4(4, "First name", "Last name", 20, "firstname.lastname4@domain.com", "parola123", "40712345678");
     service.create(u1);
     service.create(u2);
     service.create(u3);
@@ -65,9 +65,9 @@ void TestUserService::deleteUser() {
     clearFile("testService.csv");
     RepositoryCSV<User> repository("testService.csv");
     UserService service(repository);
-    User u1(1, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
-    User u2(2, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
-    User u3(3, "First name", "Last name", 18, "firstname.lastname@domain.com", "parola123", "40712345678");
+    User u1(1, "First name", "Last name", 18, "firstname.lastname1@domain.com", "parola123", "40712345678");
+    User u2(2, "First name", "Last name", 18, "firstname.lastname2@domain.com", "parola123", "40712345678");
+    User u3(3, "First name", "Last name", 18, "firstname.lastname3@domain.com", "parola123", "40712345678");
     service.create(u1);
     service.create(u2);
     service.create(u3);
@@ -80,14 +80,9 @@ void TestUserService::deleteUser() {
     assert(service.read(3) == u3);
 }
 
-void TestUserService::getPosById() {
-
-}
-
 void TestUserService::all() {
     createUser();
     readUser();
     updateUser();
     deleteUser();
-    getPosById();
 }

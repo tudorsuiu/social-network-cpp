@@ -4,7 +4,7 @@
 
 #include <cassert>
 #include "TestMessage.h"
-#include "../../../Domain/Message/Message.h"
+#include "../../../Domain/Entities//Message/Message.h"
 
 void TestMessage::constructor() {
     Message message;

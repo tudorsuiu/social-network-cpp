@@ -5,8 +5,8 @@
 #include "TestFriendshipRepository.h"
 #include <fstream>
 #include <cassert>
-#include "../../../Domain/User/User.h"
-#include "../../../Domain/Friendship/Friendship.h"
+#include "../../../Domain/Entities/User/User.h"
+#include "../../../Domain/Entities/Friendship/Friendship.h"
 #include "../../../Repository/RepositoryCSV.h"
 
 void TestFriendshipRepository::clearFile(std::string fileName) {

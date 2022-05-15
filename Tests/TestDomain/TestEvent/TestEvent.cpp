@@ -4,7 +4,7 @@
 
 #include <cassert>
 #include "TestEvent.h"
-#include "../../../Domain/Event/Event.h"
+#include "../../../Domain/Entities/Event/Event.h"
 
 void TestEvent::constructor() {
     Event event;

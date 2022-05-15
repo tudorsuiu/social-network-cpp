@@ -5,7 +5,7 @@
 #include <cassert>
 #include <iostream>
 #include "TestFriendship.h"
-#include "../../../Domain/Friendship/Friendship.h"
+#include "../../../Domain/Entities/Friendship/Friendship.h"
 
 void TestFriendship::constructor() {
     Friendship friendship;

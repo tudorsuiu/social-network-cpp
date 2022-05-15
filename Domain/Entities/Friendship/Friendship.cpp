@@ -3,7 +3,7 @@
 //
 
 #include "Friendship.h"
-#include "../Array/List.h"
+#include "../../ADT/List/List.h"
 
 Friendship::Friendship() {
     this->id = 0;
@@ -122,16 +122,69 @@ bool Friendship::operator!=(const Friendship &friendship) const {
 }
 
 std::istream &operator>>(std::istream &is, Friendship &friendship) {
+    unsigned int id;
+    std::cout << "Enter friendship relation id:"; is >> id;
+    friendship.id = id;
 
+    unsigned int firstUserId;
+    std::cout << "Enter first user id:"; is >> firstUserId;
+    friendship.firstUser.setId(firstUserId);
 
+    std::string firstUserFirstName;
+    std::cout << "Enter first user first name:"; is >> firstUserFirstName;
+    friendship.firstUser.setFirstName(firstUserFirstName);
 
+    std::string firstUserLastName;
+    std::cout << "Enter first user last name:"; is >> firstUserLastName;
+    friendship.firstUser.setLastName(firstUserLastName);
 
+    unsigned int firstUserAge;
+    std::cout << "Enter first user age:"; is >> firstUserAge;
+    friendship.firstUser.setAge(firstUserAge);
 
+    std::string firstUserEmail;
+    std::cout << "Enter first user email:"; is >> firstUserEmail;
+    friendship.firstUser.setEmail(firstUserEmail);
 
+    std::string firstUserPassword;
+    std::cout << "Enter first user password:"; is >> firstUserPassword;
+    friendship.firstUser.setPassword(firstUserPassword);
 
+    std::string firstUserPhoneNumber;
+    std::cout << "Enter first user phone number:"; is >> firstUserPhoneNumber;
+    friendship.firstUser.setPhoneNumber(firstUserPhoneNumber);
 
+    unsigned int secondUserId;
+    std::cout << "Enter second user id:"; is >> secondUserId;
+    friendship.secondUser.setId(secondUserId);
 
+    std::string secondUserFirstName;
+    std::cout << "Enter second user first name:"; is >> secondUserFirstName;
+    friendship.secondUser.setFirstName(secondUserFirstName);
 
+    std::string secondUserLastName;
+    std::cout << "Enter second user last name:"; is >> secondUserLastName;
+    friendship.secondUser.setLastName(secondUserLastName);
+
+    unsigned int secondUserAge;
+    std::cout << "Enter second user age:"; is >> secondUserAge;
+    friendship.secondUser.setAge(secondUserAge);
+
+    std::string secondUserEmail;
+    std::cout << "Enter second user email:"; is >> secondUserEmail;
+    friendship.secondUser.setEmail(secondUserEmail);
+
+    std::string secondUserPassword;
+    std::cout << "Enter second user password:"; is >> secondUserPassword;
+    friendship.secondUser.setPassword(secondUserPassword);
+
+    std::string secondUserPhoneNumber;
+    std::cout << "Enter second user phone number:"; is >> secondUserPhoneNumber;
+    friendship.secondUser.setPhoneNumber(secondUserPhoneNumber);
+
+    std::string status;
+    std::cout << "Enter friendship relation status:"; is >> status;
+    friendship.setStatus(status);
 
     return is;
 }

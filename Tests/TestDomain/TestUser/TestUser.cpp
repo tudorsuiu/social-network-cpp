@@ -2,7 +2,7 @@
 // Created by Tudor on 5/5/2022.
 //
 
-#include "../../../Domain/User/User.h"
+#include "../../../Domain/Entities/User/User.h"
 #include "TestUser.h"
 #include <cassert>
 
