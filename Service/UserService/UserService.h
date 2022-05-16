@@ -73,6 +73,13 @@ public:
      * @return: existing user if exists, default user otherwise
      */
     User getUserByEmailAndPassword(std::string email, std::string password);
+
+    /**
+     * Get user by email
+     * @param email: to be searched email
+     * @return: existing user if found, default user otherwise
+     */
+    User getUserByEmail(std::string email);
 };
 
 

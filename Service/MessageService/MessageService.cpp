@@ -8,13 +8,16 @@
 MessageService::MessageService(RepositoryCSV<Message> &messageRepository, UserService &userService) : messageRepository(messageRepository),
                                                                                                       userService(userService) {}
 
-void MessageService::create(Message message) {
-    if(doesExistId(message.getId())) {
+void MessageService::create(unsigned int id, std::string senderEmail, std::string receiverEmail, std::string data) {
+    User sender = userService.getUserByEmail(senderEmail);
+    User receiver = userService.getUserByEmail(receiverEmail);
+    if(doesExistId(id)) {
         throw MyException("A message with this ID already exists.");
     }
-    else if(!doesExistReceiver(message.getReceiver())) {
+    else if(!doesExistReceiver(receiver)) {
         throw MyException("Message receiver doesn't have an account.");
     }
+    Message message(id, sender, receiver, data);
     messageValidator.validate(message);
     messageRepository.addEntity(message);
 }
@@ -33,13 +36,16 @@ Message MessageService::read(unsigned int id) {
     return messageRepository.readEntity(id);
 }
 
-void MessageService::update(unsigned int id, Message newMessage) {
+void MessageService::update(unsigned int id, std::string newSenderEmail, std::string newReceiverEmail, std::string newData) {
+    User newSender = userService.getUserByEmail(newSenderEmail);
+    User newReceiver = userService.getUserByEmail(newReceiverEmail);
     if(!doesExistId(id)) {
         throw MyException("Message with given ID was not found.");
     }
-    else if(!doesExistReceiver(newMessage.getReceiver())) {
+    else if(!doesExistReceiver(newReceiver)) {
         throw MyException("Message receiver doesn't have an account.");
     }
+    Message newMessage(id, newSender, newReceiver, newData);
     messageValidator.validate(newMessage);
     messageRepository.updateEntity(id, newMessage);
 }

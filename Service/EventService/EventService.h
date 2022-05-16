@@ -27,7 +27,7 @@ public:
      * Add event to repository
      * @param event: Event object
      */
-    void create(Event event);
+    void create(unsigned int id, std::string creatorEmail, std::string name, std::string date, std::string description);
 
     /**
      * Reads all events stored in repository
@@ -47,7 +47,7 @@ public:
       * @param id: Event id
       * @param newEvent: updated event
       */
-     void update(unsigned int id, Event newEvent);
+     void update(unsigned int id, std::string newCreatorEmail, std::string newName, std::string newDate, std::string newDescription);
 
      /**
       * Delete event

@@ -70,3 +70,14 @@ User UserService::getUserByEmailAndPassword(std::string email, std::string passw
     }
     return User(0, "Default", "Default", 19, "default@default.com", "default", "40712345678");
 }
+
+User UserService::getUserByEmail(std::string email) {
+    User user;
+    for(int i = 0; i < userRepository.readEntity().size(); i++) {
+        user = userRepository.readEntity()[i];
+        if(user.getEmail() == email) {
+            return user;
+        }
+    }
+    return User(0, "Default", "Default", 19, "default@default.com", "default", "40712345678");
+}

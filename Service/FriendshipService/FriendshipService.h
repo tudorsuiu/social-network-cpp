@@ -27,7 +27,7 @@ public:
      * Add friendship to repository
      * @param friendship: Friendship object
      */
-    void create(Friendship friendship);
+    void create(unsigned int id, std::string firstUserEmail, std::string secondUserEmail, std::string status);
 
     /**
      * Reads all friendships stored in repository
@@ -47,7 +47,7 @@ public:
      * @param id: friendship id
      * @param newFriendship: updated friendship
      */
-    void update(unsigned int id, Friendship newFriendship);
+    void update(unsigned int id, std::string newFirstUserEmail, std::string newSecondUserEmail, std::string newStatus);
 
     /**
      * Delete friendship

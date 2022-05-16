@@ -8,13 +8,16 @@
 FriendshipService::FriendshipService(RepositoryCSV<Friendship> &friendshipRepository, UserService &userService) : friendshipRepository(friendshipRepository),
                                                                                         userService(userService) {}
 
-void FriendshipService::create(Friendship friendship) {
-    if(doesExistId(friendship.getId())) {
+void FriendshipService::create(unsigned int id, std::string firstUserEmail, std::string secondUserEmail, std::string status) {
+    User firstUser = userService.getUserByEmail(firstUserEmail);
+    User secondUser = userService.getUserByEmail(secondUserEmail);
+    if(doesExistId(id)) {
         throw MyException("A friendship realtion with this ID already exists.");
     }
-    else if(!doesExistSecondUser(friendship.getSecondUser())) {
+    else if(!doesExistSecondUser(secondUser)) {
         throw MyException("Friendship receiver doesn't have an account.");
     }
+    Friendship friendship(id, firstUser, secondUser, status);
     friendshipValidator.validate(friendship);
     friendshipRepository.addEntity(friendship);
 }
@@ -33,13 +36,16 @@ Friendship FriendshipService::read(unsigned int id) {
     return friendshipRepository.readEntity(id);
 }
 
-void FriendshipService::update(unsigned int id, Friendship newFriendship) {
+void FriendshipService::update(unsigned int id, std::string newFirstUserEmail, std::string newSecondUserEmail, std::string newStatus) {
+    User newFirstUser = userService.getUserByEmail(newFirstUserEmail);
+    User newSecondUser = userService.getUserByEmail(newSecondUserEmail);
     if(!doesExistId(id)) {
         throw MyException("Friendship relation with given ID was not found.");
     }
-    else if(!doesExistSecondUser(newFriendship.getSecondUser())) {
-        throw MyException("Friendship receiver doesn't habe an account.");
+    else if(!doesExistSecondUser(newSecondUser)) {
+        throw MyException("Friendship receiver doesn't have an account.");
     }
+    Friendship newFriendship(id, newFirstUser, newSecondUser, newStatus);
     friendshipValidator.validate(newFriendship);
     friendshipRepository.updateEntity(id, newFriendship);
 }

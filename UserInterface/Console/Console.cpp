@@ -201,9 +201,23 @@ void Console::uiDeleteUser() {
 
 void Console::uiAddFriendship() {
     try {
-        Friendship friendship;
-        std::cin >> friendship;
-        friendshipService.create(friendship);
+        unsigned int id;
+        std::cout << "Enter friendship id:";
+        std::cin >> id;
+
+        std::string firstUserEmail;
+        std::cout << "Enter first user email:";
+        std::cin >> firstUserEmail;
+
+        std::string secondUserEmail;
+        std::cout << "Enter second user email:";
+        std::cin >> secondUserEmail;
+
+        std::string status;
+        std::cout << "Enter friendship status:";
+        std::cin >> status;
+
+        friendshipService.create(id, firstUserEmail, secondUserEmail, status);
     }
     catch(std::exception &e) {
         std::cout << '\n' << e.what() << '\n';
@@ -224,11 +238,22 @@ void Console::uiCheckFriendship() {
 void Console::uiUpdateFriendship() {
     try {
         unsigned int id;
-        std::cout << "Update friendship relation with this id:";
+        std::cout << "Enter friendship id:";
         std::cin >> id;
-        Friendship newFriendship;
-        std::cin >> newFriendship;
-        friendshipService.update(id, newFriendship);
+
+        std::string newFirstUserEmail;
+        std::cout << "Enter new first user email:";
+        std::cin >> newFirstUserEmail;
+
+        std::string newSecondUserEmail;
+        std::cout << "Enter new second user email:";
+        std::cin >> newSecondUserEmail;
+
+        std::string newStatus;
+        std::cout << "Enter new friendship status:";
+        std::cin >> newStatus;
+
+        friendshipService.update(id, newFirstUserEmail, newSecondUserEmail, newStatus);
     }
     catch(std::exception &e) {
         std::cout << '\n' << e.what() << '\n';
@@ -249,9 +274,27 @@ void Console::uiDeleteFriendship() {
 
 void Console::uiAddEvent() {
     try {
-        Event event;
-        std::cin >> event;
-        eventService.create(event);
+        unsigned int id;
+        std::cout << "Enter event id:";
+        std::cin >> id;
+
+        std::string creatorEmail;
+        std::cout << "Enter creator email:";
+        std::cin >> creatorEmail;
+
+        std::string name;
+        std::cout << "Enter event name:";
+        std::cin >> name;
+
+        std::string date;
+        std::cout << "Enter event date:";
+        std::cin >> date;
+
+        std::string description;
+        std::cout << "Enter event description:";
+        std::cin >> description;
+
+        eventService.create(id, creatorEmail, name, date, description);
     }
     catch(std::exception &e) {
         std::cout << '\n' << e.what() << '\n';
@@ -272,11 +315,25 @@ void Console::uiCheckEvent() {
 void Console::uiUpdateEvent() {
     try {
         unsigned int id;
-        std::cout << "Update event with this id:";
+        std::cout << "Enter event id:";
         std::cin >> id;
-        Event newEvent;
-        std::cin >> newEvent;
-        eventService.update(id, newEvent);
+
+        std::string newCreatorEmail;
+        std::cout << "Enter new creator email:";
+        std::cin >> newCreatorEmail;
+
+        std::string newName;
+        std::cout << "Enter new event name:";
+        std::cin >> newName;
+
+        std::string newDate;
+        std::cout << "Enter new event date:";
+        std::cin >> newDate;
+
+        std::string newDescription;
+        std::cout << "Enter new event description:";
+        std::cin >> newDescription;
+        eventService.update(id, newCreatorEmail, newName, newDate, newDescription);
     }
     catch(std::exception &e) {
         std::cout << '\n' << e.what() << '\n';
@@ -297,9 +354,23 @@ void Console::uiDeleteEvent() {
 
 void Console::uiAddMessage() {
     try {
-        Message message;
-        std::cin >> message;
-        messageService.create(message);
+        unsigned int id;
+        std::cout << "Enter message id:";
+        std::cin >> id;
+
+        std::string senderEmail;
+        std::cout << "Enter sender email:";
+        std::cin >> senderEmail;
+
+        std::string receiverEmail;
+        std::cout << "Enter receiver email:";
+        std::cin >> receiverEmail;
+
+        std::string data;
+        std::cout << "Enter message:";
+        std::cin >> data;
+
+        messageService.create(id, senderEmail, receiverEmail, data);
     }
     catch(std::exception &e) {
         std::cout << '\n' << e.what() << '\n';
@@ -320,11 +391,21 @@ void Console::uiCheckMessage() {
 void Console::uiUpdateMessage() {
     try {
         unsigned int id;
-        std::cout << "Update message with this id:";
+        std::cout << "Enter message id:";
         std::cin >> id;
-        Message newMessage;
-        std::cin >> newMessage;
-        messageService.update(id, newMessage);
+
+        std::string senderEmail;
+        std::cout << "Enter new sender email:";
+        std::cin >> senderEmail;
+
+        std::string receiverEmail;
+        std::cout << "Enter new receiver email:";
+        std::cin >> receiverEmail;
+
+        std::string data;
+        std::cout << "Enter new message:";
+        std::cin >> data;
+        messageService.update(id, senderEmail, receiverEmail, data);
     }
     catch(std::exception &e) {
         std::cout << '\n' << e.what() << '\n';

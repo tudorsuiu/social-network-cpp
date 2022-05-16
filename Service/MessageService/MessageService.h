@@ -27,7 +27,7 @@ public:
      * Add message to repository
      * @param message: Message object
      */
-    void create(Message message);
+    void create(unsigned int id, std::string senderEmail, std::string receiverEmail, std::string data);
 
     /**
      * Reads all messages stored in repository
@@ -47,7 +47,7 @@ public:
      * @param id: message id
      * @param newMessage: update message
      */
-    void update(unsigned int id, Message newMessage);
+    void update(unsigned int id, std::string newSenderEmail, std::string newReceiverEmail, std::string newData);
 
     /**
      * Delete message

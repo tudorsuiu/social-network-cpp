@@ -8,10 +8,12 @@
 EventService::EventService(RepositoryCSV<Event> &eventRepository, UserService &userService) : eventRepository(eventRepository),
                                                                                               userService(userService){}
 
-void EventService::create(Event event) {
-    if(doesExistId(event.getId())) {
+void EventService::create(unsigned int id, std::string creatorEmail, std::string name, std::string date, std::string description) {
+    User creator = userService.getUserByEmail(creatorEmail);
+    if(doesExistId(id)) {
         throw MyException("An event with this ID already exists.");
     }
+    Event event(id, creator, name, date, description);
     eventValidator.validate(event);
     eventRepository.addEntity(event);
 }
@@ -30,10 +32,12 @@ Event EventService::read(unsigned int id) {
     return eventRepository.readEntity(id);
 }
 
-void EventService::update(unsigned int id, Event newEvent) {
+void EventService::update(unsigned int id, std::string newCreatorEmail, std::string newName, std::string newDate, std::string newDescription) {
+    User newCreator = userService.getUserByEmail(newCreatorEmail);
     if(!doesExistId(id)) {
         throw MyException("Event with given ID was not found.");
     }
+    Event newEvent(id, newCreator, newName, newDate, newDescription);
     eventValidator.validate(newEvent);
     eventRepository.updateEntity(id, newEvent);
 }
