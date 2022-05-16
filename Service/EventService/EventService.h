@@ -24,8 +24,12 @@ public:
     EventService(RepositoryCSV<Event> &eventRepository, UserService &userService);
 
     /**
-     * Add event to repository
-     * @param event: Event object
+     * Creates an Event object
+     * @param id: event id
+     * @param creatorEmail: event creator email
+     * @param name: event name
+     * @param date: event date
+     * @param description: event description
      */
     void create(unsigned int id, std::string creatorEmail, std::string name, std::string date, std::string description);
 
@@ -43,9 +47,12 @@ public:
      Event read(unsigned int id);
 
      /**
-      * Update event
-      * @param id: Event id
-      * @param newEvent: updated event
+      * Updates an Event object
+      * @param id: event id
+      * @param newCreatorEmail: new event creator email
+      * @param newName: new event name
+      * @param newDate: new event date
+      * @param newDescription: new event description
       */
      void update(unsigned int id, std::string newCreatorEmail, std::string newName, std::string newDate, std::string newDescription);
 

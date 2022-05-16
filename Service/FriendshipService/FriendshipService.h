@@ -24,8 +24,11 @@ public:
     FriendshipService(RepositoryCSV<Friendship> &friendshipRepository, UserService &userService);
 
     /**
-     * Add friendship to repository
-     * @param friendship: Friendship object
+     * Create a Friendship object
+     * @param id: friendship id
+     * @param firstUserEmail: friendship first user email
+     * @param secondUserEmail: friendship second user email
+     * @param status: friendship status
      */
     void create(unsigned int id, std::string firstUserEmail, std::string secondUserEmail, std::string status);
 
@@ -43,9 +46,11 @@ public:
     Friendship read(unsigned int id);
 
     /**
-     * Update friendship
+     * Update a Friendship object
      * @param id: friendship id
-     * @param newFriendship: updated friendship
+     * @param newFirstUserEmail: new friendship first user email
+     * @param newSecondUserEmail: new friendship second user email
+     * @param newStatus: new friendship status
      */
     void update(unsigned int id, std::string newFirstUserEmail, std::string newSecondUserEmail, std::string newStatus);
 

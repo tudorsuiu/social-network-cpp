@@ -24,8 +24,11 @@ public:
     MessageService(RepositoryCSV<Message> &messageRepository, UserService &userService);
 
     /**
-     * Add message to repository
-     * @param message: Message object
+     * Create a Message object
+     * @param id: message id
+     * @param senderEmail: message sender
+     * @param receiverEmail: message receiver
+     * @param data: message data
      */
     void create(unsigned int id, std::string senderEmail, std::string receiverEmail, std::string data);
 
@@ -43,9 +46,11 @@ public:
     Message read(unsigned int id);
 
     /**
-     * Update message
-     * @param id: message id
-     * @param newMessage: update message
+     * Update a Message object
+     * @param id: new message id
+     * @param newSenderEmail: new message sender
+     * @param newReceiverEmail: new message receiver
+     * @param newData: new message data
      */
     void update(unsigned int id, std::string newSenderEmail, std::string newReceiverEmail, std::string newData);
 
