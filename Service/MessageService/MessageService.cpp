@@ -8,16 +8,20 @@
 MessageService::MessageService(RepositoryCSV<Message> &messageRepository, UserService &userService) : messageRepository(messageRepository),
                                                                                                       userService(userService) {}
 
-void MessageService::create(unsigned int id, std::string senderEmail, std::string receiverEmail, std::string data) {
-    User sender = userService.getUserByEmail(senderEmail);
-    User receiver = userService.getUserByEmail(receiverEmail);
-    if(doesExistId(id)) {
-        throw MyException("A message with this ID already exists.");
+unsigned int MessageService::getId() {
+    if(messageRepository.readEntity().size() == 0) {
+        return 1;
     }
-    else if(!doesExistReceiver(receiver)) {
+    else {
+        return messageRepository.readEntity()[messageRepository.readEntity().size() - 1].getId() + 1;
+    }
+}
+
+void MessageService::create(User sender, User receiver, std::string data) {
+    if(!userService.doesExistEmail(receiver.getEmail())) {
         throw MyException("Message receiver doesn't have an account.");
     }
-    Message message(id, sender, receiver, data);
+    Message message(getId(), sender, receiver, data);
     messageValidator.validate(message);
     messageRepository.addEntity(message);
 }
@@ -36,36 +40,49 @@ Message MessageService::read(unsigned int id) {
     return messageRepository.readEntity(id);
 }
 
-void MessageService::update(unsigned int id, std::string newSenderEmail, std::string newReceiverEmail, std::string newData) {
-    User newSender = userService.getUserByEmail(newSenderEmail);
-    User newReceiver = userService.getUserByEmail(newReceiverEmail);
-    if(!doesExistId(id)) {
+void MessageService::update(Message oldMessage, Message newMessage) {
+    if(!doesExistId(oldMessage.getId())) {
         throw MyException("Message with given ID was not found.");
     }
-    else if(!doesExistReceiver(newReceiver)) {
+    else if(!userService.doesExistEmail(newMessage.getReceiver().getEmail())) {
         throw MyException("Message receiver doesn't have an account.");
     }
-    Message newMessage(id, newSender, newReceiver, newData);
     messageValidator.validate(newMessage);
-    messageRepository.updateEntity(id, newMessage);
+    messageRepository.updateEntity(oldMessage, newMessage);
 }
 
-void MessageService::del(unsigned int id) {
-    if(!doesExistId(id)) {
+void MessageService::del(Message message) {
+    if(!doesExistId(message.getId())) {
         throw MyException("Message with given ID was not found.");
     }
-    messageRepository.deleteEntity(id);
+    messageRepository.deleteEntity(message);
 }
 
 bool MessageService::doesExistId(unsigned int id) {
     return messageRepository.getPosById(id) != -1;
 }
 
-bool MessageService::doesExistReceiver(User receiver) {
-    for(int i = 0; i < userService.read().size(); i++) {
-        if(userService.read()[i] == receiver) {
-            return true;
+Message MessageService::getMessageByEmailsAndData(std::string senderEmail,
+                                                  std::string receiverEmail,
+                                                  std::string data) {
+    for(int i = 0; i < messageRepository.readEntity().size(); i++) {
+        Message message = messageRepository.readEntity()[i];
+        if(message.getSender().getEmail() == senderEmail && message.getReceiver().getEmail() == receiverEmail && message.getData() == data) {
+            return message;
         }
     }
-    return false;
+    throw MyException("Message with given details was not found.");
+}
+
+List<Message> MessageService::getConversationWithUser(User loggedUser, User user) {
+    List<Message> result;
+    for(int i = 0; i < messageRepository.readEntity().size(); i++) {
+        if(messageRepository.readEntity()[i].getSender() == loggedUser && messageRepository.readEntity()[i].getReceiver() == user) {
+            result.push_back(messageRepository.readEntity()[i]);
+        }
+        if(messageRepository.readEntity()[i].getSender() == user && messageRepository.readEntity()[i].getReceiver() == loggedUser) {
+            result.push_back(messageRepository.readEntity()[i]);
+        }
+    }
+    return result;
 }

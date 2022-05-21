@@ -134,7 +134,7 @@ User &User::operator=(const User &user) {
 }
 
 bool User::operator<(const User &user) const {
-    return this->age < user.age;
+    return this->lastName.compare(user.lastName) < 0;
 }
 
 bool User::operator>(const User &user) const {
@@ -196,13 +196,9 @@ std::istream &operator>>(std::istream &is, User &user) {
 }
 
 std::ostream &operator<<(std::ostream &os, User &user) {
-    os << "User id: " << user.id << '\n' <<
-    "First name: " << user.firstName << '\n' <<
-    "Last name: " << user.lastName << '\n' <<
-    "Age: " << user.age << '\n' <<
-    "Email: " << user.email << '\n' <<
-    "Password: " << user.password << '\n' <<
-    "Phone number: " << user.phoneNumber << '\n';
+    os << "User(" << user.id << ", " << user.firstName << ", "
+    << user.lastName << ", " << user.age << ", " << user.email << ", "
+    << user.password << ", " << user.phoneNumber << ")" << '\n';
 
     return os;
 }

@@ -191,9 +191,8 @@ std::istream &operator>>(std::istream &is, Message &message) {
 }
 
 std::ostream &operator<<(std::ostream &os, Message &message) {
-    os << "Message id: " << message.id << '\n' <<
-    "Message sender: " << message.sender.getFirstName() << " " << message.sender.getLastName() << '\n' <<
-    "Message receiver: " << message.receiver.getFirstName() << " " << message.receiver.getLastName() << '\n' <<
-    "Message: " << message.data << '\n';
+    os << "Message(" << message.id << ", " << message.sender.getFirstName() << " " << message.sender.getLastName() << ", "
+    << message.receiver.getFirstName() << " " << message.receiver.getLastName() << ", " << message.data << ")" << '\n';
+
     return os;
 }

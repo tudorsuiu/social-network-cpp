@@ -55,36 +55,36 @@ public:
             return elements[getPosById(id)];
         }
         else {
-            throw std::out_of_range("Id out of range");
+            throw MyException("Id out of range.");
         }
     }
 
     /**
      * Update an entity from file
-     * @param id: unsigned int - entity index
+     * @param oldEntity: T class object - old entity
      * @param newEntity: T class object - updated entity
      */
-    void updateEntity(unsigned int id, T newEntity) {
-        if(getPosById(id) != -1) {
-            elements[getPosById(id)] = newEntity;
+    void updateEntity(T oldEntity, T newEntity) {
+        if(getPosById(oldEntity.getId()) != -1) {
+            elements[getPosById(oldEntity.getId())] = newEntity;
             this->saveToFile();
         }
         else {
-            throw std::out_of_range("Id out of range");
+            throw MyException("Id out of range.");
         }
     }
 
     /**
      * Delete an entity from file
-     * @param id: unsigned int - id
+     * @param entity: unsigned int - entity
      */
-    void deleteEntity(unsigned int id) {
-        if(getPosById(id) != -1) {
-            elements.erase(getPosById(id));
+    void deleteEntity(T entity) {
+        if(getPosById(entity.getId()) != -1) {
+            elements.erase(entity);
             this->saveToFile();
         }
         else {
-            throw std::out_of_range("Id out of range");
+            throw MyException("Id out of range.");
         }
     }
 
@@ -112,7 +112,6 @@ public:
             f << elements[i].toStringDelimiter(',') << '\n';
         }
     }
-
 
     /**
      * Loads the elements from file into "elements" vector

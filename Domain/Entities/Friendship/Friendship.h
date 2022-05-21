@@ -13,7 +13,6 @@ private:
     unsigned int id;
     User firstUser;
     User secondUser;
-    std::string status;
 public:
     /**
      * Constructor
@@ -25,9 +24,8 @@ public:
      * @param id: friendship id
      * @param firstPerson: person that creates the friendship
      * @param secondPerson: person that accepts/declines the friendship
-     * @param status: friendship status (accepted/declined/pending)
      */
-    Friendship(unsigned int id, User firstUser, User secondUser, std::string status);
+    Friendship(unsigned int id, User firstUser, User secondUser);
 
     /**
      * Constructor from file
@@ -82,18 +80,6 @@ public:
      * @param secondUser: new friendship receiver
      */
     void setSecondUser(User secondUser);
-
-    /**
-     * Status getter
-     * @return: friendship status
-     */
-    std::string getStatus();
-
-    /**
-     * Status setter
-     * @param status: new friendship status
-     */
-    void setStatus(std::string status);
 
     /**
      * To string delimiter

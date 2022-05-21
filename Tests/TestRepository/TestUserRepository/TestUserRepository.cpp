@@ -49,7 +49,7 @@ void TestUserRepository::updateUser() {
     repository.addEntity(u1);
     repository.addEntity(u2);
     repository.addEntity(u3);
-    repository.updateEntity(2, u4);
+    repository.updateEntity(u2, u4);
     assert(repository.readEntity(1) == u1);
     assert(repository.readEntity(4) == u4);
     assert(repository.readEntity(3) == u3);
@@ -68,7 +68,7 @@ void TestUserRepository::deleteUser() {
     assert(repository.readEntity(1) == u1);
     assert(repository.readEntity(2) == u2);
     assert(repository.readEntity(3) == u3);
-    repository.deleteEntity(3);
+    repository.deleteEntity(u3);
     assert(repository.readEntity().size() == 2);
     assert(repository.readEntity(1) == u1);
     assert(repository.readEntity(2) == u2);

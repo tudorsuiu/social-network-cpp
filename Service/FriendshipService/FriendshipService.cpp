@@ -6,55 +6,56 @@
 #include "../../Domain/MyException.h"
 
 FriendshipService::FriendshipService(RepositoryCSV<Friendship> &friendshipRepository, UserService &userService) : friendshipRepository(friendshipRepository),
-                                                                                        userService(userService) {}
+                                                                                                                  userService(userService) {}
 
-void FriendshipService::create(unsigned int id, std::string firstUserEmail, std::string secondUserEmail, std::string status) {
-    User firstUser = userService.getUserByEmail(firstUserEmail);
-    User secondUser = userService.getUserByEmail(secondUserEmail);
-    if(doesExistId(id)) {
-        throw MyException("A friendship realtion with this ID already exists.");
+unsigned int FriendshipService::getId() {
+    if(friendshipRepository.readEntity().size() == 0) {
+        return 1;
     }
-    else if(!doesExistSecondUser(secondUser)) {
-        throw MyException("Friendship receiver doesn't have an account.");
+    else {
+        return friendshipRepository.readEntity()[friendshipRepository.readEntity().size() - 1].getId() + 1;
     }
-    Friendship friendship(id, firstUser, secondUser, status);
+}
+
+void FriendshipService::create(User firstUser, User secondUser) {
+//    if(!doesExistSecondUser(secondUser)) {
+//        throw MyException("Friendship receiver doesn't have an account.");
+//    }
+    Friendship friendship(getId(), firstUser, secondUser);
     friendshipValidator.validate(friendship);
     friendshipRepository.addEntity(friendship);
 }
 
 List<Friendship> FriendshipService::read() {
-    if(friendshipRepository.readEntity().size() == 0) {
-        throw MyException("There are no friendship relations.");
-    }
+//    if(friendshipRepository.readEntity().size() == 0) {
+//        throw MyException("There are no friendship relations.");
+//    }
     return friendshipRepository.readEntity();
 }
 
 Friendship FriendshipService::read(unsigned int id) {
-    if(!doesExistId(id)) {
-        throw MyException("Friendship relation with given ID was not found.");
-    }
+//    if(!doesExistId(id)) {
+//        throw MyException("Friendship relation with given ID was not found.");
+//    }
     return friendshipRepository.readEntity(id);
 }
 
-void FriendshipService::update(unsigned int id, std::string newFirstUserEmail, std::string newSecondUserEmail, std::string newStatus) {
-    User newFirstUser = userService.getUserByEmail(newFirstUserEmail);
-    User newSecondUser = userService.getUserByEmail(newSecondUserEmail);
-    if(!doesExistId(id)) {
-        throw MyException("Friendship relation with given ID was not found.");
-    }
-    else if(!doesExistSecondUser(newSecondUser)) {
-        throw MyException("Friendship receiver doesn't have an account.");
-    }
-    Friendship newFriendship(id, newFirstUser, newSecondUser, newStatus);
+void FriendshipService::update(Friendship oldFriendship, Friendship newFriendship) {
+//    if(!doesExistId(oldFriendship.getId())) {
+//        throw MyException("Friendship relation with given ID was not found.");
+//    }
+//    else if(!doesExistSecondUser(newFriendship.getSecondUser())) {
+//        throw MyException("Friendship receiver doesn't have an account.");
+//    }
     friendshipValidator.validate(newFriendship);
-    friendshipRepository.updateEntity(id, newFriendship);
+    friendshipRepository.updateEntity(oldFriendship, newFriendship);
 }
 
-void FriendshipService::del(unsigned int id) {
-    if(!doesExistId(id)) {
-        throw MyException("Friendship relation with given ID was not found.");
-    }
-    friendshipRepository.deleteEntity(id);
+void FriendshipService::del(Friendship friendship) {
+//    if(!doesExistId(friendship.getId())) {
+//        throw MyException("Friendship relation with given ID was not found.");
+//    }
+    friendshipRepository.deleteEntity(friendship);
 }
 
 bool FriendshipService::doesExistId(unsigned int id) {
@@ -68,4 +69,29 @@ bool FriendshipService::doesExistSecondUser(User secondUser) {
         }
     }
     return false;
+}
+
+Friendship FriendshipService::getFriendshipByEmails(std::string firstUserEmail,
+                                                    std::string secondUserEmail) {
+    for(int i = 0; i < friendshipRepository.readEntity().size(); i++) {
+        Friendship friendship = friendshipRepository.readEntity()[i];
+        if(friendship.getFirstUser().getEmail() == firstUserEmail &&
+        friendship.getSecondUser().getEmail() == secondUserEmail) {
+            return friendship;
+        }
+    }
+    throw MyException("Friendship relation between these users was not found.");
+}
+
+List<User> FriendshipService::getUserFriendList(User user) {
+    List<User> result;
+    for(int i = 0; i < friendshipRepository.readEntity().size(); i++) {
+        if(friendshipRepository.readEntity()[i].getFirstUser() == user) {
+            result.push_back(friendshipRepository.readEntity()[i].getSecondUser());
+        }
+        if(friendshipRepository.readEntity()[i].getSecondUser() == user) {
+            result.push_back(friendshipRepository.readEntity()[i].getFirstUser());
+        }
+    }
+    return result;
 }

@@ -6,7 +6,7 @@
 #include <cassert>
 #include "TestEventRepository.h"
 #include "../../../Domain/Entities/Event/Event.h"
-#include "../../../Repository/RepositoryCSV.h"
+#include "../../../Repository/BSTRepositoryCSV.h"
 
 void TestEventRepository::clearFile(std::string fileName) {
     std::ofstream file(fileName);
@@ -14,7 +14,7 @@ void TestEventRepository::clearFile(std::string fileName) {
 
 void TestEventRepository::addEvent() {
     clearFile("testEventRepository.csv");
-    RepositoryCSV<Event> repository("testEventRepository.csv");
+    BSTRepositoryCSV<Event> repository("testEventRepository.csv");
     User creator(1, "Creator", "Test", 23, "creatortest@gmail.com", "cartof4", "40753123456");
     Event e1(1, creator, "Event name", "21/07/2002", "This is the description of the event1!");
     Event e2(2, creator, "Event name", "21/07/2002", "This is the description of the event2!");
@@ -29,7 +29,7 @@ void TestEventRepository::addEvent() {
 
 void TestEventRepository::readEvent() {
     clearFile("testEventRepository.csv");
-    RepositoryCSV<Event> repository("testEventRepository.csv");
+    BSTRepositoryCSV<Event> repository("testEventRepository.csv");
     User creator(1, "Creator", "Test", 23, "creatortest@gmail.com", "cartof4", "40753123456");
     Event e1(1, creator, "Event name", "21/07/2002", "This is the description of the event1!");
     Event e2(2, creator, "Event name", "21/07/2002", "This is the description of the event2!");
@@ -44,7 +44,7 @@ void TestEventRepository::readEvent() {
 
 void TestEventRepository::updateEvent() {
     clearFile("testEventRepository.csv");
-    RepositoryCSV<Event> repository("testEventRepository.csv");
+    BSTRepositoryCSV<Event> repository("testEventRepository.csv");
     User creator(1, "Creator", "Test", 23, "creatortest@gmail.com", "cartof4", "40753123456");
     Event e1(1, creator, "Event name", "21/07/2002", "This is the description of the event1!");
     Event e2(2, creator, "Event name", "21/07/2002", "This is the description of the event2!");
@@ -52,7 +52,7 @@ void TestEventRepository::updateEvent() {
     repository.addEntity(e1);
     repository.addEntity(e2);
     repository.addEntity(e3);
-    repository.updateEntity(3, Event(3, creator, "New event name", "21/09/2002", "This is the new description of the event3!"));
+    repository.updateEntity(e3, Event(3, creator, "New event name", "21/09/2002", "This is the new description of the event3!"));
     assert(repository.readEntity(1) == e1);
     assert(repository.readEntity(2) == e2);
     assert(repository.readEntity(3) == Event(3, creator, "New event name", "21/09/2002", "This is the new description of the event3!"));
@@ -60,7 +60,7 @@ void TestEventRepository::updateEvent() {
 
 void TestEventRepository::deleteEvent() {
     clearFile("testEventRepository.csv");
-    RepositoryCSV<Event> repository("testEventRepository.csv");
+    BSTRepositoryCSV<Event> repository("testEventRepository.csv");
     User creator(1, "Creator", "Test", 23, "creatortest@gmail.com", "cartof4", "40753123456");
     Event e1(1, creator, "Event name", "21/07/2002", "This is the description of the event1!");
     Event e2(2, creator, "Event name", "21/07/2002", "This is the description of the event2!");
@@ -68,26 +68,10 @@ void TestEventRepository::deleteEvent() {
     repository.addEntity(e1);
     repository.addEntity(e2);
     repository.addEntity(e3);
-    assert(repository.readEntity().size() == 3);
-    repository.deleteEntity(1);
-    repository.deleteEntity(2);
-    repository.deleteEntity(3);
-    assert(repository.readEntity().size() == 0);
-}
-
-void TestEventRepository::getPosById() {
-    clearFile("testEventRepository.csv");
-    RepositoryCSV<Event> repository("testEventRepository.csv");
-    User creator(1, "Creator", "Test", 23, "creatortest@gmail.com", "cartof4", "40753123456");
-    Event e1(1, creator, "Event name", "21/07/2002", "This is the description of the event1!");
-    Event e2(2, creator, "Event name", "21/07/2002", "This is the description of the event2!");
-    Event e3(3, creator, "Event name", "21/07/2002", "This is the description of the event3!");
-    repository.addEntity(e1);
-    repository.addEntity(e2);
-    repository.addEntity(e3);
-    assert(repository.getPosById(1) == 0);
-    assert(repository.getPosById(2) == 1);
-    assert(repository.getPosById(3) == 2);
+    repository.deleteEntity(e1);
+    repository.deleteEntity(e2);
+    repository.deleteEntity(e3);
+    assert(repository.empty());
 }
 
 void TestEventRepository::all() {
@@ -95,5 +79,4 @@ void TestEventRepository::all() {
     readEvent();
     updateEvent();
     deleteEvent();
-    getPosById();
 }

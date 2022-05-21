@@ -7,67 +7,62 @@
 
 
 #include "../../Domain/Entities/Event/Event.h"
-#include "../../Repository/RepositoryCSV.h"
 #include "../../Domain/Validators/EventValidator/EventValidator.h"
 #include "../UserService/UserService.h"
+#include "../../Repository/BSTRepositoryCSV.h"
 
 class EventService {
 private:
     EventValidator eventValidator;
-    RepositoryCSV<Event> eventRepository;
+    BSTRepositoryCSV<Event> eventRepository;
     UserService userService;
+    unsigned int id = 1;
 public:
     /**
      * Constructor
      * @param eventRepository: repository
+     * @param userService: user service
      */
-    EventService(RepositoryCSV<Event> &eventRepository, UserService &userService);
+    EventService(BSTRepositoryCSV<Event> &eventRepository, UserService &userService);
 
-    /**
-     * Creates an Event object
-     * @param id: event id
-     * @param creatorEmail: event creator email
-     * @param name: event name
-     * @param date: event date
-     * @param description: event description
-     */
-    void create(unsigned int id, std::string creatorEmail, std::string name, std::string date, std::string description);
+    void create(User creator, std::string name, std::string date, std::string description);
 
     /**
      * Reads all events stored in repository
      * @return: all events stored in repository
      */
-     List<Event> read();
+    BST<Event> read();
 
-     /**
-      * Read event with given id
-      * @param id: event id
-      * @return: event with given id
-      */
-     Event read(unsigned int id);
+    /**
+     * Read event with given id
+     * @param id: event id
+     * @return: event with given id
+     */
+    Event read(unsigned int id);
 
-     /**
-      * Updates an Event object
-      * @param id: event id
-      * @param newCreatorEmail: new event creator email
-      * @param newName: new event name
-      * @param newDate: new event date
-      * @param newDescription: new event description
-      */
-     void update(unsigned int id, std::string newCreatorEmail, std::string newName, std::string newDate, std::string newDescription);
+    /**
+     * Updates an Event object
+     * @param id: event id
+     * @param newCreatorEmail: new event creator email
+     * @param newName: new event name
+     * @param newDate: new event date
+     * @param newDescription: new event description
+     */
+    void update(Event oldEvent, Event newEvent);
 
-     /**
-      * Delete event
-      * @param id: event id
-      */
-     void del(unsigned int id);
 
-     /**
-      * Checks if entity with given ID exist
-      * @param id: id
-      * @return: true if exists, false otherwise
-      */
-     bool doesExistId(unsigned int id);
+    /**
+     * Delete event
+     * @param event: event to be deleted
+     */
+    void del(Event event);
+
+    /**
+     * Checks if entity with given ID exist
+     * @param id: id
+     * @return: true if exists, false otherwise
+     */
+    bool doesExistId(unsigned int id);
 };
 
 

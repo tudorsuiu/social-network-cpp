@@ -9,12 +9,10 @@ Friendship::Friendship() {
     this->id = 0;
 }
 
-Friendship::Friendship(unsigned int id, User firstUser, User secondUser,
-                       std::string status) {
+Friendship::Friendship(unsigned int id, User firstUser, User secondUser) {
     this->id = id;
     this->firstUser = firstUser;
     this->secondUser = secondUser;
-    this->status = status;
 }
 
 Friendship::Friendship(std::string line, char separator) {
@@ -25,7 +23,6 @@ Friendship::Friendship(const Friendship &friendship) {
     this->id = friendship.id;
     this->firstUser = friendship.firstUser;
     this->secondUser = friendship.secondUser;
-    this->status = friendship.status;
 }
 
 Friendship::~Friendship() = default;
@@ -54,16 +51,8 @@ void Friendship::setSecondUser(User secondUser) {
     this->secondUser = secondUser;
 }
 
-std::string Friendship::getStatus() {
-    return this->status;
-}
-
-void Friendship::setStatus(std::string status) {
-    this->status = status;
-}
-
 std::string Friendship::toStringDelimiter(char separator) {
-    return std::to_string(this->id) + separator + firstUser.toStringDelimiter(',') + separator + secondUser.toStringDelimiter(',') + separator + this->status;
+    return std::to_string(this->id) + separator + firstUser.toStringDelimiter(',') + separator + secondUser.toStringDelimiter(',');
 }
 
 void Friendship::loadFromstring(std::string line, char separator) {
@@ -73,7 +62,7 @@ void Friendship::loadFromstring(std::string line, char separator) {
     while(getline(ss, friendshipInfo, separator)) {
         friendships.push_back(friendshipInfo);
     }
-    if(friendships.size() == 16) {
+    if(friendships.size() == 15) {
         unsigned int firstUserId, firstUserAge, secondUserId, secondUserAge;
         std::stringstream i(friendships[0]);
         i >> this->id;
@@ -99,7 +88,6 @@ void Friendship::loadFromstring(std::string line, char separator) {
         this->secondUser.setEmail(friendships[12]);
         this->secondUser.setPassword(friendships[13]);
         this->secondUser.setPhoneNumber(friendships[14]);
-        this->status = friendships[15];
     }
 }
 
@@ -107,14 +95,12 @@ Friendship &Friendship::operator=(const Friendship &friendship) {
     this->id = friendship.id;
     this->firstUser = friendship.firstUser;
     this->secondUser = friendship.secondUser;
-    this->status = friendship.status;
 }
 
 bool Friendship::operator==(const Friendship &friendship) const {
     return this->id == friendship.id &&
     this->firstUser == friendship.firstUser &&
-    this->secondUser == friendship.secondUser &&
-    this->status == friendship.status;
+    this->secondUser == friendship.secondUser;
 }
 
 bool Friendship::operator!=(const Friendship &friendship) const {
@@ -182,17 +168,13 @@ std::istream &operator>>(std::istream &is, Friendship &friendship) {
     std::cout << "Enter second user phone number:"; is >> secondUserPhoneNumber;
     friendship.secondUser.setPhoneNumber(secondUserPhoneNumber);
 
-    std::string status;
-    std::cout << "Enter friendship relation status:"; is >> status;
-    friendship.setStatus(status);
-
     return is;
 }
 
 std::ostream &operator<<(std::ostream &os, Friendship &friendship) {
-    os << "Friendship id: " << friendship.id << '\n' <<
-    "This is a relation of friendship between: " << friendship.firstUser.getFirstName() << " " << friendship.firstUser.getLastName() <<
-    " and " << friendship.secondUser.getFirstName() << " " << friendship.secondUser.getLastName() << '\n' <<
-    "Friendship status: " << friendship.status << '\n';
+    os << "Friendship(" << friendship.id << ", " << friendship.firstUser.getFirstName() << " "
+    << friendship.firstUser.getLastName() << ", " << friendship.secondUser.getFirstName() << " "
+    << friendship.secondUser.getLastName() << ")" << '\n';
+
     return os;
 }

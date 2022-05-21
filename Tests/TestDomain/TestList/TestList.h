@@ -6,7 +6,7 @@
 #define PROIECT_SDA_TESTARRAY_H
 
 
-class TestArray {
+class TestList {
 private:
     void constructor();
     void copyConstructor();

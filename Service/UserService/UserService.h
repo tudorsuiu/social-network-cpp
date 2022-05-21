@@ -8,6 +8,7 @@
 #include "../../Domain/Entities/User/User.h"
 #include "../../Repository/RepositoryCSV.h"
 #include "../../Domain/Validators/UserValidator/UserValidator.h"
+#include "../../Domain/ADT/BST/BST.h"
 
 class UserService {
 private:
@@ -20,11 +21,9 @@ public:
      */
     UserService(RepositoryCSV<User> &userRepository);
 
-    /**
-     * Add user to repository
-     * @param user: User object
-     */
-    void create(User user);
+    unsigned int getId();
+
+    void create(std::string firstName, std::string lastName, unsigned int age, std::string email, std::string password, std::string phoneNumber);
 
     /**
      * Reads all users stored in repository
@@ -44,13 +43,15 @@ public:
      * @param id: user id
      * @param newUser: updated user
      */
-    void update(unsigned int id, User newUser);
+    void update(User oldUser, User newUser);
 
     /**
      * Delete user
      * @param id: user id
      */
-    void del(unsigned int id);
+    void del(User user);
+
+    unsigned int numberOfUsers();
 
     /**
      * Checks if entity ID already exist
@@ -65,6 +66,8 @@ public:
      * @return: true if exists, false otherwise
      */
     bool doesExistEmail(std::string email);
+
+    bool doesExistUser(User user);
 
     /**
      * Checks if email and password are valid

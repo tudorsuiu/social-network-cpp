@@ -17,8 +17,6 @@ private:
     void getFirstUser();
     void setFirstUser();
     void getSecondUser();
-    void getStatus();
-    void setStatus();
 public:
     void all();
 };

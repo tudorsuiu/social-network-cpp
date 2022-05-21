@@ -125,6 +125,22 @@ bool Event::operator!=(const Event &event) const {
     return !(*this == event);
 }
 
+bool Event::operator<(const Event &event) const {
+    return this->id < event.id;
+}
+
+bool Event::operator>(const Event &event) const {
+    return event < *this;
+}
+
+bool Event::operator<=(const Event &event) const {
+    return !(event < *this);
+}
+
+bool Event::operator>=(const Event &event) const {
+    return !(*this < event);
+}
+
 std::istream &operator>>(std::istream &is, Event &event) {
     unsigned int id;
     std::cout << "Enter event id:"; is >> id;
@@ -174,12 +190,9 @@ std::istream &operator>>(std::istream &is, Event &event) {
 }
 
 std::ostream &operator<<(std::ostream &os, Event &event) {
-    os << "Event id: " << event.id << '\n' <<
-    "Event creator: " << event.creator.getFirstName() << " " <<
-    event.creator.getLastName() << '\n' <<
-    "Event name: " << event.name << '\n' <<
-    "Event date: " << event.date << '\n' <<
-    "Event description: " << event.description << '\n';
+    os << "Event(" << event.id << ", " << event.creator.getFirstName() << ", "
+    << event.creator.getLastName() << ", " << event.name << ", "
+    << event.date << ", " << event.description << ")" << '\n';
 
     return os;
 }

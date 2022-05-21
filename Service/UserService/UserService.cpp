@@ -7,13 +7,20 @@
 
 UserService::UserService(RepositoryCSV<User> &userRepository) : userRepository(userRepository) {}
 
-void UserService::create(User user) {
-    if(doesExistId(user.getId())) {
-        throw MyException("An user with this ID already exists.");
+unsigned int UserService::getId() {
+    if(userRepository.readEntity().size() == 0) {
+        return 1;
     }
-    else if(doesExistEmail(user.getEmail())) {
+    else {
+        return userRepository.readEntity()[userRepository.readEntity().size() - 1].getId() + 1;
+    }
+}
+
+void UserService::create(std::string firstName, std::string lastName, unsigned int age, std::string email, std::string password, std::string phoneNumber) {
+    if(doesExistEmail(email)) {
         throw MyException("An user with this email already exists.");
     }
+    User user(getId(), firstName, lastName, age, email, password, phoneNumber);
     userValidator.validate(user);
     userRepository.addEntity(user);
 }
@@ -27,24 +34,33 @@ List<User> UserService::read() {
 
 User UserService::read(unsigned int id) {
     if(!doesExistId(id)) {
-        throw MyException("User with given ID was not found.");
+        throw MyException("User was not found.");
     }
     return userRepository.readEntity(id);
 }
 
-void UserService::update(unsigned int id, User newUser) {
-    if(!doesExistId(id)) {
-        throw MyException("User with given ID was not found.");
+void UserService::update(User oldUser, User newUser) {
+    if(!doesExistUser(oldUser)) {
+        throw MyException("User was not found.");
+    }
+    else if(doesExistId(newUser.getId())) {
+        throw MyException("An user with this ID already exists.");
+    } else if(doesExistEmail(newUser.getEmail())) {
+        throw MyException("An user with this email already exists.");
     }
     userValidator.validate(newUser);
-    userRepository.updateEntity(id, newUser);
+    userRepository.updateEntity(oldUser, newUser);
 }
 
-void UserService::del(unsigned int id) {
-    if(!doesExistId(id)) {
-        throw MyException("User with given ID was not found.");
+void UserService::del(User user) {
+    if(!doesExistUser(user)) {
+        throw MyException("User was not found.");
     }
-    userRepository.deleteEntity(id);
+    userRepository.deleteEntity(user);
+}
+
+unsigned int UserService::numberOfUsers() {
+    return userRepository.readEntity().size();
 }
 
 bool UserService::doesExistId(unsigned int id) {
@@ -60,6 +76,15 @@ bool UserService::doesExistEmail(std::string email) {
     return false;
 }
 
+bool UserService::doesExistUser(User user) {
+    for(int i = 0; i < userRepository.readEntity().size(); i++) {
+        if(userRepository.readEntity()[i] == user) {
+            return true;
+        }
+    }
+    return false;
+}
+
 User UserService::getUserByEmailAndPassword(std::string email, std::string password) {
     User user;
     for(int i = 0; i < userRepository.readEntity().size(); i++) {
@@ -68,7 +93,7 @@ User UserService::getUserByEmailAndPassword(std::string email, std::string passw
             return user;
         }
     }
-    return User(0, "Default", "Default", 19, "default@default.com", "default", "40712345678");
+    throw MyException("An user with given credentials doesn't exist.");
 }
 
 User UserService::getUserByEmail(std::string email) {
@@ -79,5 +104,5 @@ User UserService::getUserByEmail(std::string email) {
             return user;
         }
     }
-    return User(0, "Default", "Default", 19, "default@default.com", "default", "40712345678");
+    throw MyException("An user with given email doesn't exist.");
 }

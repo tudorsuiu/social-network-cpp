@@ -23,6 +23,8 @@ public:
      */
     MessageService(RepositoryCSV<Message> &messageRepository, UserService &userService);
 
+    unsigned int getId();
+
     /**
      * Create a Message object
      * @param id: message id
@@ -30,7 +32,7 @@ public:
      * @param receiverEmail: message receiver
      * @param data: message data
      */
-    void create(unsigned int id, std::string senderEmail, std::string receiverEmail, std::string data);
+    void create(User sender, User receiver, std::string data);
 
     /**
      * Reads all messages stored in repository
@@ -52,13 +54,13 @@ public:
      * @param newReceiverEmail: new message receiver
      * @param newData: new message data
      */
-    void update(unsigned int id, std::string newSenderEmail, std::string newReceiverEmail, std::string newData);
+    void update(Message oldMessage, Message newMessage);
 
     /**
      * Delete message
      * @param id: message id
      */
-    void del(unsigned int id);
+    void del(Message message);
 
     /**
      * Checks if entity ID already exist
@@ -73,6 +75,10 @@ public:
      * @return: true if exists, false otherwise
      */
     bool doesExistReceiver(User receiver);
+
+    Message getMessageByEmailsAndData(std::string senderEmail, std::string receiverEmail, std::string data);
+
+    List<Message> getConversationWithUser(User loggedUser, User user);
 };
 
 

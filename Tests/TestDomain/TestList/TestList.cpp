@@ -3,16 +3,16 @@
 //
 
 #include <cassert>
-#include "TestArray.h"
+#include "TestList.h"
 #include "../../../Domain/ADT/List/List.h"
 
-void TestArray::constructor() {
+void TestList::constructor() {
     List<int> array;
     assert(array.size() == 0);
     assert(array.capacity() == 10);
 }
 
-void TestArray::copyConstructor() {
+void TestList::copyConstructor() {
     List<int> copyArray;
     List<int> array;
     array.push_back(1);
@@ -31,7 +31,7 @@ void TestArray::copyConstructor() {
     assert(copyArray.capacity() == 20);
 }
 
-void TestArray::size() {
+void TestList::size() {
     List<int> array;
     array.push_back(1);
     array.push_back(2);
@@ -47,7 +47,7 @@ void TestArray::size() {
     assert(array.size() == 11);
 }
 
-void TestArray::capacity() {
+void TestList::capacity() {
     List<int> array;
     array.push_back(1);
     array.push_back(2);
@@ -73,7 +73,7 @@ void TestArray::capacity() {
     assert(array.capacity() == 30);
 }
 
-void TestArray::empty() {
+void TestList::empty() {
     List<int> array;
     assert(array.empty() == true);
 
@@ -81,7 +81,7 @@ void TestArray::empty() {
     assert(array.empty() == false);
 }
 
-void TestArray::push_back() {
+void TestList::push_back() {
     List<int> array;
     array.push_back(1);
     array.push_back(2);
@@ -108,7 +108,7 @@ void TestArray::push_back() {
     assert(array[10] == 11);
 }
 
-void TestArray::pop_back() {
+void TestList::pop_back() {
     List<int> array;
     array.push_back(1);
     array.push_back(2);
@@ -127,7 +127,7 @@ void TestArray::pop_back() {
     assert(array.size() == 10);
 }
 
-void TestArray::insert() {
+void TestList::insert() {
     List<int> array;
     array.push_back(1);
     array.push_back(2);
@@ -157,7 +157,7 @@ void TestArray::insert() {
     assert(array[11] == 11);
 }
 
-void TestArray::erase() {
+void TestList::erase() {
     List<int> array;
     array.push_back(1);
     array.push_back(2);
@@ -178,14 +178,14 @@ void TestArray::erase() {
     assert(array[2] == 3);
     assert(array[3] == 4);
     assert(array[4] == 5);
-    assert(array[5] == 6);
+    assert(array[5] == 7);
     assert(array[6] == 8);
     assert(array[7] == 9);
     assert(array[8] == 10);
     assert(array[9] == 11);
 }
 
-void TestArray::clear() {
+void TestList::clear() {
     List<int> array;
     array.push_back(1);
     array.push_back(2);
@@ -202,7 +202,7 @@ void TestArray::clear() {
     assert(array.empty() == true);
 }
 
-void TestArray::all() {
+void TestList::all() {
     constructor();
     copyConstructor();
     size();

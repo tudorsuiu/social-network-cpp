@@ -5,50 +5,32 @@
 #include "EventService.h"
 #include "../../Domain/MyException.h"
 
-EventService::EventService(RepositoryCSV<Event> &eventRepository, UserService &userService) : eventRepository(eventRepository),
+EventService::EventService(BSTRepositoryCSV<Event> &eventRepository, UserService &userService) : eventRepository(eventRepository),
                                                                                               userService(userService){}
 
-void EventService::create(unsigned int id, std::string creatorEmail, std::string name, std::string date, std::string description) {
-    User creator = userService.getUserByEmail(creatorEmail);
-    if(doesExistId(id)) {
-        throw MyException("An event with this ID already exists.");
-    }
-    Event event(id, creator, name, date, description);
+void EventService::create(User creator, std::string name, std::string date, std::string description) {
+    Event event(this->id, creator, name, date, description);
     eventValidator.validate(event);
     eventRepository.addEntity(event);
+    this->id++;
 }
 
-List<Event> EventService::read() {
-    if(eventRepository.readEntity().size() == 0) {
-        throw MyException("There are no events.");
-    }
-    return eventRepository.readEntity();
+BST<Event> EventService::read() {
+   if(eventRepository.empty()) {
+       throw MyException("There are no events.");
+   }
+   return eventRepository.read();
 }
 
 Event EventService::read(unsigned int id) {
-    if(!doesExistId(id)) {
-        throw MyException("Event with given ID was not found.");
-    }
     return eventRepository.readEntity(id);
 }
 
-void EventService::update(unsigned int id, std::string newCreatorEmail, std::string newName, std::string newDate, std::string newDescription) {
-    User newCreator = userService.getUserByEmail(newCreatorEmail);
-    if(!doesExistId(id)) {
-        throw MyException("Event with given ID was not found.");
-    }
-    Event newEvent(id, newCreator, newName, newDate, newDescription);
+void EventService::update(Event oldEvent, Event newEvent) {
     eventValidator.validate(newEvent);
-    eventRepository.updateEntity(id, newEvent);
+    eventRepository.updateEntity(oldEvent, newEvent);
 }
 
-void EventService::del(unsigned int id) {
-    if(!doesExistId(id)) {
-        throw MyException("Event with given ID was not found.");
-    }
-    eventRepository.deleteEntity(id);
-}
-
-bool EventService::doesExistId(unsigned int id) {
-    return eventRepository.getPosById(id) != -1;
+void EventService::del(Event event) {
+    eventRepository.deleteEntity(event);
 }

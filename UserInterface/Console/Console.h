@@ -10,50 +10,47 @@
 #include "../../Service/MessageService/MessageService.h"
 #include "../../Service/EventService/EventService.h"
 #include "../../Service/FriendshipService/FriendshipService.h"
+#include "../../Domain/Entities/Network/Network.h"
 
 class Console {
 private:
-    UserService userService;
-    MessageService messageService;
-    EventService eventService;
-    FriendshipService friendshipService;
+    Network network;
 public:
-    Console(UserService &userService, MessageService &messageService, EventService &eventService, FriendshipService &friendshipService);
+    Console(Network &network);
 
-    void showFirstMenu();
-
-    void uiLogIn();
-    void uiRegister();
-    void showLoggedUserMenu();
-    void runLogInPage();
+    void uiAddUser();
+    void uiShowUsers();
+    void uiUpdateUser();
+    void uiDeleteUser();
+    void uiAddEvent();
+    void uiShowEvents();
+    void uiUpdateEvent();
+    void uiDeleteEvent();
+    void uiAddFriendship();
+    void uiShowFriendships();
+    void uiUpdateFriendship();
+    void uiDeleteFriendship();
+    void uiAddMessage();
+    void uiShowMessages();
+    void uiUpdateMessage();
+    void uiDeleteMessage();
 
     void showMenu();
 
     void showUserMenu();
-    void uiAddUser();
-    void uiCheckUser();
-    void uiUpdateUser();
-    void uiDeleteUser();
-
     void showFriendshipMenu();
-    void uiAddFriendship();
-    void uiCheckFriendship();
-    void uiUpdateFriendship();
-    void uiDeleteFriendship();
-
     void showEventMenu();
-    void uiAddEvent();
-    void uiCheckEvent();
-    void uiUpdateEvent();
-    void uiDeleteEvent();
-
     void showMessageMenu();
-    void uiAddMessage();
-    void uiCheckMessage();
-    void uiUpdateMessage();
-    void uiDeleteMessage();
+    void runAdminMenu();
 
-    void runMenu();
+    void showLoggedUserMenu(User loggedUser);
+    void runUserMenu(User loggedUser);
+
+    void showFirstMenu();
+    void runLogInPage();
+
+    void showRunMenu();
+    void run();
 };
 
 

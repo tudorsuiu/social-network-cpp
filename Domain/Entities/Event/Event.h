@@ -127,6 +127,10 @@ public:
     Event& operator=(const Event& event);
     bool operator==(const Event& event) const;
     bool operator!=(const Event& event) const;
+    bool operator<(const Event &event) const;
+    bool operator>(const Event &event) const;
+    bool operator<=(const Event &event) const;
+    bool operator>=(const Event &event) const;
 
     friend std::istream &operator>>(std::istream& is, Event& event);
     friend std::ostream &operator<<(std::ostream& os, Event& event);

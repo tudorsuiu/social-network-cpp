@@ -6,6 +6,7 @@
 #define PROIECT_SDA_LIST_H
 
 #include <iostream>
+#include "../../MyException.h"
 
 template<class T> class List {
 private:
@@ -94,7 +95,7 @@ public:
      */
     T pop_back() {
         if(empty()) {
-            throw std::out_of_range("List is empty.");
+            throw MyException("List is empty.");
         }
         T entity;
         entity = this->_entities[--this->_size];
@@ -117,7 +118,7 @@ public:
      */
     void insert(int index, T entity) {
         if (index < 0 || index > this->_size) {
-            throw std::out_of_range("Index out of range");
+            throw MyException("Index out of range");
         }
         if(this->_size == this->_capacity) {
             this->_resize();
@@ -139,16 +140,24 @@ public:
     }
 
     /**
-     * Removes entity from array
-     * @param index: position of entity
+     * Removes first entity from array
+     * @param entity: given entity
      */
-    void erase(int index) {
+    void erase(T entity) {
         if(empty()) {
-            throw std::out_of_range("List is empty.");
+            throw MyException("List is empty.");
+        }
+
+        int index = -1;
+        for(int i = 0; i < _size; i++) {
+            if(_entities[i] == entity) {
+                index = i;
+                i = _size;
+            }
         }
 
         if (index < 0 || index >= this->_size) {
-            throw std::out_of_range("Index out of range");
+            throw MyException("Index out of range.");
         }
 
         T* newEntities = new T[this->_capacity];
@@ -173,15 +182,6 @@ public:
         this->_size = 0;
         this->_capacity = _DEFAULT_CAPACITY;
         this->_entities = new T[this->_capacity];
-    }
-
-    /**
-     * Show all elements of an array
-     */
-    void show() {
-        for(int i = 0; i < this->_size; i++) {
-            std::cout << _entities[i] << '\n';
-        }
     }
 
     T& operator[](int index) const {

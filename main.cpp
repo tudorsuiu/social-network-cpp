@@ -2,6 +2,7 @@
 #include "UserInterface/Console/Console.h"
 #include "Tests/TestAll/TestAll.h"
 #include "Repository/RepositoryCSV.h"
+#include "Repository/BSTRepositoryCSV.h"
 
 int main() {
     TestAll test;
@@ -10,7 +11,7 @@ int main() {
     RepositoryCSV<User> userRepository("users.csv");
     UserService userService(userRepository);
 
-    RepositoryCSV<Event> eventRepository("events.csv");
+    BSTRepositoryCSV<Event> eventRepository("events.csv");
     EventService eventService(eventRepository, userService);
 
     RepositoryCSV<Friendship> friendshipRepository("friendships.csv");
@@ -19,8 +20,10 @@ int main() {
     RepositoryCSV<Message> messageRepository("messages.csv");
     MessageService messageService(messageRepository, userService);
 
-    Console console(userService, messageService, eventService, friendshipService);
+    Network network(userService, friendshipService, messageService, eventService);
 
-    console.runMenu();
+    Console console(network);
+
+    console.run();
     return 0;
 }

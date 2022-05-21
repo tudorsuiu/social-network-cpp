@@ -56,7 +56,7 @@ void TestMessageRepository::updateMessage() {
     repository.addEntity(m1);
     repository.addEntity(m2);
     repository.addEntity(m3);
-    repository.updateEntity(2, Message(2, sender, receiver, "Hello!"));
+    repository.updateEntity(m2, Message(2, sender, receiver, "Hello!"));
     assert(repository.readEntity(1) == m1);
     assert(repository.readEntity(2) == Message(2, sender, receiver, "Hello!"));
     assert(repository.readEntity(3) == m3);
@@ -77,9 +77,9 @@ void TestMessageRepository::deleteMessage() {
     assert(repository.readEntity(2) == m2);
     assert(repository.readEntity(3) == m3);
     assert(repository.readEntity().size() == 3);
-    repository.deleteEntity(1);
-    repository.deleteEntity(2);
-    repository.deleteEntity(3);
+    repository.deleteEntity(m1);
+    repository.deleteEntity(m2);
+    repository.deleteEntity(m3);
     assert(repository.readEntity().size() == 0);
 }
 

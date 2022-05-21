@@ -23,14 +23,15 @@ public:
      */
     FriendshipService(RepositoryCSV<Friendship> &friendshipRepository, UserService &userService);
 
+    unsigned int getId();
+
     /**
      * Create a Friendship object
      * @param id: friendship id
      * @param firstUserEmail: friendship first user email
      * @param secondUserEmail: friendship second user email
-     * @param status: friendship status
      */
-    void create(unsigned int id, std::string firstUserEmail, std::string secondUserEmail, std::string status);
+    void create(User firstUser, User secondUser);
 
     /**
      * Reads all friendships stored in repository
@@ -50,15 +51,14 @@ public:
      * @param id: friendship id
      * @param newFirstUserEmail: new friendship first user email
      * @param newSecondUserEmail: new friendship second user email
-     * @param newStatus: new friendship status
      */
-    void update(unsigned int id, std::string newFirstUserEmail, std::string newSecondUserEmail, std::string newStatus);
+    void update(Friendship oldFriendship, Friendship newFriendship);
 
     /**
      * Delete friendship
      * @param id: friendship id
      */
-    void del(unsigned int id);
+    void del(Friendship friendship);
 
     /**
      * Checks if entity with given ID already exist
@@ -73,6 +73,10 @@ public:
      * @return: true if exists, false otherwise
      */
     bool doesExistSecondUser(User secondUser);
+
+    Friendship getFriendshipByEmails(std::string firstUserEmail, std::string secondUserEmail);
+
+    List<User> getUserFriendList(User user);
 };
 
 
