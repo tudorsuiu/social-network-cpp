@@ -14,8 +14,8 @@
 class FriendshipService {
 private:
     FriendshipValidator friendshipValidator;
-    RepositoryCSV<Friendship> friendshipRepository;
-    UserService userService;
+    RepositoryCSV<Friendship> &friendshipRepository;
+    UserService &userService;
 public:
     /**
      * Constructor
@@ -23,13 +23,16 @@ public:
      */
     FriendshipService(RepositoryCSV<Friendship> &friendshipRepository, UserService &userService);
 
+    /**
+     * Last ID getter
+     * @return: last ID from file
+     */
     unsigned int getId();
 
     /**
-     * Create a Friendship object
-     * @param id: friendship id
-     * @param firstUserEmail: friendship first user email
-     * @param secondUserEmail: friendship second user email
+     * Create friendship relation
+     * @param firstUser: first user
+     * @param secondUser: second user
      */
     void create(User firstUser, User secondUser);
 
@@ -47,16 +50,15 @@ public:
     Friendship read(unsigned int id);
 
     /**
-     * Update a Friendship object
-     * @param id: friendship id
-     * @param newFirstUserEmail: new friendship first user email
-     * @param newSecondUserEmail: new friendship second user email
+     * Update oldFriendship with newFriendship
+     * @param oldFriendship: old friendship relation
+     * @param newFriendship: new friendship relation
      */
     void update(Friendship oldFriendship, Friendship newFriendship);
 
     /**
      * Delete friendship
-     * @param id: friendship id
+     * @param friendship: friendship to be deleted
      */
     void del(Friendship friendship);
 
@@ -74,9 +76,34 @@ public:
      */
     bool doesExistSecondUser(User secondUser);
 
+    /**
+     * Getter for number o friendship relations
+     * @return: number of friendship relations
+     */
+    unsigned int getNumberOfFriendships();
+
+    /**
+     * Get friendship relation by emails
+     * @param firstUserEmail: first user email
+     * @param secondUserEmail: last user email
+     * @return: friendship relation by given emails
+     */
     Friendship getFriendshipByEmails(std::string firstUserEmail, std::string secondUserEmail);
 
+    /**
+     * Get user friend list
+     * @param user: user
+     * @return: friend list for given user
+     */
     List<User> getUserFriendList(User user);
+
+    /**
+     * Checks if friendship relation between two users exist
+     * @param firstUser: first user
+     * @param secondUser: second user
+     * @return: true if friendship relation exist, false otherwise
+     */
+    bool doesExistFriendshipRelation(User firstUser, User secondUser);
 };
 
 

@@ -6,6 +6,7 @@
 #define PROIECT_SDA_BST_H
 
 #include <iostream>
+#include <vector>
 #include "BSTNode.h"
 #include "../../MyException.h"
 
@@ -128,17 +129,38 @@ private:
         return searchById(node->left, id);
     }
 
-//    /**
-//     * Destroys from memory
-//     * @param node: node
-//     */
-//    void DestroyRecursive(BSTNode<T> *node) {
-//        if(node != nullptr) {
-//            DestroyRecursive(node->left);
-//            DestroyRecursive(node->right);
-//        }
-//        delete node;
-//    }
+    unsigned int getSize(BSTNode<T> *node)
+    {
+        if (node == NULL)
+            return 0;
+        else
+            return(getSize(node->left) + 1 + getSize(node->right));
+    }
+
+    /**
+     * Find the node with maximum value
+     * @param node: root
+     * @return: the node with maximum value
+     */
+    T maxValue(BSTNode<T> *node) {
+        BSTNode<T> *current = node;
+        while(current->right != nullptr) {
+            current = current->right;
+        }
+        return current->info;
+    }
+
+    /**
+     * Destroys from memory
+     * @param node: node
+     */
+    void DestroyRecursive(BSTNode<T> *node) {
+        if(node != nullptr) {
+            DestroyRecursive(node->left);
+            DestroyRecursive(node->right);
+        }
+        delete node;
+    }
 public:
     /**
      * Constructor
@@ -211,6 +233,27 @@ public:
      */
     bool exist(T element) {
         return search(this->root, element) != nullptr;
+    }
+
+    /**
+     * Return BST size
+     * @return: BST size
+     */
+    unsigned int size() {
+        return getSize(this->root);
+    }
+
+    /**
+     * Add BST elements into vector
+     * @param entities: vector with entities
+     * @param node: root
+     */
+    void getListWithEntities(std::vector<T> &entities, BSTNode<T> *node) {
+        if(node != nullptr) {
+            getListWithEntities(entities, node->left);
+            entities.push_back(node->info);
+            getListWithEntities(entities, node->right);
+        }
     }
 
     void saveToFileRecursive(std::ofstream &f,BSTNode<T> *root) {

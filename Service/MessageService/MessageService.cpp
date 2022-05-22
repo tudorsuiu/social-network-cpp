@@ -44,7 +44,7 @@ void MessageService::update(Message oldMessage, Message newMessage) {
     if(!doesExistId(oldMessage.getId())) {
         throw MyException("Message with given ID was not found.");
     }
-    else if(!userService.doesExistEmail(newMessage.getReceiver().getEmail())) {
+    else if(!doesExistReceiver(newMessage.getReceiver())) {
         throw MyException("Message receiver doesn't have an account.");
     }
     messageValidator.validate(newMessage);
@@ -60,6 +60,15 @@ void MessageService::del(Message message) {
 
 bool MessageService::doesExistId(unsigned int id) {
     return messageRepository.getPosById(id) != -1;
+}
+
+bool MessageService::doesExistReceiver(User receiver) {
+    for(int i = 0; i < userService.read().size(); i++) {
+        if(userService.read()[i] == receiver) {
+            return true;
+        }
+    }
+    return false;
 }
 
 Message MessageService::getMessageByEmailsAndData(std::string senderEmail,

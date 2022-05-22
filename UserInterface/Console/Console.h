@@ -35,6 +35,16 @@ public:
     void uiUpdateMessage();
     void uiDeleteMessage();
 
+    void uiLoggedUserAddFriend(User loggedUser);
+    void uiLoggedUserDeleteFriend(User loggedUser);
+    void uiLoggedUserShowFriendList(User loggedUser);
+    void uiLoggedUserSendMessage(User loggedUser);
+    void uiLoggedUserDeleteMessage(User loggedUser);
+    void uiLoggedUserShowConversation(User loggedUser);
+    void uiLoggedUserCreateEvent(User loggedUser);
+    void uiLoggedUserShowCreatedEvents(User loggedUser);
+    void uiLoggedUserDeleteEvent(User loggedUser);
+
     void showMenu();
 
     void showUserMenu();

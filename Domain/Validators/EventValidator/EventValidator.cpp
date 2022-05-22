@@ -6,7 +6,7 @@
 #include "../../MyException.h"
 
 void EventValidator::validate(Event event) {
-    if(event.getId() <= 0) {
+    if(event.getId() == 0 || event.getId() > INT_MAX) {
         throw MyException("Event ID must be positive.");
     }
     else if(event.getName().empty() == true) {

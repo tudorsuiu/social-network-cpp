@@ -16,6 +16,7 @@
 #include "../TestDomain/TestBST/TestBST.h"
 #include "../TestService/TestMessageSerivce/TestMessageService.h"
 #include "../TestService/TestFriendshipService/TestFriendshipService.h"
+#include "../TestService/TestEventService/TestEventService.h"
 
 void TestAll::run() {
     TestList testList;
@@ -56,5 +57,8 @@ void TestAll::run() {
 
     TestEventRepository testEventRepository;
     testEventRepository.all();
+
+    TestEventService testEventService;
+    testEventService.all();
 
 }

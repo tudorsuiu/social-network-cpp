@@ -41,14 +41,13 @@ public:
     void updateMessage(unsigned int id, std::string newSenderEmail, std::string newReceiverEmail, std::string newData);
     void deleteMessage(std::string senderEmail, std::string receiverEmail, std::string data);
 
-    User logIn(std::string email, std::string password);
-    void createAccount();
+    std::vector<Event> getEventsByCreator(User user);
 
-    void AddFriend(User loggedUser, std::string email);
+    User logIn(std::string email, std::string password);
+
     List<User> CheckFriends(User loggedUser);
     void SendMesssage(User loggedUser, std::string receiverEmail, std::string data);
     List<Message> getConversation(User loggedUser, std::string userEmail);
-    void CreateEvent(User loggedUser, std::string name, std::string date, std::string description);
 };
 
 

@@ -30,14 +30,6 @@ public:
      */
     BSTNode(T info, BSTNode<T> *left, BSTNode<T> *right) : info(info), left(left), right(right) {}
 
-//    /**
-//     * Destructor
-//     */
-//    ~BSTNode() {
-//        delete left;
-//        delete right;
-//    }
-
     friend class BST<T>;
 };
 

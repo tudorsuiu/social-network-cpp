@@ -6,7 +6,7 @@
 #include "../../MyException.h"
 
 void FriendshipValidator::validate(Friendship friendship) {
-    if(friendship.getId() <= 0) {
+    if(friendship.getId() == 0 || friendship.getId() > INT_MAX) {
         throw MyException("Friendship ID must be positive.");
     }
 }

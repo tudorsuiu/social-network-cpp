@@ -21,33 +21,70 @@ public:
         this->loadFromFile();
     }
 
+    /**
+     * Destructor
+     */
     ~BSTRepositoryCSV() = default;
 
+    /**
+     * Add entity to file
+     * @param entity: T class object
+     */
     void addEntity(T entity) {
         this->elements.add(entity);
         this->saveToFile(elements.getRoot());
     }
 
+    /**
+     * Get all entities from file
+     * @return: BST<class T> - all entities stored in file
+     */
     BST<T> read() {
         return elements;
     }
 
+    /**
+     * Read entity by id
+     * @param id: unsigned int - entity id
+     * @return: entity with given id
+     */
     T readEntity(unsigned int id) {
         return elements.read(id);
     }
 
+    /**
+     * Update an entity from file
+     * @param oldEntity: T class object - old entity
+     * @param newEntity: T class object - updated entity
+     */
     void updateEntity(T oldEntity, T newEntity) {
         elements.update(oldEntity, newEntity);
         this->saveToFile(elements.getRoot());
     }
 
+    /**
+     * Delete an entity from file
+     * @param entity: unsigned int - entity
+     */
     void deleteEntity(T entity) {
         elements.remove(entity);
         this->saveToFile(elements.getRoot());
     }
 
+    /**
+     * Check if BST is empty
+     * @return: true if BST is empty, false otherwise
+     */
     bool empty() {
         return elements.empty();
+    }
+
+    /**
+     * Check BST size
+     * @return: BST size
+     */
+    unsigned int size() {
+        return elements.size();
     }
 
     /**

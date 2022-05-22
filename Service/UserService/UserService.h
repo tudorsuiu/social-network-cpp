@@ -13,7 +13,7 @@
 class UserService {
 private:
     UserValidator userValidator;
-    RepositoryCSV<User> userRepository;
+    RepositoryCSV<User> &userRepository;
 public:
     /**
      * Constructor
@@ -21,8 +21,21 @@ public:
      */
     UserService(RepositoryCSV<User> &userRepository);
 
+    /**
+     * Last ID getter
+     * @return: last ID from file
+     */
     unsigned int getId();
 
+    /**
+     * Create user
+     * @param firstName: first name
+     * @param lastName: last name
+     * @param age: age
+     * @param email: email
+     * @param password: password
+     * @param phoneNumber: phone number
+     */
     void create(std::string firstName, std::string lastName, unsigned int age, std::string email, std::string password, std::string phoneNumber);
 
     /**
@@ -39,18 +52,22 @@ public:
     User read(unsigned int id);
 
     /**
-     * Update user
-     * @param id: user id
-     * @param newUser: updated user
+     * Update oldUser with newUser
+     * @param oldUser: old user
+     * @param newUser: new user
      */
     void update(User oldUser, User newUser);
 
     /**
      * Delete user
-     * @param id: user id
+     * @param user: user
      */
     void del(User user);
 
+    /**
+     * Number of users
+     * @return: number of users
+     */
     unsigned int numberOfUsers();
 
     /**
@@ -67,6 +84,11 @@ public:
      */
     bool doesExistEmail(std::string email);
 
+    /**
+     * Checks if user exists
+     * @param user: user
+     * @return: true if exists, false otherwise
+     */
     bool doesExistUser(User user);
 
     /**

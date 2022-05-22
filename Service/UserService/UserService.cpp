@@ -43,9 +43,7 @@ void UserService::update(User oldUser, User newUser) {
     if(!doesExistUser(oldUser)) {
         throw MyException("User was not found.");
     }
-    else if(doesExistId(newUser.getId())) {
-        throw MyException("An user with this ID already exists.");
-    } else if(doesExistEmail(newUser.getEmail())) {
+    else if(doesExistEmail(newUser.getEmail())) {
         throw MyException("An user with this email already exists.");
     }
     userValidator.validate(newUser);

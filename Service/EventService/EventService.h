@@ -14,8 +14,8 @@
 class EventService {
 private:
     EventValidator eventValidator;
-    BSTRepositoryCSV<Event> eventRepository;
-    UserService userService;
+    BSTRepositoryCSV<Event> &eventRepository;
+    UserService &userService;
     unsigned int id = 1;
 public:
     /**
@@ -25,11 +25,18 @@ public:
      */
     EventService(BSTRepositoryCSV<Event> &eventRepository, UserService &userService);
 
+    /**
+     * Create event
+     * @param creator: event creator
+     * @param name: event name
+     * @param date: event date
+     * @param description: event description
+     */
     void create(User creator, std::string name, std::string date, std::string description);
 
     /**
      * Reads all events stored in repository
-     * @return: all events stored in repository
+     * @return: BST<Event> - all events stored in repository
      */
     BST<Event> read();
 
@@ -41,15 +48,11 @@ public:
     Event read(unsigned int id);
 
     /**
-     * Updates an Event object
-     * @param id: event id
-     * @param newCreatorEmail: new event creator email
-     * @param newName: new event name
-     * @param newDate: new event date
-     * @param newDescription: new event description
+     * Update oldEvent with newEvent
+     * @param oldEvent: old event
+     * @param newEvent: new event
      */
     void update(Event oldEvent, Event newEvent);
-
 
     /**
      * Delete event
@@ -58,11 +61,14 @@ public:
     void del(Event event);
 
     /**
-     * Checks if entity with given ID exist
-     * @param id: id
-     * @return: true if exists, false otherwise
+     * Number of events
+     * @return: number of events
      */
-    bool doesExistId(unsigned int id);
+    unsigned int size();
+
+    std::vector<Event> getEventsInVector();
+    std::vector<Event> getEventsByUser(User user);
+
 };
 
 

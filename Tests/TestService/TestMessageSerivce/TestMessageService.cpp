@@ -69,9 +69,9 @@ void TestMessageService::update() {
     messageService.create(u2, u1, "Salut! Ce faci?");
     messageService.create(u1, u2, "Bine tu?");
     messageService.update(Message(2, u2, u1, "Salut! Ce faci?"), Message(3, u1, u2, "Bine tu?"));
-    assert(messageService.read(1) == Message(1,u1, u2, "Salut"));
-    assert(messageService.read(2) == Message(3,u1, u2, "Bine tu?"));
-    assert(messageService.read(3) == Message(3,u1, u2, "Bine tu?"));
+    assert(messageService.read()[0] == Message(1,u1, u2, "Salut"));
+    assert(messageService.read()[1] == Message(3,u1, u2, "Bine tu?"));
+    assert(messageService.read()[2] == Message(3,u1, u2, "Bine tu?"));
 }
 
 void TestMessageService::del() {

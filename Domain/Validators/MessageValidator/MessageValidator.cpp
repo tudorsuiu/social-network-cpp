@@ -6,7 +6,7 @@
 #include "../../MyException.h"
 
 void MessageValidator::validate(Message message) {
-    if(message.getId() <= 0) {
+    if(message.getId() == 0 || message.getId() > INT_MAX) {
         throw MyException("Message ID must be positive.");
     }
     else if(message.getData().find(',') != std::string::npos) {

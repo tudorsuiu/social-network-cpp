@@ -90,7 +90,7 @@ public:
 
     /**
      * Get position by object index
-     * @param index: unsigned int - object index
+     * @param id: unsigned int - object id
      * @return: int - object position
      */
     int getPosById(unsigned int id) {

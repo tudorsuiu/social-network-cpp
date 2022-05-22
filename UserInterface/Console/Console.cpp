@@ -31,16 +31,19 @@ void Console::showFirstMenu() {
 
 void Console::showLoggedUserMenu(User loggedUser) {
     std::cout << '\n';
-    std::cout << "PROFILE: " << loggedUser.getFirstName() << " " << loggedUser.getLastName() << "." << '\n';
+    std::cout << "PROFILE: " << loggedUser.getFirstName() << " "
+              << loggedUser.getLastName() << "." << '\n';
     std::cout << "_________------MENU------_________" << '\n';
     std::cout << "1. Account info." << '\n';
     std::cout << "2. Add friend." << '\n';
-    std::cout << "3. Check friends list." << '\n';
-    std::cout << "4. Send message." << '\n';
-    std::cout << "5. Check the conversation with an user." << '\n';
-    std::cout << "6. Create event." << '\n';
-    std::cout << "7. Participate to event." << '\n';
-    std::cout << "8. Check events you are going to." << '\n';
+    std::cout << "3. Delete friend." << '\n';
+    std::cout << "4. Check friends list." << '\n';
+    std::cout << "5. Send message." << '\n';
+    std::cout << "6. Delete message." << '\n';
+    std::cout << "7. Check the conversation with an user." << '\n';
+    std::cout << "8. Create event." << '\n';
+    std::cout << "9. Show created events." << '\n';
+    std::cout << "0. Delete event." << '\n';
     std::cout << "x. Sign out." << '\n';
     std::cout << "__________________________________" << '\n';
     std::cout << "Select option:";
@@ -105,324 +108,374 @@ void Console::showRunMenu() {
 }
 
 void Console::uiAddUser() {
-    try {
-        std::string firstName;
-        std::cout << "Enter first name:";
-        std::cin >> firstName;
+    std::string firstName;
+    std::cout << "Enter first name:";
+    std::cin >> firstName;
 
-        std::string lastName;
-        std::cout << "Enter last name:";
-        std::cin >> lastName;
+    std::string lastName;
+    std::cout << "Enter last name:";
+    std::cin >> lastName;
 
-        unsigned int age;
-        std::cout << "Enter age:";
-        std::cin >> age;
-
-        std::string email;
-        std::cout << "Enter email:";
-        std::cin >> email;
-
-        std::string password;
-        std::cout << "Enter password:";
-        std::cin >> password;
-
-        std::string phoneNumber;
-        std::cout << "Enter phone number:";
-        std::cin >> phoneNumber;
-
-        network.addUser(firstName, lastName, age, email, password, phoneNumber);
+    unsigned int age;
+    std::cout << "Enter age:";
+    std::cin >> age;
+    if (std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        throw MyException("Age must be an unsigned int.");
     }
-    catch(std::exception &e) {
-        std::cout << '\n' << e.what() << '\n';
-    }
+
+    std::string email;
+    std::cout << "Enter email:";
+    std::cin >> email;
+
+    std::string password;
+    std::cout << "Enter password:";
+    std::cin >> password;
+
+    std::string phoneNumber;
+    std::cout << "Enter phone number:";
+    std::cin >> phoneNumber;
+
+    network.addUser(firstName, lastName, age, email, password, phoneNumber);
 }
 
 void Console::uiShowUsers() {
-    try {
-        for(int i = 0; i < network.checkUser().size(); i++) {
-            std::cout << network.checkUser()[i];
-        }
-    }
-    catch(std::exception &e) {
-        std::cout << '\n' << e.what() << '\n';
+    for (int i = 0; i < network.checkUser().size(); i++) {
+        std::cout << network.checkUser()[i];
     }
 }
 
 void Console::uiUpdateUser() {
-    try {
-        std::string oldEmail;
-        std::cout << "Enter old user email:";
-        std::cin >> oldEmail;
+    std::string oldEmail;
+    std::cout << "Enter old user email:";
+    std::cin >> oldEmail;
 
-        std::cout << "Enter new user details:" << '\n';
+    std::string firstName;
+    std::cout << "Enter first name:";
+    std::cin >> firstName;
 
-        std::string firstName;
-        std::cout << "Enter first name:";
-        std::cin >> firstName;
+    std::string lastName;
+    std::cout << "Enter last name:";
+    std::cin >> lastName;
+    unsigned int age;
+    std::cout << "Enter age:";
+    std::cin >> age;
 
-        std::string lastName;
-        std::cout << "Enter last name:";
-        std::cin >> lastName;
+    std::string email;
+    std::cout << "Enter email:";
+    std::cin >> email;
 
-        unsigned int age;
-        std::cout << "Enter age:";
-        std::cin >> age;
+    std::string password;
+    std::cout << "Enter password:";
+    std::cin >> password;
 
-        std::string email;
-        std::cout << "Enter email:";
-        std::cin >> email;
+    std::string phoneNumber;
+    std::cout << "Enter phone number:";
+    std::cin >> phoneNumber;
 
-        std::string password;
-        std::cout << "Enter password:";
-        std::cin >> password;
-
-        std::string phoneNumber;
-        std::cout << "Enter phone number:";
-        std::cin >> phoneNumber;
-
-        network.updateUser(oldEmail, firstName, lastName, age, email, password, phoneNumber);
-    }
-    catch(std::exception &e) {
-        std::cout << '\n' << e.what() << '\n';
-    }
+    network.updateUser(oldEmail, firstName, lastName, age, email, password,
+                       phoneNumber);
 }
 
 void Console::uiDeleteUser() {
-    try {
-        std::string email;
-        std::cout << "Delete user with this email:";
-        std::cin >> email;
 
-        network.deleteUser(email);
-    }
-    catch(std::exception &e) {
-        std::cout << '\n' << e.what() << '\n';
-    }
+    std::string email;
+    std::cout << "Delete user with this email:";
+    std::cin >> email;
+
+    network.deleteUser(email);
+
 }
 
 void Console::uiAddEvent() {
-    try {
-        std::string creatorEmail;
-        std::cout << "Enter creator email:";
-        std::cin >> creatorEmail;
+    std::string creatorEmail;
+    std::cout << "Enter creator email:";
+    std::cin >> creatorEmail;
 
-        std::string name;
-        std::cout << "Enter event name:";
-        std::cin >> name;
+    std::string name;
+    std::cout << "Enter event name:";
+    std::cin.get();
+    std::getline(std::cin, name);
 
-        std::string date;
-        std::cout << "Enter event date:";
-        std::cin >> date;
+    std::string date;
+    std::cout << "Enter event date:";
+    std::cin >> date;
 
-        std::string description;
-        std::cout << "Enter event description:";
-        std::cin >> description;
+    std::string description;
+    std::cout << "Enter event description:";
+    std::cin.get();
+    std::getline(std::cin, description);
 
-        network.addEvent(creatorEmail, name, date, description);
-    }
-    catch(std::exception &e) {
-        std::cout << '\n' << e.what() << '\n';
-    }
+    network.addEvent(creatorEmail, name, date, description);
 }
 
 void Console::uiShowEvents() {
-    try {
-        network.checkEvent().show();
-    }
-    catch(std::exception &e) {
-        std::cout << '\n' << e.what() << '\n';
-    }
+    network.checkEvent().show();
 }
 
 void Console::uiUpdateEvent() {
-    try {
-        unsigned int id;
-        std::cout << "Enter old event id:" << '\n';
-        std::cin >> id;
-
-        std::cout << "Enter new event details:" << '\n';
-
-        std::string newCreatorEmail;
-        std::cout << "Enter new creator email:";
-        std::cin >> newCreatorEmail;
-
-        std::string newName;
-        std::cout << "Enter new event name:";
-        std::cin >> newName;
-
-        std::string newDate;
-        std::cout << "Enter new event date:";
-        std::cin >> newDate;
-
-        std::string newDescription;
-        std::cout << "Enter new event description:";
-        std::cin >> newDescription;
-
-        network.updateEvent(id, newCreatorEmail, newName, newDate, newDescription);
+    unsigned int id;
+    std::cout << "Enter old event id:" << '\n';
+    std::cin >> id;
+    if (std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        throw MyException("Event ID must an unsigned int.");
     }
-    catch(std::exception &e) {
-        std::cout << '\n' << e.what() << '\n';
-    }
+
+    std::string newCreatorEmail;
+    std::cout << "Enter new creator email:";
+    std::cin >> newCreatorEmail;
+
+    std::string newName;
+    std::cout << "Enter new event name:";
+    std::cin.get();
+    std::getline(std::cin, newName);
+
+    std::string newDate;
+    std::cout << "Enter new event date:";
+    std::cin >> newDate;
+
+    std::string newDescription;
+    std::cout << "Enter new event description:";
+    std::cin.get();
+    std::getline(std::cin, newDescription);
+
+    network.updateEvent(id, newCreatorEmail, newName, newDate, newDescription);
 }
 
 void Console::uiDeleteEvent() {
-    try {
-        unsigned int id;
-        std::cout << "Enter event id:";
-        std::cin >> id;
+    unsigned int id;
+    std::cout << "Enter event id:";
+    std::cin >> id;
+    if (std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        throw MyException("Id must be an unsigned int.");
+    }
 
-        network.deleteEvent(id);
-    }
-    catch(std::exception &e) {
-        std::cout << '\n' << e.what() << '\n';
-    }
+    network.deleteEvent(id);
 }
 
 void Console::uiAddFriendship() {
-    try {
-        std::string firstUserEmail;
-        std::cout << "Enter first user email:";
-        std::cin >> firstUserEmail;
+    std::string firstUserEmail;
+    std::cout << "Enter first user email:";
+    std::cin >> firstUserEmail;
 
-        std::string secondUserEmail;
-        std::cout << "Enter second user email:";
-        std::cin >> secondUserEmail;
+    std::string secondUserEmail;
+    std::cout << "Enter second user email:";
+    std::cin >> secondUserEmail;
 
-        network.addFriendship(firstUserEmail, secondUserEmail);
-    }
-    catch(std::exception &e) {
-        std::cout << '\n' << e.what() << '\n';
-    }
+    network.addFriendship(firstUserEmail, secondUserEmail);
 }
 
 void Console::uiShowFriendships() {
-    try {
-        for(int i = 0; i < network.checkFriendship().size(); i++) {
-            std::cout << network.checkFriendship()[i];
-        }
-    }
-    catch(std::exception &e) {
-        std::cout << '\n' << e.what() << '\n';
+    for (int i = 0; i < network.checkFriendship().size(); i++) {
+        std::cout << network.checkFriendship()[i];
     }
 }
 
 void Console::uiUpdateFriendship() {
-    try {
-        unsigned int id;
-        std::cout << "Enter old friendship id:";
-        std::cin >> id;
-
-        std::cout << "Enter new friendship details:";
-
-        std::string firstUserEmail;
-        std::cout << "Enter new first user email:";
-        std::cin >> firstUserEmail;
-
-        std::string secondUserEmail;
-        std::cout << "Enter new second user email:";
-        std::cin >> secondUserEmail;
-
-        network.updateFriendship(id, firstUserEmail, secondUserEmail);
+    unsigned int id;
+    std::cout << "Enter old friendship id:";
+    std::cin >> id;
+    if (std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        throw MyException("Id must be an unsigned int.");
     }
-    catch(std::exception &e) {
-        std::cout << '\n' << e.what() << '\n';
-    }
+
+
+    std::string firstUserEmail;
+    std::cout << "Enter new first user email:";
+    std::cin >> firstUserEmail;
+
+    std::string secondUserEmail;
+    std::cout << "Enter new second user email:";
+    std::cin >> secondUserEmail;
+
+    network.updateFriendship(id, firstUserEmail, secondUserEmail);
 }
 
 void Console::uiDeleteFriendship() {
-    try {
-        std::string firstUserEmail;
-        std::cout << "Enter first user email:";
-        std::cin >> firstUserEmail;
+    std::string firstUserEmail;
+    std::cout << "Enter first user email:";
+    std::cin >> firstUserEmail;
 
-        std::string secondUserEmail;
-        std::cout << "Enter secondu ser email:";
-        std::cin >> secondUserEmail;
+    std::string secondUserEmail;
+    std::cout << "Enter second user email:";
+    std::cin >> secondUserEmail;
 
-        network.deleteFriendship(firstUserEmail, secondUserEmail);
-    }
-    catch(std::exception &e) {
-        std::cout << '\n' << e.what() << '\n';
-    }
+    network.deleteFriendship(firstUserEmail, secondUserEmail);
 }
 
 void Console::uiAddMessage() {
-    try {
-        std::string senderEmail;
-        std::cout << "Enter sender email:";
-        std::cin >> senderEmail;
+    std::string senderEmail;
+    std::cout << "Enter sender email:";
+    std::cin >> senderEmail;
 
-        std::string receiverEmail;
-        std::cout << "Enter receiver email:";
-        std::cin >> receiverEmail;
+    std::string receiverEmail;
+    std::cout << "Enter receiver email:";
+    std::cin >> receiverEmail;
 
-        std::string data;
-        std::cout << "Enter message:";
-        std::cin >> data;
+    std::string data;
+    std::cout << "Enter message:";
+    std::cin.get();
+    std::getline(std::cin, data);
 
-        network.addMessage(senderEmail, receiverEmail, data);
-    }
-    catch(std::exception &e) {
-        std::cout << '\n' << e.what() << '\n';
-    }
+    network.addMessage(senderEmail, receiverEmail, data);
 }
 
 void Console::uiShowMessages() {
-    try {
-        for(int i = 0; i < network.checkMessage().size(); i++) {
-            std::cout << network.checkMessage()[i];
-        }
-    }
-    catch(std::exception &e) {
-        std::cout << '\n' << e.what() << '\n';
+    for (int i = 0; i < network.checkMessage().size(); i++) {
+        std::cout << network.checkMessage()[i];
     }
 }
 
 void Console::uiUpdateMessage() {
-    try {
-        unsigned int id;
-        std::cout << "Enter old message id:";
-        std::cin >> id;
-
-        std::cout << "Enter new message details:" << '\n';
-
-        std::string newSenderEmail;
-        std::cout << "Enter sender email:";
-        std::cin >> newSenderEmail;
-
-        std::string newReceiverEmail;
-        std::cout << "Enter receiver email:";
-        std::cin >> newReceiverEmail;
-
-        std::string newData;
-        std::cout << "Enter new message:";
-        std::cin >> newData;
-
-        network.updateMessage(id, newSenderEmail, newReceiverEmail, newData);
+    unsigned int id;
+    std::cout << "Enter old message id:";
+    std::cin >> id;
+    if (std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        throw MyException("Id must be an unsigned int.");
     }
-    catch(std::exception &e) {
-        std::cout << '\n' << e.what() << '\n';
-    }
+
+    std::string newSenderEmail;
+    std::cout << "Enter sender email:";
+    std::cin >> newSenderEmail;
+
+    std::string newReceiverEmail;
+    std::cout << "Enter receiver email:";
+    std::cin >> newReceiverEmail;
+
+    std::string newData;
+    std::cout << "Enter new message:";
+    std::cin.get();
+    std::getline(std::cin, newData);
+
+    network.updateMessage(id, newSenderEmail, newReceiverEmail, newData);
 }
 
 void Console::uiDeleteMessage() {
-    try {
-        std::string senderEmail;
-        std::cout << "Enter sender email:";
-        std::cin >> senderEmail;
+    std::string senderEmail;
+    std::cout << "Enter sender email:";
+    std::cin >> senderEmail;
 
-        std::string receiverEmail;
-        std::cout << "Enter receiver email:";
-        std::cin >>receiverEmail;
+    std::string receiverEmail;
+    std::cout << "Enter receiver email:";
+    std::cin >> receiverEmail;
 
-        std::string data;
-        std::cout << "Enter message data:";
-        std::cin >> data;
+    std::string data;
+    std::cout << "Enter message data:";
+    std::cin.get();
+    std::getline(std::cin, data);
 
-        network.deleteMessage(senderEmail, receiverEmail, data);
+    network.deleteMessage(senderEmail, receiverEmail, data);
+}
+
+void Console::uiLoggedUserAddFriend(User loggedUser) {
+    std::string email;
+    std::cout << "Insert user email:";
+    std::cin >> email;
+    network.addFriendship(loggedUser.getEmail(), email);
+}
+
+void Console::uiLoggedUserDeleteFriend(User loggedUser) {
+    std::string userEmail;
+    std::cout << "Delete friend by email:";
+    std::cin >> userEmail;
+
+    network.deleteFriendship(loggedUser.getEmail(), userEmail);
+}
+
+void Console::uiLoggedUserShowFriendList(User loggedUser) {
+    List<User> friends = network.CheckFriends(loggedUser);
+    for (int i = 0; i < friends.size(); i++) {
+        std::cout << friends[i].getFirstName() << " "
+                  << friends[i].getLastName() << '\n';
     }
-    catch(std::exception &e) {
-        std::cout << '\n' << e.what() << '\n';
+}
+
+void Console::uiLoggedUserSendMessage(User loggedUser) {
+    std::string receiverEmail, data;
+    std::cout << "Insert receiver email:";
+    std::cin >> receiverEmail;
+
+    std::cout << "Insert message:";
+    std::cin.get();
+    std::getline(std::cin, data);
+
+    network.addMessage(loggedUser.getEmail(), receiverEmail,
+                       data);
+}
+
+void Console::uiLoggedUserDeleteMessage(User loggedUser) {
+    std::string receiverEmail, data;
+    std::cout << "Insert receiver email:";
+    std::cin >> receiverEmail;
+
+
+    std::cout << "Insert message:";
+    std::cin.get();
+    std::getline(std::cin, data);
+
+    network.deleteMessage(loggedUser.getEmail(), receiverEmail,
+                          data);
+}
+
+void Console::uiLoggedUserShowConversation(User loggedUser) {
+    std::string userEmail;
+    std::cout << "Insert user email:";
+    std::cin >> userEmail;
+    List<Message> conversation = network.getConversation(
+            loggedUser, userEmail);
+    for (int i = 0; i < conversation.size(); i++) {
+        std::cout << conversation[i] << '\n';
+    }
+}
+
+void Console::uiLoggedUserCreateEvent(User loggedUser) {
+    std::string name, date, description;
+    std::cout << "Event name:";
+    std::cin.get();
+    std::getline(std::cin, name);
+
+    std::cout << "Event date:";
+    std::cin >> date;
+
+    std::cout << "Event description:";
+    std::cin.get();
+    std::getline(std::cin, description);
+
+    network.addEvent(loggedUser.getEmail(), name, date,
+                     description);
+}
+
+void Console::uiLoggedUserShowCreatedEvents(User loggedUser) {
+    std::vector<Event> eventsCreatedByUser;
+    eventsCreatedByUser = network.getEventsByCreator(loggedUser);
+    for(int i = 0; i < eventsCreatedByUser.size(); i++) {
+        std::cout << eventsCreatedByUser[i] << '\n';
+    }
+}
+
+void Console::uiLoggedUserDeleteEvent(User loggedUser) {
+    unsigned int id;
+    std::cout << "Event id:";
+    std::cin >> id;
+    if (std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        throw MyException("ID must be an unsigned int.");
+    }
+    if(network.checkEvent(id).getCreator() == loggedUser) {
+        network.deleteEvent(id);
+    }
+    else {
+        throw MyException("This event was not created by you. You can't delete it.");
     }
 }
 
@@ -432,90 +485,96 @@ void Console::runUserMenu(User loggedUser) {
         showLoggedUserMenu(loggedUser);
         std::cin >> loggedUserOption;
         std::cout << '\n';
-        switch(loggedUserOption) {
+        switch (loggedUserOption) {
             case '1': {
                 try {
                     std::cout << loggedUser << '\n';
                 }
-                catch(std::exception &e) {
+                catch (std::exception &e) {
                     std::cout << '\n' << e.what() << '\n';
                 }
                 break;
             }
             case '2': {
                 try {
-                    std::string email;
-                    std::cout << "Insert user email:";
-                    std::cin >> email;
-                    network.addFriendship(loggedUser.getEmail(), email);
+                    uiLoggedUserAddFriend(loggedUser);
                 }
-                catch(std::exception &e) {
+                catch (std::exception &e) {
                     std::cout << '\n' << e.what() << '\n';
                 }
                 break;
             }
             case '3': {
                 try {
-                    List<User> friends = network.CheckFriends(loggedUser);
-                    for(int i = 0; i < friends.size(); i++) {
-                        std::cout << friends[i].getFirstName() << " " << friends[i].getLastName() << '\n';
-                    }
+                    uiLoggedUserDeleteFriend(loggedUser);
                 }
-                catch(std::exception &e) {
+                catch (std::exception &e) {
                     std::cout << '\n' << e.what() << '\n';
                 }
                 break;
             }
             case '4': {
                 try {
-                    std::string receiverEmail, data;
-                    std::cout << "Insert receiver email:";
-                    std::cin >> receiverEmail;
-                    std::cout << "Insert message:";
-                    std::cin >> data;
-                    network.addMessage(loggedUser.getEmail(), receiverEmail, data);
+                    uiLoggedUserShowFriendList(loggedUser);
                 }
-                catch(std::exception &e) {
+                catch (std::exception &e) {
                     std::cout << '\n' << e.what() << '\n';
                 }
                 break;
             }
             case '5': {
                 try {
-                    std::string userEmail;
-                    std::cout << "Insert user email:";
-                    std::cin >> userEmail;
-                    List<Message> conversation = network.getConversation(loggedUser, userEmail);
-                    for(int i = 0; i < conversation.size(); i++) {
-                        std::cout << conversation[i] << '\n';
-                    }
+                    uiLoggedUserSendMessage(loggedUser);
                 }
-                catch(std::exception &e) {
+                catch (std::exception &e) {
                     std::cout << '\n' << e.what() << '\n';
                 }
                 break;
             }
             case '6': {
                 try {
-                    std::string name, date, description;
-                    std::cout << "Event name:";
-                    std::cin >> name;
-
-                    std::cout << "Event date:";
-                    std::cin >> date;
-
-                    std::cout << "Event description:";
-                    std::cin >> description;
-
-                    network.addEvent(loggedUser.getEmail(), name, date, description);
+                    uiLoggedUserDeleteMessage(loggedUser);
                 }
-                catch(std::exception &e) {
+                catch (std::exception &e) {
                     std::cout << '\n' << e.what() << '\n';
                 }
                 break;
             }
             case '7': {
-
+                try {
+                    uiLoggedUserShowConversation(loggedUser);
+                }
+                catch (std::exception &e) {
+                    std::cout << '\n' << e.what() << '\n';
+                }
+                break;
+            }
+            case '8': {
+                try {
+                    uiLoggedUserCreateEvent(loggedUser);
+                }
+                catch (std::exception &e) {
+                    std::cout << '\n' << e.what() << '\n';
+                }
+                break;
+            }
+            case '9': {
+                try {
+                    uiLoggedUserShowCreatedEvents(loggedUser);
+                }
+                catch (std::exception &e) {
+                    std::cout << '\n' << e.what() << '\n';
+                }
+                break;
+            }
+            case '0': {
+                try {
+                    uiLoggedUserDeleteEvent(loggedUser);
+                }
+                catch (std::exception &e) {
+                    std::cout << '\n' << e.what() << '\n';
+                }
+                break;
             }
             case 'x': {
                 break;
@@ -524,7 +583,7 @@ void Console::runUserMenu(User loggedUser) {
                 std::cout << "Invalid option! Please try again!" << '\n';
             }
         }
-    }while(loggedUserOption != 'x');
+    } while (loggedUserOption != 'x');
 }
 
 void Console::runLogInPage() {
@@ -533,7 +592,7 @@ void Console::runLogInPage() {
         showFirstMenu();
         std::cin >> firstMenuOption;
         std::cout << '\n';
-        switch(firstMenuOption) {
+        switch (firstMenuOption) {
             case '1': {
                 try {
                     User user;
@@ -549,13 +608,18 @@ void Console::runLogInPage() {
                     user = network.logIn(email, password);
                     runUserMenu(user);
                 }
-                catch(std::exception &e) {
-                        std::cout << '\n' << e.what() << '\n';
+                catch (std::exception &e) {
+                    std::cout << '\n' << e.what() << '\n';
                 }
                 break;
             }
             case '2': {
-                uiAddUser();
+                try {
+                    uiAddUser();
+                }
+                catch (std::exception &e) {
+                    std::cout << '\n' << e.what() << '\n';
+                }
                 break;
             }
             case 'x': {
@@ -565,7 +629,7 @@ void Console::runLogInPage() {
                 std::cout << "Invalid option! Please try again!" << '\n';
             }
         }
-    }while(firstMenuOption != 'x');
+    } while (firstMenuOption != 'x');
 }
 
 void Console::runAdminMenu() {
@@ -574,38 +638,59 @@ void Console::runAdminMenu() {
         showMenu();
         std::cin >> option;
         std::cout << '\n';
-        switch(option) {
+        switch (option) {
             case '1': {
                 char userOption;
                 do {
                     showUserMenu();
                     std::cin >> userOption;
                     std::cout << '\n';
-                    switch(userOption) {
+                    switch (userOption) {
                         case '1': {
-                            uiAddUser();
+                            try {
+                                uiAddUser();
+                            }
+                            catch (std::exception &e) {
+                                std::cout << '\n' << e.what() << '\n';
+                            }
                             break;
                         }
                         case '2': {
-                            uiShowUsers();
+                            try {
+                                uiShowUsers();
+                            }
+                            catch (std::exception &e) {
+                                std::cout << '\n' << e.what() << '\n';
+                            }
                             break;
                         }
                         case '3': {
-                            uiUpdateUser();
+                            try {
+                                uiUpdateUser();
+                            }
+                            catch (std::exception &e) {
+                                std::cout << '\n' << e.what() << '\n';
+                            }
                             break;
                         }
                         case '4': {
-                            uiDeleteUser();
+                            try {
+                                uiDeleteUser();
+                            }
+                            catch (std::exception &e) {
+                                std::cout << '\n' << e.what() << '\n';
+                            }
                             break;
                         }
                         case 'x': {
                             break;
                         }
                         default: {
-                            std::cout << "Invalid option! Please try again!" << '\n';
+                            std::cout << "Invalid option! Please try again!"
+                                      << '\n';
                         }
                     }
-                }while(userOption != 'x');
+                } while (userOption != 'x');
                 break;
             }
             case '2': {
@@ -614,31 +699,52 @@ void Console::runAdminMenu() {
                     showMessageMenu();
                     std::cin >> messageOption;
                     std::cout << '\n';
-                    switch(messageOption) {
+                    switch (messageOption) {
                         case '1': {
-                            uiAddMessage();
+                            try {
+                                uiAddMessage();
+                            }
+                            catch (std::exception &e) {
+                                std::cout << '\n' << e.what() << '\n';
+                            }
                             break;
                         }
                         case '2': {
-                            uiShowMessages();
+                            try {
+                                uiShowMessages();
+                            }
+                            catch (std::exception &e) {
+                                std::cout << '\n' << e.what() << '\n';
+                            }
                             break;
                         }
                         case '3': {
-                            uiUpdateMessage();
+                            try {
+                                uiUpdateMessage();
+                            }
+                            catch (std::exception &e) {
+                                std::cout << '\n' << e.what() << '\n';
+                            }
                             break;
                         }
                         case '4': {
-                            uiDeleteMessage();
+                            try {
+                                uiDeleteMessage();
+                            }
+                            catch (std::exception &e) {
+                                std::cout << '\n' << e.what() << '\n';
+                            }
                             break;
                         }
                         case 'x': {
                             break;
                         }
                         default: {
-                            std::cout << "Invalid option! Please try again!" << '\n';
+                            std::cout << "Invalid option! Please try again!"
+                                      << '\n';
                         }
                     }
-                }while(messageOption != 'x');
+                } while (messageOption != 'x');
                 break;
             }
             case '3': {
@@ -647,31 +753,52 @@ void Console::runAdminMenu() {
                     showEventMenu();
                     std::cin >> eventOption;
                     std::cout << '\n';
-                    switch(eventOption) {
+                    switch (eventOption) {
                         case '1': {
-                            uiAddEvent();
+                            try {
+                                uiAddEvent();
+                            }
+                            catch (std::exception &e) {
+                                std::cout << '\n' << e.what() << '\n';
+                            }
                             break;
                         }
                         case '2': {
-                            uiShowEvents();
+                            try {
+                                uiShowEvents();
+                            }
+                            catch (std::exception &e) {
+                                std::cout << '\n' << e.what() << '\n';
+                            }
                             break;
                         }
                         case '3': {
-                            uiUpdateEvent();
+                            try {
+                                uiUpdateEvent();
+                            }
+                            catch (std::exception &e) {
+                                std::cout << '\n' << e.what() << '\n';
+                            }
                             break;
                         }
                         case '4': {
-                            uiDeleteEvent();
+                            try {
+                                uiDeleteEvent();
+                            }
+                            catch (std::exception &e) {
+                                std::cout << '\n' << e.what() << '\n';
+                            }
                             break;
                         }
                         case 'x': {
                             break;
                         }
                         default: {
-                            std::cout << "Invalid option! Please try again!" << '\n';
+                            std::cout << "Invalid option! Please try again!"
+                                      << '\n';
                         }
                     }
-                }while(eventOption != 'x');
+                } while (eventOption != 'x');
                 break;
             }
             case '4': {
@@ -680,31 +807,52 @@ void Console::runAdminMenu() {
                     showFriendshipMenu();
                     std::cin >> friendshipOption;
                     std::cout << '\n';
-                    switch(friendshipOption) {
+                    switch (friendshipOption) {
                         case '1': {
-                            uiAddFriendship();
+                            try {
+                                uiAddFriendship();
+                            }
+                            catch (std::exception &e) {
+                                std::cout << '\n' << e.what() << '\n';
+                            }
                             break;
                         }
                         case '2': {
-                            uiShowFriendships();
+                            try {
+                                uiShowFriendships();
+                            }
+                            catch (std::exception &e) {
+                                std::cout << '\n' << e.what() << '\n';
+                            }
                             break;
                         }
                         case '3': {
-                            uiUpdateFriendship();
+                            try {
+                                uiUpdateFriendship();
+                            }
+                            catch (std::exception &e) {
+                                std::cout << '\n' << e.what() << '\n';
+                            }
                             break;
                         }
                         case '4': {
-                            uiDeleteFriendship();
+                            try {
+                                uiDeleteFriendship();
+                            }
+                            catch (std::exception &e) {
+                                std::cout << '\n' << e.what() << '\n';
+                            }
                             break;
                         }
                         case 'x': {
                             break;
                         }
                         default: {
-                            std::cout << "Invalid option! Please try again!" << '\n';
+                            std::cout << "Invalid option! Please try again!"
+                                      << '\n';
                         }
                     }
-                }while(friendshipOption != 'x');
+                } while (friendshipOption != 'x');
                 break;
             }
             case 'x': {
@@ -714,7 +862,7 @@ void Console::runAdminMenu() {
                 std::cout << "Invalid option! Please try again!" << '\n';
             }
         }
-    }while(option != 'x');
+    } while (option != 'x');
 }
 
 void Console::run() {
@@ -723,13 +871,23 @@ void Console::run() {
         showRunMenu();
         std::cin >> option;
         std::cout << '\n';
-        switch(option) {
+        switch (option) {
             case '1': {
-                runLogInPage();
+                try {
+                    runLogInPage();
+                }
+                catch(std::exception &e) {
+                    std::cout << '\n' << e.what() << '\n';
+                }
                 break;
             }
             case '2': {
-                runAdminMenu();
+                try {
+                    runAdminMenu();
+                }
+                catch(std::exception &e) {
+                    std::cout << '\n' << e.what() << '\n';
+                }
                 break;
             }
             case 'x': {
@@ -739,5 +897,5 @@ void Console::run() {
                 std::cout << "Invalid option! Please try again!" << '\n';
             }
         }
-    }while(option != 'x');
+    } while (option != 'x');
 }

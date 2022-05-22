@@ -146,3 +146,10 @@ List<Message> Network::getConversation(User loggedUser, std::string userEmail) {
     }
     return result;
 }
+
+std::vector<Event> Network::getEventsByCreator(User user) {
+    if(eventService.getEventsByUser(user).empty()) {
+        throw MyException("No events created by this user.");
+    }
+    return eventService.getEventsByUser(user);
+}

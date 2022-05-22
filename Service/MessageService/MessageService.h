@@ -14,8 +14,8 @@
 class MessageService {
 private:
     MessageValidator messageValidator;
-    RepositoryCSV<Message> messageRepository;
-    UserService userService;
+    RepositoryCSV<Message> &messageRepository;
+    UserService &userService;
 public:
     /**
      * Constructor
@@ -23,14 +23,17 @@ public:
      */
     MessageService(RepositoryCSV<Message> &messageRepository, UserService &userService);
 
+    /**
+     * Last ID getter
+     * @return: last ID from file
+     */
     unsigned int getId();
 
     /**
-     * Create a Message object
-     * @param id: message id
-     * @param senderEmail: message sender
-     * @param receiverEmail: message receiver
-     * @param data: message data
+     * Create message
+     * @param sender: message sender
+     * @param receiver: message receiver
+     * @param data: message
      */
     void create(User sender, User receiver, std::string data);
 
@@ -43,22 +46,20 @@ public:
     /**
      * Read message with given id
      * @param id: message id
-     * @return:
+     * @return: message with given id
      */
     Message read(unsigned int id);
 
     /**
-     * Update a Message object
-     * @param id: new message id
-     * @param newSenderEmail: new message sender
-     * @param newReceiverEmail: new message receiver
-     * @param newData: new message data
+     * Update oldMessage to newMessage
+     * @param oldMessage: old message
+     * @param newMessage: new message
      */
     void update(Message oldMessage, Message newMessage);
 
     /**
      * Delete message
-     * @param id: message id
+     * @param message: message to be deleted
      */
     void del(Message message);
 
@@ -76,8 +77,21 @@ public:
      */
     bool doesExistReceiver(User receiver);
 
+    /**
+     * Get message by email and data
+     * @param senderEmail: sender email
+     * @param receiverEmail: receiver email
+     * @param data: message
+     * @return: Message object
+     */
     Message getMessageByEmailsAndData(std::string senderEmail, std::string receiverEmail, std::string data);
 
+    /**
+     * Get conversation with user
+     * @param loggedUser: user
+     * @param user: user
+     * @return: List<Message> - conversation
+     */
     List<Message> getConversationWithUser(User loggedUser, User user);
 };
 

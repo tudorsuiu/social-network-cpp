@@ -18,43 +18,49 @@ unsigned int FriendshipService::getId() {
 }
 
 void FriendshipService::create(User firstUser, User secondUser) {
-//    if(!doesExistSecondUser(secondUser)) {
-//        throw MyException("Friendship receiver doesn't have an account.");
-//    }
+    if(!doesExistSecondUser(secondUser)) {
+        throw MyException("Friendship receiver doesn't have an account.");
+    }
+    else if(doesExistFriendshipRelation(firstUser, secondUser)) {
+        throw MyException("Users are already friends.");
+    }
     Friendship friendship(getId(), firstUser, secondUser);
     friendshipValidator.validate(friendship);
     friendshipRepository.addEntity(friendship);
 }
 
 List<Friendship> FriendshipService::read() {
-//    if(friendshipRepository.readEntity().size() == 0) {
-//        throw MyException("There are no friendship relations.");
-//    }
+    if(friendshipRepository.readEntity().size() == 0) {
+        throw MyException("There are no friendship relations.");
+    }
     return friendshipRepository.readEntity();
 }
 
 Friendship FriendshipService::read(unsigned int id) {
-//    if(!doesExistId(id)) {
-//        throw MyException("Friendship relation with given ID was not found.");
-//    }
+    if(!doesExistId(id)) {
+        throw MyException("Friendship relation with given ID was not found.");
+    }
     return friendshipRepository.readEntity(id);
 }
 
 void FriendshipService::update(Friendship oldFriendship, Friendship newFriendship) {
-//    if(!doesExistId(oldFriendship.getId())) {
-//        throw MyException("Friendship relation with given ID was not found.");
-//    }
-//    else if(!doesExistSecondUser(newFriendship.getSecondUser())) {
-//        throw MyException("Friendship receiver doesn't have an account.");
-//    }
+    if(!doesExistId(oldFriendship.getId())) {
+        throw MyException("Friendship relation with given ID was not found.");
+    }
+    else if(!doesExistSecondUser(newFriendship.getSecondUser())) {
+        throw MyException("Friendship receiver doesn't have an account.");
+    }
+    else if(doesExistFriendshipRelation(newFriendship.getFirstUser(), newFriendship.getSecondUser())) {
+        throw MyException("Users are already friends.");
+    }
     friendshipValidator.validate(newFriendship);
     friendshipRepository.updateEntity(oldFriendship, newFriendship);
 }
 
 void FriendshipService::del(Friendship friendship) {
-//    if(!doesExistId(friendship.getId())) {
-//        throw MyException("Friendship relation with given ID was not found.");
-//    }
+    if(!doesExistId(friendship.getId())) {
+        throw MyException("Friendship relation with given ID was not found.");
+    }
     friendshipRepository.deleteEntity(friendship);
 }
 
@@ -69,6 +75,10 @@ bool FriendshipService::doesExistSecondUser(User secondUser) {
         }
     }
     return false;
+}
+
+unsigned int FriendshipService::getNumberOfFriendships() {
+    return friendshipRepository.readEntity().size();
 }
 
 Friendship FriendshipService::getFriendshipByEmails(std::string firstUserEmail,
@@ -94,4 +104,15 @@ List<User> FriendshipService::getUserFriendList(User user) {
         }
     }
     return result;
+}
+
+bool FriendshipService::doesExistFriendshipRelation(User firstUser,
+                                                    User secondUser) {
+    for(int i = 0; i < friendshipRepository.readEntity().size(); i++) {
+        Friendship friendship = friendshipRepository.readEntity()[i];
+        if(friendship.getFirstUser() == firstUser && friendship.getSecondUser() == secondUser || friendship.getSecondUser() == firstUser && friendship.getFirstUser() == secondUser) {
+            return true;
+        }
+    }
+    return false;
 }
