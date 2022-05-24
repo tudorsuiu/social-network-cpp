@@ -7,11 +7,19 @@
 
 EventService::EventService(BSTRepositoryCSV<Event> &eventRepository, UserService &userService) : eventRepository(eventRepository), userService(userService) {}
 
+unsigned int EventService::getId() {
+    if(eventRepository.read().empty()) {
+        return 1;
+    }
+    else {
+        return eventRepository.read().getMax().getId() + 1;
+    }
+}
+
 void EventService::create(User creator, std::string name, std::string date, std::string description) {
-    Event event(this->id, creator, name, date, description);
+    Event event(getId(), creator, name, date, description);
     eventValidator.validate(event);
     eventRepository.addEntity(event);
-    this->id++;
 }
 
 BST<Event> EventService::read() {
@@ -25,7 +33,7 @@ Event EventService::read(unsigned int id) {
     if(eventRepository.empty()) {
         throw MyException("There are no events.");
     }
-    return eventRepository.readEntity(id);
+    return eventRepository.read(id);
 }
 
 void EventService::update(Event oldEvent, Event newEvent) {
@@ -56,6 +64,3 @@ std::vector<Event> EventService::getEventsByUser(User user) {
     }
     return result;
 }
-
-
-

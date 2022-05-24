@@ -108,8 +108,8 @@ void Network::updateMessage(unsigned int id, std::string newSenderEmail, std::st
     messageService.update(oldMessage, newMessage);
 }
 
-void Network::deleteMessage(std::string senderEmail, std::string receiverEmail, std::string data) {
-    Message message = messageService.getMessageByEmailsAndData(senderEmail, receiverEmail, data);
+void Network::deleteMessage(unsigned int id) {
+    Message message = messageService.read(id);
     messageService.del(message);
 }
 

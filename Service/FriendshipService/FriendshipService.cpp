@@ -24,6 +24,9 @@ void FriendshipService::create(User firstUser, User secondUser) {
     else if(doesExistFriendshipRelation(firstUser, secondUser)) {
         throw MyException("Users are already friends.");
     }
+    else if(firstUser == secondUser) {
+        throw MyException("A friendship relation can't be created between the same users.");
+    }
     Friendship friendship(getId(), firstUser, secondUser);
     friendshipValidator.validate(friendship);
     friendshipRepository.addEntity(friendship);
@@ -52,6 +55,9 @@ void FriendshipService::update(Friendship oldFriendship, Friendship newFriendshi
     }
     else if(doesExistFriendshipRelation(newFriendship.getFirstUser(), newFriendship.getSecondUser())) {
         throw MyException("Users are already friends.");
+    }
+    else if(oldFriendship.getFirstUser() == newFriendship.getSecondUser()) {
+        throw MyException("A friendship relation can't be created between the same users.");
     }
     friendshipValidator.validate(newFriendship);
     friendshipRepository.updateEntity(oldFriendship, newFriendship);

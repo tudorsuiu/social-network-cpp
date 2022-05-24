@@ -39,7 +39,7 @@ public:
     List<Message> checkMessage();
     Message checkMessage(unsigned int id);
     void updateMessage(unsigned int id, std::string newSenderEmail, std::string newReceiverEmail, std::string newData);
-    void deleteMessage(std::string senderEmail, std::string receiverEmail, std::string data);
+    void deleteMessage(unsigned int id);
 
     std::vector<Event> getEventsByCreator(User user);
 

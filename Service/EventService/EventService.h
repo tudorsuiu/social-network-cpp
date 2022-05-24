@@ -16,7 +16,6 @@ private:
     EventValidator eventValidator;
     BSTRepositoryCSV<Event> &eventRepository;
     UserService &userService;
-    unsigned int id = 1;
 public:
     /**
      * Constructor
@@ -24,6 +23,12 @@ public:
      * @param userService: user service
      */
     EventService(BSTRepositoryCSV<Event> &eventRepository, UserService &userService);
+
+    /**
+     * Last ID getter
+     * @return: last ID from file
+     */
+    unsigned int getId();
 
     /**
      * Create event
@@ -66,9 +71,18 @@ public:
      */
     unsigned int size();
 
+    /**
+     * Add every event into vector
+     * @return: events in vector
+     */
     std::vector<Event> getEventsInVector();
-    std::vector<Event> getEventsByUser(User user);
 
+    /**
+     * Shows all events created by given user
+     * @param user: user
+     * @return: all events created by given user
+     */
+    std::vector<Event> getEventsByUser(User user);
 };
 
 

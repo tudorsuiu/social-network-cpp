@@ -38,7 +38,7 @@ private:
      * Search a given element in a given ADT
      * @param node: node
      * @param element: T class object
-     * @return
+     * @return: nullptr if element is not found, node if element si found
      */
     BSTNode<T> *search(BSTNode<T> *node, T element) {
         if(node == nullptr || node->info == element) {
@@ -149,18 +149,6 @@ private:
         }
         return current->info;
     }
-
-    /**
-     * Destroys from memory
-     * @param node: node
-     */
-    void DestroyRecursive(BSTNode<T> *node) {
-        if(node != nullptr) {
-            DestroyRecursive(node->left);
-            DestroyRecursive(node->right);
-        }
-        delete node;
-    }
 public:
     /**
      * Constructor
@@ -168,13 +156,6 @@ public:
     BST() {
         this->root = nullptr;
     }
-
-//    /**
-//     * Destructor
-//     */
-//    ~BST() {
-//        DestroyRecursive(this->root);
-//    }
 
     /**
      * Add element
@@ -198,6 +179,9 @@ public:
      * @return: entity with given id or default entity
      */
     T &read(unsigned int id) {
+        if(searchById(this->root, id) == nullptr) {
+            throw MyException("An element with given ID doesn't exist");
+        }
         return searchById(this->root, id)->info;
     }
 
@@ -207,15 +191,23 @@ public:
      * @param newElement: new element
      */
     void update(T element, T newElement) {
-        remove(element);
+        del(element);
         add(newElement);
+    }
+
+    /**
+     * Return max value from tree
+     * @return: max value from tree
+     */
+    T getMax() {
+        return maxValue(this->root);
     }
 
     /**
      * Delete element
      * @param element: T class object
      */
-    void remove(T element) {
+    void del(T element) {
         this->root = remove(this->root, element);
     }
 

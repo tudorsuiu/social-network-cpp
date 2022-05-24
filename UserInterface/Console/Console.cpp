@@ -44,6 +44,8 @@ void Console::showLoggedUserMenu(User loggedUser) {
     std::cout << "8. Create event." << '\n';
     std::cout << "9. Show created events." << '\n';
     std::cout << "0. Delete event." << '\n';
+    std::cout << "u. Update account." << '\n';
+    std::cout << "d. Delete account." << '\n';
     std::cout << "x. Sign out." << '\n';
     std::cout << "__________________________________" << '\n';
     std::cout << "Select option:";
@@ -158,9 +160,15 @@ void Console::uiUpdateUser() {
     std::string lastName;
     std::cout << "Enter last name:";
     std::cin >> lastName;
+
     unsigned int age;
     std::cout << "Enter age:";
     std::cin >> age;
+    if(std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        throw MyException("Age must be an unsigned int.");
+    }
 
     std::string email;
     std::cout << "Enter email:";
@@ -215,13 +223,16 @@ void Console::uiShowEvents() {
 }
 
 void Console::uiUpdateEvent() {
-    unsigned int id;
+    int id;
     std::cout << "Enter old event id:" << '\n';
     std::cin >> id;
     if (std::cin.fail()) {
         std::cin.clear();
         std::cin.ignore(10000, '\n');
         throw MyException("Event ID must an unsigned int.");
+    }
+    if(id <= 0) {
+        throw MyException("Event ID must be positive.");
     }
 
     std::string newCreatorEmail;
@@ -246,13 +257,16 @@ void Console::uiUpdateEvent() {
 }
 
 void Console::uiDeleteEvent() {
-    unsigned int id;
+    int id;
     std::cout << "Enter event id:";
     std::cin >> id;
     if (std::cin.fail()) {
         std::cin.clear();
         std::cin.ignore(10000, '\n');
         throw MyException("Id must be an unsigned int.");
+    }
+    if(id <= 0) {
+        throw MyException("Event ID must be positive.");
     }
 
     network.deleteEvent(id);
@@ -277,7 +291,7 @@ void Console::uiShowFriendships() {
 }
 
 void Console::uiUpdateFriendship() {
-    unsigned int id;
+    int id;
     std::cout << "Enter old friendship id:";
     std::cin >> id;
     if (std::cin.fail()) {
@@ -285,7 +299,9 @@ void Console::uiUpdateFriendship() {
         std::cin.ignore(10000, '\n');
         throw MyException("Id must be an unsigned int.");
     }
-
+    if(id <= 0) {
+        throw MyException("Friendship ID must be positive.");
+    }
 
     std::string firstUserEmail;
     std::cout << "Enter new first user email:";
@@ -334,13 +350,16 @@ void Console::uiShowMessages() {
 }
 
 void Console::uiUpdateMessage() {
-    unsigned int id;
+    int id;
     std::cout << "Enter old message id:";
     std::cin >> id;
     if (std::cin.fail()) {
         std::cin.clear();
         std::cin.ignore(10000, '\n');
         throw MyException("Id must be an unsigned int.");
+    }
+    if(id <= 0) {
+        throw MyException("Message ID must be positive.");
     }
 
     std::string newSenderEmail;
@@ -360,20 +379,18 @@ void Console::uiUpdateMessage() {
 }
 
 void Console::uiDeleteMessage() {
-    std::string senderEmail;
-    std::cout << "Enter sender email:";
-    std::cin >> senderEmail;
-
-    std::string receiverEmail;
-    std::cout << "Enter receiver email:";
-    std::cin >> receiverEmail;
-
-    std::string data;
-    std::cout << "Enter message data:";
-    std::cin.get();
-    std::getline(std::cin, data);
-
-    network.deleteMessage(senderEmail, receiverEmail, data);
+    int id;
+    std::cout << "Delete message with ID:";
+    std::cin >> id;
+    if(std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        throw MyException("Id must be an unsigned int.");
+    }
+    if(id <= 0) {
+        throw MyException("Invalid ID.");
+    }
+    network.deleteMessage(id);
 }
 
 void Console::uiLoggedUserAddFriend(User loggedUser) {
@@ -413,17 +430,15 @@ void Console::uiLoggedUserSendMessage(User loggedUser) {
 }
 
 void Console::uiLoggedUserDeleteMessage(User loggedUser) {
-    std::string receiverEmail, data;
-    std::cout << "Insert receiver email:";
-    std::cin >> receiverEmail;
-
-
-    std::cout << "Insert message:";
-    std::cin.get();
-    std::getline(std::cin, data);
-
-    network.deleteMessage(loggedUser.getEmail(), receiverEmail,
-                          data);
+    int id;
+    std::cout << "Insert message ID:";
+    std::cin >> id;
+    if(std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        throw MyException("ID must be a positive integer!");
+    }
+    network.deleteMessage(id);
 }
 
 void Console::uiLoggedUserShowConversation(User loggedUser) {
@@ -476,6 +491,57 @@ void Console::uiLoggedUserDeleteEvent(User loggedUser) {
     }
     else {
         throw MyException("This event was not created by you. You can't delete it.");
+    }
+}
+
+void Console::uiLoggedUserUpdateAccount(User loggedUser) {
+    std::string firstName;
+    std::cout << "Enter first name:";
+    std::cin >> firstName;
+
+    std::string lastName;
+    std::cout << "Enter last name:";
+    std::cin >> lastName;
+
+    unsigned int age;
+    std::cout << "Enter age:";
+    std::cin >> age;
+    if (std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
+        throw MyException("Age must be an unsigned int.");
+    }
+
+    std::string email;
+    std::cout << "Enter email:";
+    std::cin >> email;
+
+    std::string password;
+    std::cout << "Enter password:";
+    std::cin >> password;
+
+    std::string phoneNumber;
+    std::cout << "Enter phone number:";
+    std::cin >> phoneNumber;
+
+    network.updateUser(loggedUser.getEmail(), firstName, lastName, age, email, password, phoneNumber);
+
+    User newLoggedUser = User(loggedUser.getId(), firstName, lastName, age, email, password, phoneNumber);
+
+    runUserMenu(newLoggedUser);
+}
+
+void Console::uiLoggedUserDeleteAccount(User loggedUser) {
+    char yorn;
+    std::cout << "Are you sure you want to do this action? (y/n)";
+    std::cin >> yorn;
+
+    if(yorn == 'y') {
+        network.deleteUser(loggedUser.getEmail());
+        runLogInPage();
+    }
+    else {
+        std::cout << "Action was not completed." << '\n';
     }
 }
 
@@ -570,6 +636,24 @@ void Console::runUserMenu(User loggedUser) {
             case '0': {
                 try {
                     uiLoggedUserDeleteEvent(loggedUser);
+                }
+                catch (std::exception &e) {
+                    std::cout << '\n' << e.what() << '\n';
+                }
+                break;
+            }
+            case 'u': {
+                try {
+                    uiLoggedUserUpdateAccount(loggedUser);
+                }
+                catch (std::exception &e) {
+                    std::cout << '\n' << e.what() << '\n';
+                }
+                break;
+            }
+            case 'd': {
+                try {
+                    uiLoggedUserDeleteAccount(loggedUser);
                 }
                 catch (std::exception &e) {
                     std::cout << '\n' << e.what() << '\n';

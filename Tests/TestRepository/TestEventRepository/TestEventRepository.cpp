@@ -22,9 +22,9 @@ void TestEventRepository::addEvent() {
     repository.addEntity(e1);
     repository.addEntity(e2);
     repository.addEntity(e3);
-    assert(repository.readEntity(1) == e1);
-    assert(repository.readEntity(2) == e2);
-    assert(repository.readEntity(3) == e3);
+    assert(repository.read(1) == e1);
+    assert(repository.read(2) == e2);
+    assert(repository.read(3) == e3);
 }
 
 void TestEventRepository::readEvent() {
@@ -37,9 +37,9 @@ void TestEventRepository::readEvent() {
     repository.addEntity(e1);
     repository.addEntity(e2);
     repository.addEntity(e3);
-    assert(repository.readEntity(1) == e1);
-    assert(repository.readEntity(2) == e2);
-    assert(repository.readEntity(3) == e3);
+    assert(repository.read(1) == e1);
+    assert(repository.read(2) == e2);
+    assert(repository.read(3) == e3);
 }
 
 void TestEventRepository::updateEvent() {
@@ -53,9 +53,9 @@ void TestEventRepository::updateEvent() {
     repository.addEntity(e2);
     repository.addEntity(e3);
     repository.updateEntity(e3, Event(3, creator, "New event name", "21/09/2002", "This is the new description of the event3!"));
-    assert(repository.readEntity(1) == e1);
-    assert(repository.readEntity(2) == e2);
-    assert(repository.readEntity(3) == Event(3, creator, "New event name", "21/09/2002", "This is the new description of the event3!"));
+    assert(repository.read(1) == e1);
+    assert(repository.read(2) == e2);
+    assert(repository.read(3) == Event(3, creator, "New event name", "21/09/2002", "This is the new description of the event3!"));
 }
 
 void TestEventRepository::deleteEvent() {

@@ -5,13 +5,11 @@
 #ifndef USERREPOSITORYCSV_H_BSTREPOSITORYCSV_H
 #define USERREPOSITORYCSV_H_BSTREPOSITORYCSV_H
 
-
 #include <string>
 #include <fstream>
 #include "../Domain/ADT/BST/BST.h"
 
-template<class T>
-class BSTRepositoryCSV {
+template<class T> class BSTRepositoryCSV {
 private:
     BST<T> elements;
     std::string fileName;
@@ -48,7 +46,7 @@ public:
      * @param id: unsigned int - entity id
      * @return: entity with given id
      */
-    T readEntity(unsigned int id) {
+    T read(unsigned int id) {
         return elements.read(id);
     }
 
@@ -67,7 +65,7 @@ public:
      * @param entity: unsigned int - entity
      */
     void deleteEntity(T entity) {
-        elements.remove(entity);
+        elements.del(entity);
         this->saveToFile(elements.getRoot());
     }
 

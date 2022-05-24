@@ -18,4 +18,7 @@ void EventValidator::validate(Event event) {
     else if(event.getDescription().find(',') != std::string::npos) {
         throw MyException("Event description shouldn't contain commas.");
     }
+    else if(event.getName().find(',') != std::string::npos) {
+        throw MyException("Event name shouldn't contain commas.");
+    }
 }

@@ -74,7 +74,7 @@ void TestBST::remove() {
     bst.add(64);
     bst.add(9);
     bst.add(8);
-    bst.remove(81);
+    bst.del(81);
     assert(bst.exist(81) == false);
 }
 

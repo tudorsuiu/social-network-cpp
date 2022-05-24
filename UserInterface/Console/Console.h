@@ -44,6 +44,8 @@ public:
     void uiLoggedUserCreateEvent(User loggedUser);
     void uiLoggedUserShowCreatedEvents(User loggedUser);
     void uiLoggedUserDeleteEvent(User loggedUser);
+    void uiLoggedUserUpdateAccount(User loggedUser);
+    void uiLoggedUserDeleteAccount(User loggedUser);
 
     void showMenu();
 
